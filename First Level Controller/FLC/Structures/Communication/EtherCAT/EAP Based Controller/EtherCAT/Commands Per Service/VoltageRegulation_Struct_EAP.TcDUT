@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="VoltageRegulation_Struct_EAP" Id="{06f8f0aa-55cc-4190-a4e1-a2adada87e84}">
+    <Declaration><![CDATA[TYPE VoltageRegulation_Struct_EAP :
+UNION
+	Value : INT;
+	Bits : Bits_VoltageRegulation_EAP;
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

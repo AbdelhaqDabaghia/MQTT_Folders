@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="EtherCAT_Monitor_Variables" Id="{abe60628-c988-4a98-80e8-2f6c25bd835e}">
+    <Declaration><![CDATA[TYPE EtherCAT_Monitor_Variables :
+STRUCT
+	BatSoc 			: REAL;				//0 - 100
+	BatSocUpLim 	: REAL;				//1 - 100
+	BatSocLowLim 	: REAL;				//2
+	MaxWAval 		: REAL;				//3
+	MaxWCharVal 	: REAL;				//4
+	MaxVArAval 		: REAL;				//5
+	MinVArAval 		: REAL;				//6
+	TotW 			: REAL;				//7
+	TotVAr 			: REAL;				//8
+	GridFre 		: REAL;				//9
+	Vrmsa 			: REAL;				//10
+	Vrmsb 			: REAL;				//11
+	Vrmsc 			: REAL;				//12
+	Irmsa 			: REAL;				//13
+	Irmsb 			: REAL;				//14
+	Irmsc 			: REAL;				//15
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

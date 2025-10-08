@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="HPF_Function" Id="{d425d246-1428-4be6-8a8e-dca788ef7830}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION HPF_Function : REAL
+VAR_INPUT
+	SignalToFilter : REAL;
+	FilterParams : POINTER TO HighPassFilter;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[HPF_Function := FilterParams^.b0*SignalToFilter + FilterParams^.b1*FilterParams^.ErrorFilt - FilterParams^.a1*Filterparams^.OutputFilt;
+
+FilterParams^.ErrorFilt := SignalToFilter;
+FilterParams^.OutputFilt := HPF_Function;
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="HPF_Function">
+      <LineId Id="14" Count="0" />
+      <LineId Id="16" Count="1" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

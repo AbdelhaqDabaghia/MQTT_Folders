@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="EtherCAT_Inputs_DINT" Id="{49990ab9-3d49-4684-9a8d-67a9ae7ec94a}">
+    <Declaration><![CDATA[TYPE EtherCAT_Inputs_DINT :
+STRUCT
+	Command : StateMachineCommand;				//0
+	ActivePowerReference : DINT;				//1
+	ReactivePowerReference : DINT;				//2
+	Heartbeat : DINT;							//3
+	Reserved4 : DINT;							//4
+	Reserved5 : DINT;							//5
+	Reserved6 : DINT;							//6
+	Reserved7 : DINT;							//7
+	Reserved8 : DINT;							//8
+	Reserved9 : DINT;							//9	
+	Reserved10 : DINT;							//10
+	Reserved11 : DINT;							//11
+	Reserved12 : DINT;							//12
+	Reserved13 : DINT;							//13
+	Reserved14 : DINT;							//14
+	Reserved15 : DINT;							//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

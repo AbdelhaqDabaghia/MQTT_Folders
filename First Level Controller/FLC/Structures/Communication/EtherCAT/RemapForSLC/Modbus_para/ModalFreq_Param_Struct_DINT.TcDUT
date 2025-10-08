@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="ModalFreq_Param_Struct_DINT" Id="{b2aedc6e-987f-4874-b6b0-0513df444741}">
+    <Declaration><![CDATA[TYPE ModalFreq_Param_Struct_DINT :
+STRUCT
+	//Modal Frequency Attenuation
+		ModalFreq_Gain : DINT := 1000;				//0
+		BandPassFilter_CenterFreq : DINT := 31400;	//1
+		PowerLimit_ModalFreq : DINT := 1000000;		//2
+		Reserved1 : DINT;					//3
+		Reserved2 : DINT;					//4	
+		Reserved3 : DINT;					//5
+		Reserved4 : DINT;					//6
+		Reserved5 : DINT;					//7
+		Reserved6 : DINT;					//8
+		Reserved7 : DINT;					//9
+		Reserved8 : DINT;					//10
+		Reserved9 : DINT;					//11
+		Reserved10 : DINT;					//12
+		Reserved11 : DINT;					//13
+		Reserved12 : DINT;					//14
+		Reserved13 : DINT;					//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="LPF_Function" Id="{999d823c-04f1-401e-8597-53114b0d73cd}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION LPF_Function : REAL
+VAR_INPUT
+	SignalToFilter : REAL;
+	FilterParams : POINTER TO LowPassFilter;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[LPF_Function := FilterParams^.b0*SignalToFilter + FilterParams^.b1*FilterParams^.ErrorFilt - FilterParams^.OutputFilt*FilterParams^.a1;
+FilterParams^.ErrorFilt := SignalToFilter;
+FilterParams^.OutputFilt := LPF_Function;]]></ST>
+    </Implementation>
+    <LineIds Name="LPF_Function">
+      <LineId Id="10" Count="1" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

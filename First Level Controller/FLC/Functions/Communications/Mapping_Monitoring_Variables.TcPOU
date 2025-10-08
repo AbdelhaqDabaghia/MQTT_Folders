@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <POU Name="Mapping_Monitoring_Variables" Id="{a78b82dd-3f60-434d-9961-9d35433dc104}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Mapping_Monitoring_Variables
+VAR_INPUT
+	Input_var : ScaledModRead;
+	Output_var : POINTER TO EtherCAT_Monitor_Variables;
+	Output_var2 : POINTER TO EtherCAT_Stat_Variables;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Output_var^.BatSoc := Input_var.BatSoc;
+Output_var^.BatSocLowLim := Input_var.BatSocLowLimit;
+Output_var^.BatSocUpLim := Input_var.BatSocUpLimit;
+
+Output_var2^.Status := Input_var.fbOpMode;
+Output_var2^.HeartBeat := GlobalVar.wMiliseconds;
+
+Output_var2^.Alarms1 := Input_var.GrAlm0;
+Output_var2^.Alarms2 := Input_var.GrAlm1;
+Output_var2^.Alarms3 := Input_var.GrAlm2;
+Output_var2^.Alarms4 := Input_var.GrAlm3;
+
+Output_var^.GridFre := Input_var.GridFre;
+
+Output_var^.Irmsa := Input_var.Irmsa;
+Output_var^.Irmsb := Input_var.Irmsb;
+Output_var^.Irmsc := Input_var.Irmsc;
+
+Output_var^.TotW := Input_var.TotW;
+Output_var^.TotVAr := Input_var.TotVAr;
+
+Output_var^.Vrmsa := Input_var.Vrmsa;
+Output_var^.Vrmsb := Input_var.Vrmsb;
+Output_var^.Vrmsc := Input_var.Vrmsc;
+]]></ST>
+    </Implementation>
+    <LineIds Name="Mapping_Monitoring_Variables">
+      <LineId Id="7" Count="0" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="31" Count="1" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="15" Count="2" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="18" Count="1" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="22" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

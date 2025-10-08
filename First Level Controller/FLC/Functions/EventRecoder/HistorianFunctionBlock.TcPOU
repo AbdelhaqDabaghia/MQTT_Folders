@@ -1,0 +1,494 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="HistorianFunctionBlock" Id="{e47bf73b-626d-49fa-8f07-412b7ee0fdf6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK HistorianFunctionBlock
+VAR_INPUT
+	
+END_VAR
+
+VAR_OUTPUT
+	
+END_VAR
+
+VAR
+	HistorianStateMachine			:	UINT	:=	3;
+	
+	FIFO_Buffer_In_Modbus			:	ARRAY [0..1199] OF EventRecorder_In_Modbus;
+	FIFO_Buffer_In_EAP 				:	ARRAY [0..1199] OF EventRecorder_In_EAP;
+	FIFO_Buffer_ControllerOut 		:	ARRAY [0..1199] OF EventRecorder_Controller_Output;
+	FIFO_Buffer_Index_TimeStamp		:	ARRAY [0..1199] OF Index_TimeStamp;	
+	
+	
+	FIFO_Transmit_EAP_Index			:	INT;
+	FIFO_Transmit_Modbus_Index		:	INT;
+	FIFO_Transmit_ControlOut_Index	:	INT;
+	
+	
+	FIFO_Index_Max					:	INT := 1200;
+	PreEventCaptures				:	INT	:= 200;	// 20 Percent of preevent recored
+	
+	FIFO_StopIndex					:	INT;
+	FIFO_StopIndex_Modbus			:	INT;
+	FIFO_StopIndex_ControlOut		:	INT;
+	
+	FIFO_index						:	INT;
+	FIFO_index_Modbus				:	INT;
+	FIFO_index_ControlOut			:	INT;
+	
+	
+	TranmitingIndex					:	INT;
+	RecordingTriger					:	BOOL;
+	_TransmitRequest				:	INT;
+	FIFO_Transmit_Index				:	INT;
+	
+	EAP_Record_done			:	BOOL := FALSE;
+	Modbus_Record_done		:	BOOL := FALSE;
+	ControlOut_Record_done	:	BOOL := FALSE;
+	
+	EAP_trigger_done		:	BOOL := FALSE;
+	Modbus_triger_done		:	BOOL := FALSE;
+	ControlOut_triger_done	:	BOOL := FALSE;
+		
+	unixTime: UnixTimestamp;
+    timestampSeconds: ULINT;
+    timestampMilliseconds: ULINT;
+	
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Property Name="GetRequest" Id="{658e5794-fd97-4169-a6b3-d5c247dc9f6e}">
+      <Declaration><![CDATA[PROPERTY GetRequest : INT;]]></Declaration>
+      <Get Name="Get" Id="{cee7bc8c-cdc0-4f3c-9857-15490bcf58d6}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[GetRequest	:=	_TransmitRequest;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ListeningRecording_ControlOut" Id="{deba191c-c01d-4985-b7eb-6d5d49360102}">
+      <Declaration><![CDATA[METHOD PUBLIC ListeningRecording_ControlOut : BOOL
+VAR_INPUT
+	HistorianDataPacket		:	EventRecorder_Controller_Output;
+END_VAR
+
+VAR_OUTPUT
+	
+END_VAR
+
+VAR
+	icounter	:	INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// State machine for Historian
+IF EAP_trigger_done AND NOT ControlOut_triger_done AND RecordingTriger THEN
+	// Set stop index with buffer wrapping
+		FIFO_StopIndex_ControlOut := FIFO_index_ControlOut - PreEventCaptures;	//	Set the end of FIFO buffer
+		IF FIFO_StopIndex_ControlOut < 0 THEN							// wrapping
+			FIFO_StopIndex_ControlOut := FIFO_Index_Max + FIFO_StopIndex_ControlOut;
+		END_IF
+		// Go to the recording State
+		HistorianStateMachine := 1;
+		ControlOut_triger_done := TRUE;
+END_IF
+CASE HistorianStateMachine	OF
+//---------------- Begin of Listening State -------------------------------	
+	0:	// Listening
+		FIFO_index_ControlOut := FIFO_index_ControlOut + 1;							// Inceasing buffer index
+		IF FIFO_index_ControlOut = FIFO_Index_Max THEN						// Buffer wrapping
+			FIFO_index_ControlOut := 0;
+		END_IF	
+	
+		FIFO_Buffer_ControllerOut[FIFO_index_ControlOut] := HistorianDataPacket;			// Copy data to buffer
+		
+		IF RecordingTriger = TRUE AND NOT ControlOut_triger_done THEN
+			// Set stop index with buffer wrapping
+			FIFO_StopIndex_ControlOut := FIFO_index_ControlOut - PreEventCaptures;	//	Set the end of FIFO buffer
+			IF FIFO_StopIndex_ControlOut < 0 THEN							// wrapping
+				FIFO_StopIndex_ControlOut := FIFO_Index_Max + FIFO_StopIndex_ControlOut;
+			END_IF
+			// Go to the recording State
+			HistorianStateMachine := 1;
+		END_IF
+//---------------- End of Listening State   -------------------------------	
+
+//---------------- Begin of Recording State -------------------------------		
+	1:	
+		IF NOT ControlOut_Record_done THEN
+	
+			FIFO_index_ControlOut := FIFO_index_ControlOut + 1;					// Inceasing buffer index
+			IF FIFO_index_ControlOut = FIFO_Index_Max THEN				// Buffer wrapping
+				FIFO_index_ControlOut := 0;
+			END_IF
+			
+			FIFO_Buffer_ControllerOut[FIFO_index_ControlOut] := HistorianDataPacket;	
+			
+			IF FIFO_index_ControlOut = FIFO_StopIndex_ControlOut THEN				// change to transmit state
+				ControlOut_Record_done	:= TRUE;					// Send request
+			END_IF
+		END_IF
+		
+	3: // Initialization
+		FOR icounter :=	0 TO (FIFO_Index_Max-1)	BY 1 DO
+			FIFO_Buffer_Index_Timestamp[icounter].Index := icounter;
+		END_FOR
+		HistorianStateMachine := 0;
+END_CASE
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ListeningRecording_IN_EAP" Id="{527bd702-ad0c-437b-bc86-b07c54b925a8}">
+      <Declaration><![CDATA[METHOD PUBLIC ListeningRecording_IN_EAP : BOOL
+VAR_INPUT
+	HistorianDataPacket		:	EventRecorder_In_EAP;
+END_VAR
+
+VAR_OUTPUT
+	
+END_VAR
+
+VAR
+	icounter	:	INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// State machine for Historian
+
+CASE HistorianStateMachine	OF
+//---------------- Begin of Listening State -------------------------------	
+	0:	// Listening
+		FIFO_index := FIFO_index + 1;							// Inceasing buffer index
+		IF FIFO_index = FIFO_Index_Max THEN						// Buffer wrapping
+			FIFO_index := 0;
+		END_IF	
+	
+		FIFO_Buffer_In_EAP[FIFO_index] := HistorianDataPacket;			// Copy data to buffer
+		
+		IF RecordingTriger = TRUE AND NOT EAP_trigger_done THEN
+			// Set stop index with buffer wrapping
+			FIFO_StopIndex := FIFO_index - PreEventCaptures;	//	Set the end of FIFO buffer
+			IF FIFO_StopIndex < 0 THEN							// wrapping
+				FIFO_StopIndex := FIFO_Index_Max + FIFO_StopIndex;
+			END_IF
+			// Go to the recording State
+			EAP_trigger_done := TRUE;
+			HistorianStateMachine := 1;
+		END_IF
+//---------------- End of Listening State   -------------------------------	
+
+//---------------- Begin of Recording State -------------------------------		
+	1:	
+		
+		IF NOT EAP_Record_done THEN
+	
+			FIFO_index := FIFO_index + 1;					// Inceasing buffer index
+			IF FIFO_index = FIFO_Index_Max THEN				// Buffer wrapping
+				FIFO_index := 0;
+			END_IF
+			
+			FIFO_Buffer_In_EAP[FIFO_index] := HistorianDataPacket;	
+			
+			IF FIFO_index = FIFO_StopIndex THEN				// change to transmit state
+				EAP_Record_done	:= TRUE;					// Send request
+			END_IF
+		END_IF
+		
+	3: // Initialization
+		FOR icounter :=	0 TO (FIFO_Index_Max-1)	BY 1 DO
+			FIFO_Buffer_Index_Timestamp[icounter].Index := icounter;
+		END_FOR
+		HistorianStateMachine := 0;
+END_CASE
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ListeningRecording_IN_Modbus" Id="{84023060-3153-49b5-942c-da97b10a7bbe}">
+      <Declaration><![CDATA[METHOD ListeningRecording_IN_Modbus : BOOL
+VAR_INPUT
+	HistorianDataPacket		:	EventRecorder_In_Modbus;
+END_VAR
+
+VAR_OUTPUT
+	
+END_VAR
+
+VAR
+	icounter	:	INT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// Unix Time
+Globalvar.unixTime();
+Globalvar.timestampMilliseconds := ULINT_TO_UINT(Globalvar.unixTime.milliseconds - Globalvar.unixTime.seconds*1000);
+Globalvar.timestampSeconds.dwSecond := ULINT_TO_DWORD(Globalvar.unixTime.seconds);
+
+
+// State machine for Historian
+IF EAP_trigger_done AND NOT Modbus_Triger_done AND RecordingTriger THEN
+	// Set stop index with buffer wrapping
+			FIFO_StopIndex_Modbus := FIFO_index_Modbus - PreEventCaptures;	//	Set the end of FIFO buffer
+			IF FIFO_StopIndex_Modbus < 0 THEN								// wrapping
+				FIFO_StopIndex_Modbus := FIFO_Index_Max + FIFO_StopIndex_Modbus;
+			END_IF
+			// Go to the recording State
+			HistorianStateMachine := 1;
+			Modbus_Triger_done := TRUE;
+END_IF
+CASE HistorianStateMachine	OF
+//---------------- Begin of Listening State -------------------------------	
+	0:	// Listening
+		FIFO_index_Modbus := FIFO_index_Modbus + 1;							// Inceasing buffer index
+		IF FIFO_index_Modbus = FIFO_Index_Max THEN						// Buffer wrapping
+			FIFO_index_Modbus := 0;
+		END_IF	
+	
+		FIFO_Buffer_In_Modbus[FIFO_index_Modbus] := HistorianDataPacket;			// Copy data to buffer
+		FIFO_Buffer_Index_TimeStamp[FIFO_index_Modbus].TimeStamp := Globalvar.timestampSeconds.dtSecond;
+		FIFO_Buffer_Index_TimeStamp[FIFO_index_Modbus].Miliseconds := Globalvar.timestampMilliseconds;
+		
+		IF RecordingTriger = TRUE AND NOT Modbus_triger_done  THEN
+			// Set stop index with buffer wrapping
+			FIFO_StopIndex_Modbus := FIFO_index_Modbus - PreEventCaptures;	//	Set the end of FIFO buffer
+			IF FIFO_StopIndex_Modbus < 0 THEN								// wrapping
+				FIFO_StopIndex_Modbus := FIFO_Index_Max + FIFO_StopIndex_Modbus;
+			END_IF
+			// Go to the recording State
+			HistorianStateMachine := 1;
+		END_IF
+//---------------- End of Listening State   -------------------------------	
+
+//---------------- Begin of Recording State -------------------------------		
+	1:	IF NOT 	Modbus_Record_done THEN
+		
+			FIFO_index_Modbus := FIFO_index_Modbus + 1;					// Inceasing buffer index
+			IF FIFO_index_Modbus = FIFO_Index_Max THEN				// Buffer wrapping
+				FIFO_index_Modbus := 0;
+			END_IF
+			
+			FIFO_Buffer_In_Modbus[FIFO_index_Modbus] := HistorianDataPacket;	
+			FIFO_Buffer_Index_TimeStamp[FIFO_index_Modbus].TimeStamp := Globalvar.timestampSeconds.dtSecond;
+			FIFO_Buffer_Index_TimeStamp[FIFO_index_Modbus].Miliseconds := Globalvar.timestampMilliseconds;
+			
+			IF FIFO_index_Modbus = FIFO_StopIndex_Modbus THEN	// change to transmit state
+				Modbus_Record_done := TRUE;						// Send request
+			END_IF
+		END_IF
+END_CASE
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="SetTtriger" Id="{7787d145-e19d-43cf-afe8-0d79864c4861}">
+      <Declaration><![CDATA[PROPERTY SetTtriger : BOOL]]></Declaration>
+      <Set Name="Set" Id="{f4b42821-2592-4b8d-a46f-b45f8486b56f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[RecordingTriger := SetTtriger;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+    <Method Name="Transmiting" Id="{e7f7d31f-63bc-4223-8795-541f0c9fd1a9}">
+      <Declaration><![CDATA[METHOD PUBLIC Transmiting : BOOL
+VAR_INPUT
+	
+END_VAR
+
+VAR_OUTPUT
+	HistorianDataPacket_EtherCAT	:	EthercatDataPacket;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF EAP_Record_done AND Modbus_Record_done  AND ControlOut_Record_done THEN
+	_TransmitRequest := 1;
+	HistorianStateMachine := 2;
+ELSE
+	_TransmitRequest := 0;
+END_IF
+
+// State machine for Historian
+CASE HistorianStateMachine	OF
+//---------------- Begin of Transmiting State -----------------------------	
+	2:
+		IF gvl.TransmitApproved = 1  THEN
+			
+		// Increasing transmitting index
+			FIFO_Transmit_Index := FIFO_Transmit_Index + 1;
+		
+			FIFO_Transmit_EAP_Index := FIFO_index + FIFO_Transmit_Index;
+			FIFO_Transmit_Modbus_Index := FIFO_index_Modbus + FIFO_Transmit_Index;
+			FIFO_Transmit_ControlOut_Index := FIFO_index_ControlOut + FIFO_Transmit_Index;
+			
+			IF FIFO_Transmit_EAP_Index >= FIFO_Index_Max THEN					// Buffer wrapping
+				FIFO_Transmit_EAP_Index := FIFO_Transmit_EAP_Index - FIFO_Index_Max;
+			END_IF
+			
+			IF FIFO_Transmit_Modbus_Index >= FIFO_Index_Max THEN					// Buffer wrapping
+				FIFO_Transmit_Modbus_Index := FIFO_Transmit_Modbus_Index - FIFO_Index_Max;
+			END_IF
+			
+			IF FIFO_Transmit_ControlOut_Index >= FIFO_Index_Max THEN					// Buffer wrapping
+				FIFO_Transmit_ControlOut_Index := FIFO_Transmit_ControlOut_Index - FIFO_Index_Max;
+			END_IF
+			
+			HistorianDataPacket_EtherCAT.SingalIn_Modbus := FIFO_Buffer_In_Modbus[FIFO_Transmit_Modbus_Index];		// Map to EtherCAT
+			HistorianDataPacket_EtherCAT.SignalIn_EAP := FIFO_Buffer_In_EAP[FIFO_Transmit_EAP_Index];			// Map to EtherCAT
+			HistorianDataPacket_EtherCAT.ControllerOut := FIFO_Buffer_ControllerOut[FIFO_Transmit_ControlOut_Index];
+			HistorianDataPacket_EtherCAT.Index_TimeStamp.Index := FIFO_Transmit_Index - 1;
+			
+			HistorianDataPacket_EtherCAT.Index_TimeStamp.TimeStamp := FIFO_Buffer_Index_TimeStamp[FIFO_Transmit_Modbus_Index].TimeStamp ;
+			HistorianDataPacket_EtherCAT.Index_TimeStamp.Miliseconds := FIFO_Buffer_Index_TimeStamp[FIFO_Transmit_Modbus_Index].Miliseconds;
+			
+			// Done and Switch to listening State
+			IF FIFO_Transmit_Index >= FIFO_Index_Max THEN
+				FIFO_Transmit_Index := 0;		// Remove request
+				HistorianStateMachine := 0;
+				
+				FIFO_index := 0;
+				FIFO_index_Modbus := 0;
+				FIFO_index_ControlOut := 0;
+				
+				EAP_Record_done := FALSE;
+				Modbus_Record_done	:=	FALSE;
+				ControlOut_Record_done := FALSE;
+				
+				EAP_trigger_done := FALSE;
+				Modbus_Triger_done := FALSE;
+				ControlOut_triger_done := FALSE;
+				
+			END_IF			
+		END_IF
+//---------------- End of Transmiting State -------------------------------	
+END_CASE
+]]></ST>
+      </Implementation>
+    </Method>
+    <LineIds Name="HistorianFunctionBlock">
+      <LineId Id="91" Count="0" />
+    </LineIds>
+    <LineIds Name="HistorianFunctionBlock.GetRequest.Get">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="HistorianFunctionBlock.ListeningRecording_ControlOut">
+      <LineId Id="7" Count="0" />
+      <LineId Id="112" Count="0" />
+      <LineId Id="115" Count="5" />
+      <LineId Id="113" Count="0" />
+      <LineId Id="121" Count="0" />
+      <LineId Id="114" Count="0" />
+      <LineId Id="8" Count="22" />
+      <LineId Id="96" Count="1" />
+      <LineId Id="31" Count="7" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="88" Count="1" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="HistorianFunctionBlock.ListeningRecording_IN_EAP">
+      <LineId Id="7" Count="0" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="8" Count="17" />
+      <LineId Id="112" Count="0" />
+      <LineId Id="26" Count="4" />
+      <LineId Id="113" Count="0" />
+      <LineId Id="96" Count="1" />
+      <LineId Id="31" Count="7" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="88" Count="1" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="HistorianFunctionBlock.ListeningRecording_IN_Modbus">
+      <LineId Id="108" Count="2" />
+      <LineId Id="103" Count="1" />
+      <LineId Id="102" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="77" Count="5" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="74" Count="0" />
+      <LineId Id="17" Count="8" />
+      <LineId Id="100" Count="1" />
+      <LineId Id="26" Count="13" />
+      <LineId Id="71" Count="0" />
+      <LineId Id="40" Count="5" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="46" Count="2" />
+      <LineId Id="51" Count="1" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+    <LineIds Name="HistorianFunctionBlock.SetTtriger.Set">
+      <LineId Id="2" Count="0" />
+    </LineIds>
+    <LineIds Name="HistorianFunctionBlock.Transmiting">
+      <LineId Id="96" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="101" Count="1" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="6" Count="0" />
+      <LineId Id="94" Count="0" />
+      <LineId Id="44" Count="2" />
+      <LineId Id="79" Count="0" />
+      <LineId Id="148" Count="0" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="107" Count="0" />
+      <LineId Id="117" Count="0" />
+      <LineId Id="86" Count="2" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="108" Count="0" />
+      <LineId Id="111" Count="1" />
+      <LineId Id="110" Count="0" />
+      <LineId Id="118" Count="0" />
+      <LineId Id="120" Count="1" />
+      <LineId Id="119" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="114" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="132" Count="0" />
+      <LineId Id="147" Count="0" />
+      <LineId Id="161" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="60" Count="3" />
+      <LineId Id="124" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="116" Count="0" />
+      <LineId Id="123" Count="0" />
+      <LineId Id="105" Count="0" />
+      <LineId Id="100" Count="0" />
+      <LineId Id="103" Count="1" />
+      <LineId Id="145" Count="0" />
+      <LineId Id="141" Count="1" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="143" Count="0" />
+      <LineId Id="65" Count="1" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="70" Count="0" />
+      <LineId Id="5" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

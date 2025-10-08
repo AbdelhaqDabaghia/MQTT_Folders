@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="VoltageRegulation_Param_Struct_EAP_DINT" Id="{3512d6a0-a5f5-4be9-a36d-0af490e1dee9}">
+    <Declaration><![CDATA[TYPE VoltageRegulation_Param_Struct_EAP_DINT :
+STRUCT
+	//Voltage Regulation
+		DroopConstantQ : DINT := 20;			//0
+		LowPassFilter_CutOff_Volt : DINT := 1;	//1
+		DeadBand_Limit_Q : DINT := 20;			//2
+		PowerLimit_Volt : DINT := 1000000;		//3
+		Reserved1 : DINT;						//4
+		Reserved2 : DINT;						//5
+		Reserved3 : DINT;						//6
+		Reserved4 : DINT;						//7
+		Reserved5 : DINT;						//8
+		Reserved6 : DINT;						//9
+		Reserved7 : DINT;						//10
+		Reserved8 : DINT;						//11
+		Reserved9 : DINT;						//12
+		Reserved10 : DINT;						//13
+		Reserved11 : DINT;						//14
+		Reserved12 : DINT;						//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

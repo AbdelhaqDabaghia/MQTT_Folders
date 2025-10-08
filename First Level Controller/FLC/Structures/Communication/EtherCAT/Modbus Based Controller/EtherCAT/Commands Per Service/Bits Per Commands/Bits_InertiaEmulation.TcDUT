@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="Bits_InertiaEmulation" Id="{865130f7-5a10-4129-8d3f-ce03827121c9}">
+    <Declaration><![CDATA[TYPE Bits_InertiaEmulation :
+STRUCT
+	//Inertia Emulation
+		Enable_Inertia : 			BIT;		//0
+		Inertia_Reset_States : 		BIT;		//1
+		Limit_ROCOF : 				BIT;		//2
+		Delta_Power_Limit_Inertia : BIT;		//3
+		Reset_To_Default_Inertia : 	BIT;		//4
+		Reserved1 : 				BIT;		//5
+		Reserved2 : 				BIT;		//6
+		Reserved3 : 				BIT;		//7
+		Reserved4 : 				BIT;		//8
+		Reserved5 : 				BIT;		//9
+		Reserved6 : 				BIT;		//10
+		Reserved7 : 				BIT;		//11
+		Reserved8 : 				BIT;		//12
+		Reserved9 : 				BIT;		//13
+		Reserved10 : 				BIT;		//14
+		Reserved11 : 				BIT;		//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

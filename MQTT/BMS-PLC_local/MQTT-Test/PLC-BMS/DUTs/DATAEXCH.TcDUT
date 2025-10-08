@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="DATAEXCH" Id="{60f49b63-00e9-4b1c-9f4a-1bbf16151e1c}">
+    <Declaration><![CDATA[TYPE DATAEXCH :
+STRUCT
+cmd : ARRAY [0..10] OF INT ;
+param 	: ARRAY [0..10] OF REAL ;
+variables: ARRAY [0..100] OF REAL ;
+statVAR: ARRAY [0..20] OF REAL ;
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

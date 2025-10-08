@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <DUT Name="Parameters" Id="{34d34f7f-3d6f-4893-924e-50a430915f4c}">
+    <Declaration><![CDATA[TYPE Parameters :
+STRUCT
+	//Common Block
+		CommonBlock_Params : CommonBlock_Param_Struct;
+	//Inertia Emulation
+		InertiaEmulation_Params : InertiaEmulation_Param_Struct;
+	//Frequency Regulation
+		FrequencyRegulation_Params : FreqRegulation_Param_Struct;
+	//Modal Frequencies Attenunation
+		ModalFrequency_Params : ModalFreq_Param_Struct;
+	//Voltage Regulation
+		VoltageRegulation_Params : VoltageRegulation_Param_Struct;
+	//Additional Service
+		AdditionalService_Params : AdditionalService_Param_Struct;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

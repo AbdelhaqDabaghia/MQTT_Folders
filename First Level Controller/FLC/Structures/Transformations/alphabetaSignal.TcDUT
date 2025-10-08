@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="alphabetaSignal" Id="{e208a9ca-17e1-4b38-bd97-facab646867e}">
+    <Declaration><![CDATA[TYPE alphabetaSignal :
+STRUCT
+	alpha	:	REAL;
+	beta	:	real;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

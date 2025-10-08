@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="PowerOfService_Struct" Id="{217b7c86-f5a8-4942-9954-01d68d2d9f0b}">
+    <Declaration><![CDATA[TYPE PowerOfService_Struct :
+STRUCT
+	InertiaEmulationP_Service : REAL;
+	FrequencyRegulationP_Service : REAL;
+	ModalFreqAttP_Service : REAL;
+	VoltageRegulationQ_Service : REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

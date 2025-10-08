@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="EthercatDataPacket" Id="{07a77d3c-eba7-4bb7-9723-11d1dfe900ca}">
+    <Declaration><![CDATA[TYPE EthercatDataPacket :
+STRUCT
+	TransmitRequest	:	INT;
+	Index_TimeStamp	:	Index_TimeStamp;
+	SingalIn_Modbus	:	EventRecorder_In_Modbus;
+	SignalIn_EAP	:	EventRecorder_In_EAP;
+	ControllerOut	:	EventRecorder_Controller_Output;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

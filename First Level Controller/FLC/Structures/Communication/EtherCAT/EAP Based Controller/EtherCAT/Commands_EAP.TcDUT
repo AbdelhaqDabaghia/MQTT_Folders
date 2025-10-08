@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <DUT Name="Commands_EAP" Id="{f5cb4b6d-7e68-431f-88a8-ca8e894e92af}">
+    <Declaration><![CDATA[TYPE Commands_EAP :
+STRUCT
+	//Common Block
+		CommonBlock_EAP : CommonBlock_Struct_EAP;
+	//Inertia Commands
+		InertiaEmulation_EAP : InertiaEmulation_Struct_EAP;
+	//Frequecy Regulation
+		FrequencyRegulation_EAP : FreqRegulation_Struct_EAP;
+	//Modal Frequencies attenuation
+		ModalFreq_EAP : ModalFreq_Struct_EAP;
+	//Voltage Regulation
+		VoltageRegulation_EAP : VoltageRegulation_Struct_EAP;
+	//Additional Service
+		AddtionalService_EAP : AdditionalService_Struct_EAP;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

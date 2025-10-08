@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="EtherCAT_Parameters_FrmCLC" Id="{f328ef0f-98f0-4775-b396-0853fa3c2b2d}">
+    <Declaration><![CDATA[TYPE EtherCAT_Parameters_FrmCLC :
+STRUCT
+	//set from CLC(commuinity level controller  )
+	MIN_SoC : REAL;
+	MAX_SoC :  REAL;
+	P_LIMIT :  REAL;
+	Q_LIMIT:  REAL;
+	ChargeRate_LIMIT:  REAL;
+	DischargeRate_LIMIT:  REAL;
+	Initial_Energy:  REAL;
+	Terminal_Energy:  REAL;
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

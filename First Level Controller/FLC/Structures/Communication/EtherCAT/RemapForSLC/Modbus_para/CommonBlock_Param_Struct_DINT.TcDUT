@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="CommonBlock_Param_Struct_DINT" Id="{527c7591-537c-4082-8bc0-a239a7a8080d}">
+    <Declaration><![CDATA[TYPE CommonBlock_Param_Struct_DINT :
+STRUCT
+	//Common Block parameters
+		NominalPower : DINT := 1000000;			//0
+		NominalVoltage : DINT := 240;			//1
+		NominalFreq : DINT := 50;				//2
+		ActivePowerLimit : DINT := 1000000;		//3
+		ReactivePowerLimit: DINT := 1000000;	//4
+		Reserved1 : DINT;					//5
+		Reserved2 : DINT;					//6
+		Reserved3 : DINT;					//7
+		Reserved4 : DINT;					//8
+		Reserved5 : DINT;					//9
+		Reserved6 : DINT;					//10
+		Reserved7 : DINT;					//11
+		Reserved8 : DINT;					//12
+		Reserved9 : DINT;					//13
+		Reserved10 : DINT;					//14
+		Reserved11 : DINT;					//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

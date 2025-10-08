@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="ModbusControl" Id="{5402e524-37ea-40bf-b0bd-a2aede11ed90}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM ModbusControl
+VAR
+	bWrite : BOOL;
+	bRead: BOOL;
+	fbMBwritereg : FB_MBWriteRegs;  
+	fbMBreadreg : FB_MBReadRegs;
+	adata : ARRAY [0..3] OF WORD;
+	adatar : ARRAY [0..3] OF WORD;
+	nQ : WORD :=4;
+	estateread : StateMachineCommand;
+	
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[GVL_Global.monitoringVAR.CurrentOpmod :=GVL_Global.commandsfromCLC.commands;
+//GVL_Global.ModWrite.System_state_control  := GVL_Global.EthCommandsfrmCLC_IN.StatControlCMD;
+GVL_Global.ModWrite.System_mode_control  := GVL_Global.EthCommandsfrmCLC_IN.OpModeControlCMD;
+IF GVL_Global.bPower_enable = TRUE THEN
+GVL_Global.ModWrite.Active_power_control := DINT_TO_INT(GVL_Global.EthCommandsfrmCLC_IN.ActivePowerReference)*10;
+GVL_Global.ModWrite.Reactive_power_control := DINT_TO_INT(GVL_Global.EthCommandsfrmCLC_IN.ReactivePowerReference)*10;
+ELSE
+	GVL_Global.ModWrite.Active_power_control := 0;
+GVL_Global.ModWrite.Reactive_power_control :=0;
+END_IF
+GVL_Global.ModWrite.Clear_fault := DINT_TO_USINT(GVL_Global.EthCommandsfrmCLC_IN.ClrFault);
+
+IF NOT fbMBwritereg.bBusy THEN
+	bWrite := TRUE;
+fbMBwritereg(
+	sIPAddr:= '10.200.8.219', //write at output reg of master i.e Eneraerk , CLC -- ws2lc
+	nTCPPort:= 502, 
+	nUnitID:= 255, 
+	nQuantity:=SIZEOF(GVL_Global.ModWrite)/2, 
+	nMBAddr:= 16#8020, 
+	cbLength:= SIZEOF(GVL_Global.ModWrite), 
+	pSrcAddr:= ADR(GVL_Global.ModWrite), 
+	bExecute:= bWrite, 
+	tTimeout:= T#5S, 
+	bBusy=> , 
+	bError=> , 
+	nErrId=> );
+	ELSE
+		bWrite:= FALSE;
+		fbMBwritereg(bExecute :=bWrite);
+		
+	END_IF
+	
+	IF NOT fbMBreadreg.bBusy THEN
+		bRead := TRUE;
+	fbMBreadreg(
+	sIPAddr:= '10.200.8.219', 
+	nTCPPort:= 502, 
+	nUnitID:= 255, 
+	nQuantity:= SIZEOF(GVL_Global.ModRead)/2, 
+	nMBAddr:= 16#8000, 
+	cbLength:= SIZEOF(GVL_Global.ModRead), 
+	pDestAddr:= ADR(GVL_Global.ModRead), 
+	bExecute:= bRead, 
+	tTimeout:= T#5S, 
+	bBusy=> , 
+	bError=> , 
+	nErrId=> , 
+	cbRead=> );
+	ELSE
+		bRead := FALSE;
+		fbMBreadreg(bExecute := bRead);
+		
+	END_IF
+	//GVL_Higherlevel.enstate := WORD_TO_INT(adatar[0]);]]></ST>
+    </Implementation>
+    <LineIds Name="ModbusControl">
+      <LineId Id="130" Count="0" />
+      <LineId Id="174" Count="1" />
+      <LineId Id="192" Count="0" />
+      <LineId Id="176" Count="1" />
+      <LineId Id="194" Count="2" />
+      <LineId Id="193" Count="0" />
+      <LineId Id="178" Count="0" />
+      <LineId Id="115" Count="0" />
+      <LineId Id="153" Count="1" />
+      <LineId Id="85" Count="12" />
+      <LineId Id="144" Count="0" />
+      <LineId Id="156" Count="0" />
+      <LineId Id="145" Count="0" />
+      <LineId Id="147" Count="0" />
+      <LineId Id="146" Count="0" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="98" Count="0" />
+      <LineId Id="158" Count="0" />
+      <LineId Id="99" Count="13" />
+      <LineId Id="148" Count="0" />
+      <LineId Id="160" Count="0" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="151" Count="0" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="60" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="EtherCAT_Monitor_Variables_DINT" Id="{6693201b-b9da-45ac-8123-a1454f114596}">
+    <Declaration><![CDATA[TYPE EtherCAT_Monitor_Variables_DINT :
+STRUCT
+	BatSoc 			: DINT;				//0 - 100
+	BatSocUpLim 	: DINT;				//1 - 100
+	BatSocLowLim 	: DINT;				//2
+	MaxWAval 		: DINT;				//3
+	MaxWCharVal 	: DINT;				//4
+	MaxVArAval 		: DINT;				//5
+	MinVArAval 		: DINT;				//6
+	TotW 			: DINT;				//7
+	TotVAr 			: DINT;				//8
+	GridFre 		: DINT;				//9
+	Vrmsa 			: DINT;				//10
+	Vrmsb 			: DINT;				//11
+	Vrmsc 			: DINT;				//12
+	Irmsa 			: DINT;				//13
+	Irmsb 			: DINT;				//14
+	Irmsc 			: DINT;				//15
+END_STRUCT
+END_TYPE]]></Declaration>
+  </DUT>
+</TcPlcObject>

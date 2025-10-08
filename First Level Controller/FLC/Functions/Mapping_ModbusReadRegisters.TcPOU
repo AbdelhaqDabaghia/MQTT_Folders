@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <POU Name="Mapping_ModbusReadRegisters" Id="{9fd71e59-685d-4706-af32-6ef0044453b3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Mapping_ModbusReadRegisters
+VAR_INPUT
+	Read_Struct : POINTER TO ScaledModRead;
+	ToSLCVariables : POINTER TO EtherCAT_Monitor_Variables;
+	ToSLCStatus : POINTER TO EtherCAT_Stat_Variables;
+	
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Variables
+	//Status Parameter
+		ToSLCStatus^.Status := Read_Struct^.fbOpMode;				// This data block is for send modbus FLC-SLC
+	//Battery parameters
+		ToSLCVariables^.BatSoc := Read_Struct^.BatSoc;
+		//ToSLCVariables^.BatSocUpLim := Read_Struct^.BatSocUpLimit;
+		//ToSLCVariables^.BatSocLowLim := Read_Struct^.BatSocLowLimit;
+	//Active and Reactive Power Reference
+		ToSLCVariables^.TotW := Read_Struct^.TotW;
+		ToSLCVariables^.TotVAr := Read_Struct^.TotVAr;
+	//Grid Frequency
+		ToSLCVariables^.GridFre := Read_Struct^.GridFre;
+	//Grid Currents RMS
+		ToSLCVariables^.Irmsa := Read_Struct^.Irmsa;
+		ToSLCVariables^.Irmsb := Read_Struct^.Irmsb;
+		ToSLCVariables^.Irmsc := Read_Struct^.Irmsc;
+	//Grid Voltages RMS
+		ToSLCVariables^.Vrmsa := Read_Struct^.Vrmsa;
+		ToSLCVariables^.Vrmsb := Read_Struct^.Vrmsb;
+		ToSLCVariables^.Vrmsc := Read_Struct^.Vrmsc;
+	//HeartBeat reading
+		ToSLCStatus^.HeartBeat := Read_Struct^.HeartBeat;]]></ST>
+    </Implementation>
+    <LineIds Name="Mapping_ModbusReadRegisters">
+      <LineId Id="13" Count="0" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="61" Count="1" />
+      <LineId Id="70" Count="1" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="74" Count="1" />
+      <LineId Id="64" Count="2" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="79" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

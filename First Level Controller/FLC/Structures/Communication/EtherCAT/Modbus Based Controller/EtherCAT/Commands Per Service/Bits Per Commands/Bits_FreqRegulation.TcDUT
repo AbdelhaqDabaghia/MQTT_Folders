@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="Bits_FreqRegulation" Id="{ff2ecf51-87f4-49a1-b9b6-b216fdd80ad5}">
+    <Declaration><![CDATA[TYPE Bits_FreqRegulation :
+STRUCT
+	//Frequency Regulation
+		Enable_DroopP : 					BIT;	//0
+		Delta_Power_Limit_FreqRegulation : 	BIT;	//1
+		Delta_Energy_Limit : 				BIT;	//2
+		Reset_Energy_State : 				BIT;	//3
+		DeadBandLimitationP :				BIT;	//4
+		Reset_To_Default_FreqRegulation : 	BIT; 	//5
+		Reserved1 : 						BIT;	//6
+		Reserved2 : 						BIT;	//7
+		Reserved3 : 						BIT;	//8
+		Reserved4 : 						BIT;	//9
+		Reserved5 : 						BIT;	//10
+		Reserved6 : 						BIT;	//11
+		Reserved7 : 						BIT;	//12
+		Reserved8 : 						BIT;	//13
+		Reserved9 : 						BIT;	//14
+		Reserved10 : 						BIT;	//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

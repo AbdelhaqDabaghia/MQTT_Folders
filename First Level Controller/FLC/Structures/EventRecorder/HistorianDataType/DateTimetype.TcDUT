@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="DateTimetype" Id="{4cef4e24-9fb9-46a3-81e0-7f8203237b3b}">
+    <Declaration><![CDATA[TYPE DateTimetype :
+UNION
+	dwSecond	:	DWORD;
+	dtSecond	:	DATE_AND_TIME;
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,703 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.29">
+	<DataTypes>
+		<DataType>
+			<Name GUID="{DDF7B3A5-7308-9A93-8138-CDAA2397D652}" AutoDeleteType="true">BessStateControl</Name>
+			<BitSize>16</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+			<EnumInfo>
+				<Text><![CDATA[STOP]]></Text>
+				<Enum>2</Enum>
+			</EnumInfo>
+			<EnumInfo>
+				<Text><![CDATA[RUN]]></Text>
+				<Enum>6</Enum>
+			</EnumInfo>
+			<Properties>
+				<Property>
+					<Name>qualified_only</Name>
+				</Property>
+				<Property>
+					<Name>strict</Name>
+				</Property>
+				<Property>
+					<Name>generate_implicit_init_function</Name>
+				</Property>
+			</Properties>
+		</DataType>
+		<DataType>
+			<Name GUID="{B339FB03-1746-8ABC-54EE-296D6E1F59EF}" AutoDeleteType="true">BessOpmodeControl</Name>
+			<BitSize>16</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000005}">UINT</BaseType>
+			<EnumInfo>
+				<Text><![CDATA[OPERATIONAL]]></Text>
+				<Enum>1</Enum>
+				<Comment><![CDATA[ P/Q Connected to grid and injecting current]]></Comment>
+			</EnumInfo>
+			<EnumInfo>
+				<Text><![CDATA[DISCONNECTED]]></Text>
+				<Enum>2</Enum>
+				<Comment><![CDATA[ OFF-grid Disoconneted from grid]]></Comment>
+			</EnumInfo>
+			<EnumInfo>
+				<Text><![CDATA[CONNECTED]]></Text>
+				<Enum>3</Enum>
+				<Comment><![CDATA[ On-grid Connected to grid but no injection]]></Comment>
+			</EnumInfo>
+			<Properties>
+				<Property>
+					<Name>qualified_only</Name>
+				</Property>
+				<Property>
+					<Name>generate_implicit_init_function</Name>
+				</Property>
+			</Properties>
+		</DataType>
+		<DataType>
+			<Name GUID="{D0BB73DA-4B15-B694-58B0-7AAB4F9D8E6C}" AutoDeleteType="true">EtherCATCommandsFrmCLC</Name>
+			<BitSize>256</BitSize>
+			<SubItem>
+				<Name>StatControlCMD</Name>
+				<Type GUID="{DDF7B3A5-7308-9A93-8138-CDAA2397D652}">BessStateControl</Type>
+				<Comment><![CDATA[Commands from CLC  ETHERCAT IN
+state control enum type. ]]></Comment>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>OpModeControlCMD</Name>
+				<Type GUID="{B339FB03-1746-8ABC-54EE-296D6E1F59EF}">BessOpmodeControl</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ActivePowerReference</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<Comment><![CDATA[P Q references. ]]></Comment>
+				<BitSize>32</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ReactivePowerReference</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Heartbeat</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>96</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ClrAlarm</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>128</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ClrFault</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>160</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>reserve1</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>192</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>reserver2</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>224</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{9737BB94-FDB1-1C25-DABB-5BBA157331D5}" AutoDeleteType="true">DATAEXCH</Name>
+			<BitSize>4448</BitSize>
+			<SubItem>
+				<Name>cmd</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000006}">INT</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>11</Elements>
+				</ArrayInfo>
+				<BitSize>176</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>param</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>11</Elements>
+				</ArrayInfo>
+				<BitSize>352</BitSize>
+				<BitOffs>192</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>variables</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>101</Elements>
+				</ArrayInfo>
+				<BitSize>3232</BitSize>
+				<BitOffs>544</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>statVAR</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<ArrayInfo>
+					<LBound>0</LBound>
+					<Elements>21</Elements>
+				</ArrayInfo>
+				<BitSize>672</BitSize>
+				<BitOffs>3776</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{C2B52D61-7D7E-C8B6-7325-6468CBDB63C2}" AutoDeleteType="true">EtherCAT_Parameters_FrmCLC</Name>
+			<BitSize>256</BitSize>
+			<SubItem>
+				<Name>MIN_SoC</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<Comment><![CDATA[set from CLC(commuinity level controller  )]]></Comment>
+				<BitSize>32</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>MAX_SoC</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>P_LIMIT</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Q_LIMIT</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>96</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ChargeRate_LIMIT</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>128</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>DischargeRate_LIMIT</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>160</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Initial_Energy</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>192</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Terminal_Energy</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>224</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{8F3B9F12-E3C7-83B3-A983-83E065EF436B}" AutoDeleteType="true">ETherCAT_StatMonitor_VAR</Name>
+			<BitSize>256</BitSize>
+			<SubItem>
+				<Name>StatControlCMD</Name>
+				<Type GUID="{DDF7B3A5-7308-9A93-8138-CDAA2397D652}">BessStateControl</Type>
+				<Comment><![CDATA[variables to be monitored // EthererCAT out  (IN for CLC)]]></Comment>
+				<BitSize>16</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>OpModeControlCMD</Name>
+				<Type GUID="{B339FB03-1746-8ABC-54EE-296D6E1F59EF}">BessOpmodeControl</Type>
+				<BitSize>16</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ActivePowerReference</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<Comment><![CDATA[P Q references. ]]></Comment>
+				<BitSize>32</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ReactivePowerReference</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Heartbeat</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>96</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ClrAlarm</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>128</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>ClrFault</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>160</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>reserve1</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>192</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>reserver2</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>224</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{52C033D3-792B-FB43-1694-CEA9D4BD1403}" AutoDeleteType="true">EtherCAT_Monitor_BatVariables</Name>
+			<BitSize>512</BitSize>
+			<SubItem>
+				<Name>VaRMS</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>VbRMS</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>VcRMS</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>64</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>IaRMS</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>96</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>IbRMS</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>128</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>IcRMS</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>160</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Total_ActivePower</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>192</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Total_ReactivePower</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>224</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Grid_Frequency</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>256</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>PowerFactor</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>288</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Vdc</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>320</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Idc</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>352</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>SoC</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>384</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>SoH</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>416</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>reserve1</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>448</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>reserve2</Name>
+				<Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+				<BitSize>32</BitSize>
+				<BitOffs>480</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{DD997AAA-1CA8-BB98-3983-83703E325360}" AutoDeleteType="true">Ethercat_AlarmsWarningToCLC</Name>
+			<BitSize>64</BitSize>
+			<SubItem>
+				<Name>Communication_Alarms</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>0</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Battery_Alarms</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>8</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Warnings</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>16</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>Faults</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>24</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>reservebit1</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>32</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>reservebit2</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>40</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>reservebit3</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>48</BitOffs>
+			</SubItem>
+			<SubItem>
+				<Name>reservebit4</Name>
+				<Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+				<BitSize>8</BitSize>
+				<BitOffs>56</BitOffs>
+			</SubItem>
+		</DataType>
+		<DataType>
+			<Name GUID="{36033E81-37B6-9C70-D731-A9B4B5FB612D}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF DINT</Name>
+			<BitSize>256</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000009}">DINT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{B045FA25-2EDA-C401-A95F-30A46A1ECA26}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF REAL</Name>
+			<BitSize>256</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{C9B210E6-676B-6B0E-4D83-8C09ABB69271}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..555] OF BYTE</Name>
+			<BitSize>4448</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>556</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{2C46078D-D1C8-B92F-019C-10410FF3C999}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..15] OF REAL</Name>
+			<BitSize>512</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-00000000000D}">REAL</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>16</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{FE565D85-927B-2D08-1043-124F5F921E35}" IecBaseType="true" AutoDeleteType="true">ARRAY [0..7] OF BYTE</Name>
+			<BitSize>64</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000001}">BYTE</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>8</Elements>
+			</ArrayInfo>
+		</DataType>
+		<DataType>
+			<Name GUID="{18071995-0000-0000-0000-00000000003D}" TcBaseType="true" HideType="true">USINTARR6</Name>
+			<BitSize>48</BitSize>
+			<BaseType GUID="{18071995-0000-0000-0000-000000000002}">USINT</BaseType>
+			<ArrayInfo>
+				<LBound>0</LBound>
+				<Elements>6</Elements>
+			</ArrayInfo>
+		</DataType>
+	</DataTypes>
+	<Project ProjectGUID="{3703A7B4-E517-4072-9775-E1DA1EA7E972}" TargetNetId="10.200.8.4.1.1" AutoPrioManagement="true" ShowHideConfigurations="#x106">
+		<System>
+			<Settings>
+				<IoIdleTask Priority="4"/>
+			</Settings>
+			<Licenses>
+				<Target>
+					<ManualSelect>{6952449D-F68C-49A2-ADE4-8639D85B33A4}</ManualSelect>
+				</Target>
+			</Licenses>
+			<Tasks>
+				<Task Id="5" Priority="8" CycleTime="200000" AmsPort="352" AdtTasks="true">
+					<Name>ModbusTask</Name>
+				</Task>
+				<Task Id="3" Priority="6" CycleTime="50000" AmsPort="350" AdtTasks="true">
+					<Name>StateMachineTask</Name>
+				</Task>
+			</Tasks>
+		</System>
+		<Plc>
+			<Project GUID="{0DA6AA5B-C919-479E-A431-A77EC67F6650}" Name="PLC-BMS" PrjFilePath="PLC-BMS\PLC-BMS.plcproj" TmcFilePath="PLC-BMS\PLC-BMS.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLC-BMS\PLC-BMS.tmc">
+					<Name>PLC-BMS Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>StateMachineTask Inputs</Name>
+						<Var>
+							<Name>GVL_Global.EthCommandsfrmCLC_IN</Name>
+							<Comment><![CDATA[ command from clc on Ethercat]]></Comment>
+							<Type GUID="{D0BB73DA-4B15-B694-58B0-7AAB4F9D8E6C}">EtherCATCommandsFrmCLC</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Global.data2rcv</Name>
+							<Comment><![CDATA[Data Excahnge 
+data2send AT %Q* : DATAEXCH;]]></Comment>
+							<Type GUID="{9737BB94-FDB1-1C25-DABB-5BBA157331D5}">DATAEXCH</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="1" ContextId="1" AreaNo="16">
+						<Name>ModbusTask Inputs</Name>
+						<Var>
+							<Name>GVL_Global.EthercatParametersIN</Name>
+							<Type GUID="{C2B52D61-7D7E-C8B6-7325-6468CBDB63C2}">EtherCAT_Parameters_FrmCLC</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Global.udev</Name>
+							<Type>UINT</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" ContextId="1" AreaNo="17">
+						<Name>ModbusTask Outputs</Name>
+						<Var>
+							<Name>GVL_Global.EthercatSTATMonitoringOut</Name>
+							<Comment><![CDATA[status var for clc on Ethercat]]></Comment>
+							<Type GUID="{8F3B9F12-E3C7-83B3-A983-83E065EF436B}">ETherCAT_StatMonitor_VAR</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Global.EthercatMoniotrBAT_OUT</Name>
+							<Type GUID="{52C033D3-792B-FB43-1694-CEA9D4BD1403}">EtherCAT_Monitor_BatVariables</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Global.Ethercat_alarms_warningsOUT</Name>
+							<Type GUID="{DD997AAA-1CA8-BB98-3983-83703E325360}">Ethercat_AlarmsWarningToCLC</Type>
+						</Var>
+						<Var>
+							<Name>GVL_Global.test</Name>
+							<Type>DINT</Type>
+						</Var>
+					</Vars>
+					<Contexts>
+						<Context>
+							<Id NeedCalleeCall="true">0</Id>
+							<Name>StateMachineTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>6</Priority>
+							<CycleTime>5000000</CycleTime>
+						</Context>
+						<Context>
+							<Id NeedCalleeCall="true">1</Id>
+							<Name>ModbusTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010050</OTCID>
+							</ManualConfig>
+							<Priority>8</Priority>
+							<CycleTime>20000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="6" OTCID="#x08502002"/>
+						<TaskPouOid Prio="8" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+		<Io>
+			<Device Id="1" DevType="130" AmsNetId="10.200.8.4.2.255" RemoteName="Device 1 (EtherCAT Slave)">
+				<Name>Device 1 (EtherCAT Slave)</Name>
+				<AddressInfo>
+					<Ccat>
+						<Address>-801112064</Address>
+						<Offset>65536</Offset>
+						<Size>65536</Size>
+						<BaseAddr>0</BaseAddr>
+						<BusNo>3</BusNo>
+						<SlotNo>0</SlotNo>
+						<VendorId>5612</VendorId>
+						<DeviceId>20480</DeviceId>
+						<TimeSize>128</TimeSize>
+						<TimeOffs>1024</TimeOffs>
+						<GpioSize>32</GpioSize>
+						<GpioOffs>768</GpioOffs>
+					</Ccat>
+				</AddressInfo>
+				<Vars VarGrpType="1" InsertType="1">
+					<Name>Inputs</Name>
+					<Var>
+						<Name>CommanndsfromCLC</Name>
+						<Type GUID="{36033E81-37B6-9C70-D731-A9B4B5FB612D}">ARRAY [0..7] OF DINT</Type>
+					</Var>
+					<Var>
+						<Name>ParametersIN</Name>
+						<Type GUID="{B045FA25-2EDA-C401-A95F-30A46A1ECA26}">ARRAY [0..7] OF REAL</Type>
+						<BitOffs>256</BitOffs>
+						<ExternalAddress>32</ExternalAddress>
+					</Var>
+					<Var>
+						<Name>data2rcv</Name>
+						<Type GUID="{C9B210E6-676B-6B0E-4D83-8C09ABB69271}">ARRAY [0..555] OF BYTE</Type>
+						<BitOffs>512</BitOffs>
+						<ExternalAddress>64</ExternalAddress>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="2" InsertType="1">
+					<Name>Outputs</Name>
+					<Var>
+						<Name>Var 11</Name>
+						<Type>DINT</Type>
+					</Var>
+					<Var>
+						<Name>StatMonitorVarOut</Name>
+						<Type GUID="{36033E81-37B6-9C70-D731-A9B4B5FB612D}">ARRAY [0..7] OF DINT</Type>
+						<BitOffs>32</BitOffs>
+						<ExternalAddress>4</ExternalAddress>
+					</Var>
+					<Var>
+						<Name>EthercatMonitorBatVarOUT</Name>
+						<Type GUID="{2C46078D-D1C8-B92F-019C-10410FF3C999}">ARRAY [0..15] OF REAL</Type>
+						<BitOffs>288</BitOffs>
+						<ExternalAddress>36</ExternalAddress>
+					</Var>
+					<Var>
+						<Name>AlarmsWarningOUT</Name>
+						<Type GUID="{FE565D85-927B-2D08-1043-124F5F921E35}">ARRAY [0..7] OF BYTE</Type>
+						<BitOffs>800</BitOffs>
+						<ExternalAddress>100</ExternalAddress>
+					</Var>
+				</Vars>
+				<Vars VarGrpType="3">
+					<Name>InfoData</Name>
+					<Var>
+						<Name>State</Name>
+						<Comment><![CDATA[0x___1 = Slave is in 'INIT' state
+0x___2 = Slave is in 'PREOP' state
+0x___4 = Slave is in 'SAFEOP' state
+0x___8 = Slave is in 'OP' state]]></Comment>
+						<Type>UINT</Type>
+						<BitOffs>4960</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+					<Var>
+						<Name>NetId</Name>
+						<Type GUID="{18071995-0000-0000-0000-00000000003D}">USINTARR6</Type>
+						<BitOffs>4976</BitOffs>
+						<InOut>0</InOut>
+					</Var>
+				</Vars>
+				<Vars Id="1" VarGrpType="1">
+					<Name>Device Status Mapping</Name>
+					<Var>
+						<Name>TxPDO State</Name>
+						<Type>BIT</Type>
+						<BitOffs>5038</BitOffs>
+					</Var>
+					<Var>
+						<Name>TxPDO Toggle</Name>
+						<Type>BIT</Type>
+						<BitOffs>5039</BitOffs>
+					</Var>
+				</Vars>
+				<Vars Id="1" VarGrpType="2">
+					<Name>Device Control Mapping</Name>
+					<Var>
+						<Name>AlStatus Control</Name>
+						<Type>UDINT</Type>
+						<BitOffs>864</BitOffs>
+					</Var>
+				</Vars>
+				<Image Id="1" AddrType="1" ImageType="2">
+					<Name>Image</Name>
+				</Image>
+				<EtherCATSlave Flags="1"/>
+			</Device>
+		</Io>
+	</Project>
+	<Mappings>
+		<MappingInfo Identifier="{00000000-2002-0850-0020-500810000403}" Id="#x02030010"/>
+		<MappingInfo Identifier="{08502001-0010-0304-0020-500810000403}" Id="#x02030020" Watchdog="00000000000000000000000000000000"/>
+		<OwnerA Name="TIPC^PLC-BMS^PLC-BMS Instance">
+			<OwnerB Name="TIID^Device 1 (EtherCAT Slave)">
+				<Link VarA="ModbusTask Inputs^GVL_Global.EthercatParametersIN" VarB="Inputs^ParametersIN"/>
+				<Link VarA="ModbusTask Inputs^GVL_Global.udev" VarB="InfoData^State"/>
+				<Link VarA="ModbusTask Outputs^GVL_Global.EthercatMoniotrBAT_OUT" VarB="Outputs^EthercatMonitorBatVarOUT"/>
+				<Link VarA="ModbusTask Outputs^GVL_Global.EthercatSTATMonitoringOut" VarB="Outputs^StatMonitorVarOut"/>
+				<Link VarA="ModbusTask Outputs^GVL_Global.Ethercat_alarms_warningsOUT" VarB="Outputs^AlarmsWarningOUT"/>
+				<Link VarA="ModbusTask Outputs^GVL_Global.test" VarB="Outputs^Var 11"/>
+				<Link VarA="StateMachineTask Inputs^GVL_Global.EthCommandsfrmCLC_IN" VarB="Inputs^CommanndsfromCLC"/>
+				<Link VarA="StateMachineTask Inputs^GVL_Global.data2rcv" VarB="Inputs^data2rcv"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
+</TcSmProject>

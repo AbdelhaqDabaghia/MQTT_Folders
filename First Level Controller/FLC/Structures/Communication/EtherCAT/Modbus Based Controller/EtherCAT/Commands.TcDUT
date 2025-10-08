@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <DUT Name="Commands" Id="{6f0d0c2c-7462-4229-8182-536c6d9a46e9}">
+    <Declaration><![CDATA[TYPE Commands :
+STRUCT
+	//Common Block
+		CommonBlock : CommonBlock_Struct;
+	//Inertia Commands
+		InertiaEmulation : InertiaEmulation_Struct;
+	//Frequecy Regulation
+		FrequencyRegulation : FreqRegulation_Struct;
+	//Modal Frequencies attenuation
+		ModalFreq : ModalFreq_Struct;
+	//Voltage Regulation
+		VoltageRegulation : VoltageRegulation_Struct;
+	//Additional Service
+		AdditionalService : AdditionalService_Struct;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

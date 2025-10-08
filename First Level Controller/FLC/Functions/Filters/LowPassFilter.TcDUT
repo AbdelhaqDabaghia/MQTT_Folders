@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="LowPassFilter" Id="{a762dad0-8808-4529-bbc9-a85a39ad9a31}">
+    <Declaration><![CDATA[TYPE LowPassFilter :
+STRUCT
+	FrequencyCut: REAL;
+	Den: REAL;
+	CutFreq: REAL;
+	a1: REAL;
+	b0: REAL;
+	b1: REAL;
+	ErrorFilt: REAL;
+	OutputFilt: REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <GVL Name="metering" Id="{87ead626-b4bf-453b-8d89-b496fc9f482c}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	//metering signals
+		MeteringSignals : feederMeteringStruct;
+END_VAR
+]]></Declaration>
+  </GVL>
+</TcPlcObject>

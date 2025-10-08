@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <DUT Name="ModbusRead_NRG" Id="{56c3269c-f849-41f1-a301-f4b7ae01ab85}">
+    <Declaration><![CDATA[TYPE ModbusRead_NRG :
+STRUCT
+	TotW			:REAL;	// 7, W, scale 10
+	TotVAr			:REAL;	// 8, W, scale 10
+	
+	Vrmsa			:REAL;	// 1, V, scale 1/10
+	Vrmsb			:REAL;	// 2, V, scale 1/10
+	Vrmsc			:REAL;	// 3, V, scale 1/10
+	
+	Irmsa			:INT;	// 4, A, scale 1/10
+	Irmsb			:INT;	// 5, A, scale 1/10
+	Irmsc			:INT;	// 6, A, scale 1/10
+	
+	fbOpMode		:INT;
+	SignofCosineofPhi : INT;
+	OutputApparentPower : INT;
+	GridFre			:REAL;	// 9, Hz, scale 1/100
+	
+	BatSoc : INT;
+	RawP				:REAL;	// 21, kW, 10
+	RawQ				:REAL;	// 22, kVar, 10	
+	HeartBeat		:UINT;  // 10
+	fbOpMode2		:UINT;  // 19
+	
+	BatSocUpLimit	:INT;	// 17, %
+	BatSocLowLimit	:INT;	// 18, %
+	
+	GrAlm1			:DINT;	// 12
+	GrAlm2			:DINT;	// 13
+	GrAlm3			:DINT;	// 14
+	GrAlm0			:DINT;	// 15
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

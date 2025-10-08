@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <Task Name="EAPControl_Task" Id="{1313a6a2-18e5-47cf-abcb-8e1753f9a71c}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>800</CycleTime>
+    <Priority>4</Priority>
+    <PouCall>
+      <Name>EAPControl</Name>
+    </PouCall>
+    <TaskFBGuid>{51d1ec8c-e84f-4f9e-8327-7106ac1da920}</TaskFBGuid>
+    <Fb_init>{01b08ccb-0764-46d4-9bc1-01b9681356c3}</Fb_init>
+    <Fb_exit>{59ae498a-71b8-4b21-84b0-3a2d43a55358}</Fb_exit>
+    <CycleUpdate>{0196e90c-ec31-4e24-a30a-0299fb0c3de1}</CycleUpdate>
+    <PostCycleUpdate>{b0ab2265-b0a2-474c-a452-70de5dad48d8}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

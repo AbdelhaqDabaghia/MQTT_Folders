@@ -1,0 +1,431 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="State_Machine" Id="{f2669584-332a-4cf9-b7b0-658d596d50a2}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM State_Machine
+VAR
+	//Data Send 2 FEC
+		DataSend2FEC 		AT %Q*		: data_16real;
+		
+	//Data Received
+		DataReceived AT %I*: data_16real;
+
+	//Current state of FLC
+		CurrentState : eCurrentState;
+
+		// Current State of FEC
+		FEC_CurrState : eFEC_CurrState;
+		
+		P_mod_ref : REAL;
+		Q_mod_ref : REAL;
+		
+		RampDown : REAL := 1;
+	wAutoManCtl: INT;
+	
+	Hugo :REAL;
+	Hugo1 : INT;
+	Hugo2 : INT;
+	Hugo3: INT;
+	Hugo4: INT;
+	
+			
+	EtherCATHeartBeat : DINT;
+	CounterCommFailure : INT;
+	
+	
+	TIMER_TIMEOUT:TON;	// Timer for enabling TLC communication
+	TS_TIMEOUT: TIME;
+	Counter_TimeOUT : INT;
+	TS_WARNING: TIME;
+	EmergencyStop_TimeOut	:	BOOL;
+	Counter_TimeOUT_2	:	INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Protection for EtherCAT
+	IF Communications.EtherCAT_Inputs_DINT.Heartbeat = EtherCATHeartBeat THEN
+		CounterCommFailure := CounterCommFailure + 1;
+			IF CounterCommFailure > 500 THEN
+				Communications.EtherCAT_Inputs_DINT.Command := 0;
+				GlobalVar.CommunicationFailureEtherCAT := TRUE;
+				Communications.EtherCAT_Variables.WarningLog.Bits.EtherCAT_Failure := TRUE;
+				CounterCommFailure := 0;
+			END_IF
+	ELSE
+		GlobalVar.CommunicationFailureEtherCAT := FALSE;
+		Communications.EtherCAT_Variables.WarningLog.Bits.EtherCAT_Failure := FALSE;
+		CounterCommFailure := 0;
+	END_IF
+	EtherCATHeartBeat := Communications.EtherCAT_Inputs_DINT.Heartbeat;
+// End of protection for EtherCAT
+
+
+{IF defined (JEMA)}
+	Hugo1 := 1;
+	Mapping_ModbusReadRegisters(ADR(GlobalVar.ScaledModRead),ADR(Communications.EtherCAT_Monitor_Variables),ADR(Communications.EtherCAT_Variables));	
+	Mapping_ModbusWriteRegisters(ADR(GlobalVar.ModWrite),ADR(Communications.EtherCAT_Inputs));
+{ELSE}	
+	Hugo1 := 2;
+	GlobalVar.ModWrite.wAutoManCtl := REAL_TO_UINT(Communications.EtherCAT_Inputs.Command);
+{END_IF}
+
+//Rempaing from DINT To REAL and from REAL TO DINT.
+Remap_EtherCAT_Variables(ADR(Communications.EhterCAT_Parameters_DINT),
+						ADR(Communications.EtherCAT_EAP_Parameters_DINT),
+						ADR(Communications.EtherCAT_Inputs_DINT),
+						ADR(Communications.EtherCAT_Monitor_Variables_DINT),
+						ADR(Communications.EhterCAT_Parameters),
+						ADR(Communications.EtherCAT_EAP_Parameters),
+						ADR(Communications.EtherCAT_Inputs),
+						ADR(Communications.EtherCAT_Monitor_Variables));
+			
+//Read state machine of the Front End Controller.
+		{IF defined (JEMA)}
+			Hugo2 := 1;
+			//Read state machine OF the Front End Controller.
+			IF GlobalVar.ModRead.CtrlPriority = 1 THEN
+				FEC_CurrState := UINT_TO_INT(GlobalVar.ModRead.fbOpMode);
+			ELSE
+				FEC_CurrState := 2;
+			END_IF
+		{ELSE}	
+			Hugo2 := 2;
+			FEC_CurrState := UINT_TO_INT(GlobalVar.ModRead.DerOpMode);
+		{END_IF}
+		
+	IF GlobalVar.CommunicationFailureModbus = 1 THEN
+		FEC_CurrState := 0;
+	END_IF
+					
+//ALARMS FROM THE POWER CONVERTER.		
+
+{IF defined (JEMA)}
+	Hugo3 := 3;
+	IF GlobalVar.ModRead.GrAlm0 > 0 THEN
+		FEC_CurrState := 0;				
+	END_IF
+	IF GlobalVar.ModRead.GrAlm1 > 0 THEN
+		FEC_CurrState := 0;				
+	END_IF
+	IF GlobalVar.ModRead.GrAlm2 > 0 THEN
+		FEC_CurrState := 0;				
+	END_IF
+	IF GlobalVar.ModRead.GrAlm3 > 0 THEN
+		FEC_CurrState := 0;				
+	END_IF
+	IF GlobalVar.ModRead.GrAlm4 > 0 THEN
+		FEC_CurrState := 0;				
+	END_IF
+{ELSE}	
+	Hugo3 := 2;
+{END_IF}
+
+//State Machine - First Level Controller
+	CASE FEC_CurrState OF
+		eFEC_CurrState.FEC_OFF:
+			CurrentState := eCurrentState.OFF;
+			GlobalVar.ModbusSPC_Enable := FALSE;
+			GlobalVar.EAP_SPC_Enable := FALSE;
+			
+		eFEC_CurrState.FEC_STANDBY:
+			CurrentState := eCurrentState.STANDBY;
+			GlobalVar.ModbusSPC_Enable := FALSE;
+			GlobalVar.EAP_SPC_Enable := FALSE;
+			
+		eFEC_CurrState.FEC_MANUAL:
+			CurrentState := eCurrentState.STANDBY;
+			GlobalVar.ModbusSPC_Enable := FALSE;
+			GlobalVar.EAP_SPC_Enable := FALSE;
+			
+		eFEC_CurrState.FEC_AVG_PWR_CTR:
+			CurrentState := eCurrentState.AVG_PWR_CTR;
+			GlobalVar.ModbusSPC_Enable := TRUE;
+			GlobalVar.EAP_SPC_Enable := FALSE;
+			
+		eFEC_CurrState.FEC_INST_PWR_CTR:
+			CurrentState := eCurrentState.INST_PWR_CTR;
+			GlobalVar.ModbusSPC_Enable := FALSE;
+			
+			IF GlobalVar.CommunicationFailureEtherCAT = FALSE THEN
+				GlobalVar.EAP_SPC_Enable := TRUE;
+			ELSE
+				GlobalVar.EAP_SPC_Enable := FALSE;
+			END_IF
+	ELSE
+		CurrentState := eCurrentState.STANDBY;	
+	END_CASE
+	
+	{IF defined (JEMA)}
+		Hugo := 1;
+		Mapping_Monitoring_Variables(GlobalVar.ScaledModRead,ADR(Communications.EtherCAT_Monitor_Variables),ADR(Communications.EtherCAT_Variables));
+	{ELSE}
+		Hugo := 2;
+		Mapping_Monitoring_Variables_ABG(GlobalVar.ModRead,ADR(Communications.EtherCAT_Monitor_Variables),ADR(Communications.EtherCAT_Variables));
+	{END_IF}
+	
+
+//////////Alarms/Warnings of our system
+	TS_TIMEOUT := STRING_TO_TIME(INSERT('T#ms','1000',2));
+	TIMER_TIMEOUT(IN:= NOT TIMER_TIMEOUT.Q, PT:= TS_TIMEOUT);
+	
+	IF GlobalVar.CommunicationFailureModbus = TRUE THEN
+		Communications.EtherCAT_Variables.WarningLog.Bits.ModbusComm_FLC_PCS := TRUE;	
+	ELSE
+		Communications.EtherCAT_Variables.WarningLog.Bits.ModbusComm_FLC_PCS := FALSE;	
+	END_IF
+	
+
+	IF (Communications.EtherCAT_Inputs.Command <> Communications.EtherCAT_Variables.Status) AND  Communications.EtherCAT_Inputs.Command <> 100 THEN
+		IF TIMER_TIMEOUT.Q THEN
+			Counter_TimeOUT := Counter_TimeOUT + 1;
+		END_IF
+		IF Counter_TimeOUT = 120 THEN
+			Communications.EtherCAT_Variables.WarningLog.Bits.CommandTimeout := TRUE; 
+			Counter_TimeOUT := 0;
+		END_IF
+	ELSE 
+		IF TIMER_TIMEOUT.Q THEN
+			Counter_TimeOUT_2 := Counter_TimeOUT_2 + 1;
+		END_IF
+		
+		IF Counter_TimeOUT_2 = 300 THEN
+			Communications.EtherCAT_Variables.WarningLog.Bits.CommandTimeout := FALSE; 
+			Counter_TimeOUT_2 := 0;
+		END_IF	
+		Counter_TimeOUT := 0;
+	END_IF
+	
+	IF Communications.EtherCAT_Monitor_Variables.Vrmsa > Communications.EhterCAT_Parameters.CommonBlock_Params.NominalVoltage*1.4 THEN
+		Communications.EtherCAT_Variables.WarningLog.Bits.OverVoltage := TRUE;
+	ELSE
+		Communications.EtherCAT_Variables.WarningLog.Bits.OverVoltage := FALSE;
+	END_IF
+	
+	IF Communications.EtherCAT_Monitor_Variables.Vrmsa < Communications.EhterCAT_Parameters.CommonBlock_Params.NominalVoltage*0.5 THEN
+		Communications.EtherCAT_Variables.WarningLog.Bits.UnderVoltage := TRUE;
+	ELSE
+		Communications.EtherCAT_Variables.WarningLog.Bits.UnderVoltage := FALSE;
+	END_IF
+	
+	IF Communications.EtherCAT_Monitor_Variables.Irmsa > Communications.EhterCAT_Parameters.CommonBlock_Params.NominalPower/(3*(Communications.EhterCAT_Parameters.CommonBlock_Params.NominalVoltage+1)) THEN
+		Communications.EtherCAT_Variables.WarningLog.Bits.OverCurrent := TRUE;
+	ELSE
+		Communications.EtherCAT_Variables.WarningLog.Bits.OverCurrent := FALSE;
+	END_IF
+	
+	IF Communications.EtherCAT_Monitor_Variables.GridFre*0.1591549430918 > (Communications.EhterCAT_Parameters.CommonBlock_Params.NominalFreq +  Communications.EhterCAT_Parameters.CommonBlock_Params.NominalFreq*0.02) THEN
+		Communications.EtherCAT_Variables.WarningLog.Bits.OverFrequency := TRUE;
+	ELSE
+		Communications.EtherCAT_Variables.WarningLog.Bits.OverFrequency := FALSE;
+	END_IF
+	
+	IF Communications.EtherCAT_Monitor_Variables.GridFre*0.1591549430918 < (Communications.EhterCAT_Parameters.CommonBlock_Params.NominalFreq - Communications.EhterCAT_Parameters.CommonBlock_Params.NominalFreq*0.02) THEN
+		Communications.EtherCAT_Variables.WarningLog.Bits.UnderFrequency := TRUE;
+	ELSE
+		Communications.EtherCAT_Variables.WarningLog.Bits.UnderFrequency := FALSE;
+	END_IF
+	
+	IF Communications.PowerOfService.InertiaEmulationP_Service > Communications.EhterCAT_Parameters.InertiaEmulation_Params.PowerLimit_Inertia THEN
+		Communications.EtherCAT_Variables.WarningLog.Bits.Inertia_Overrange := TRUE;
+	ELSE
+		Communications.EtherCAT_Variables.WarningLog.Bits.Inertia_Overrange := FALSE;
+	END_IF 
+	
+	IF Communications.PowerOfService.FrequencyRegulationP_Service > Communications.EhterCAT_Parameters.FrequencyRegulation_Params.PowerLimit_Freq THEN
+		Communications.EtherCAT_Variables.WarningLog.Bits.Frequency_Overrange := TRUE;
+	ELSE
+		Communications.EtherCAT_Variables.WarningLog.Bits.Frequency_Overrange := FALSE;
+	END_IF
+	
+	IF Communications.PowerOfService.VoltageRegulationQ_Service > Communications.EhterCAT_Parameters.VoltageRegulation_Params.PowerLimit_Voltage THEN
+		Communications.EtherCAT_Variables.WarningLog.Bits.VoltReg_Overrange := TRUE;
+	ELSE
+		Communications.EtherCAT_Variables.WarningLog.Bits.VoltReg_Overrange := FALSE;
+	END_IF
+	
+	IF Communications.PowerOfService.ModalFreqAttP_Service > Communications.EhterCAT_Parameters.ModalFrequency_Params.PowerLimit_ModalFreq THEN
+		Communications.EtherCAT_Variables.WarningLog.Bits.ModFreq_Overrange := TRUE;
+	ELSE
+		Communications.EtherCAT_Variables.WarningLog.Bits.ModFreq_Overrange := FALSE;
+	END_IF
+	
+	IF Communications.EtherCAT_Monitor_Variables.BatSoc > 80 THEN
+		Communications.EtherCAT_Variables.WarningLog.Bits.Battery_80Perc := TRUE;
+	ELSE
+		Communications.EtherCAT_Variables.WarningLog.Bits.Battery_80Perc := FALSE;
+	END_IF
+	
+	IF Communications.EtherCAT_Monitor_Variables.BatSoc < 20 THEN
+		Communications.EtherCAT_Variables.WarningLog.Bits.Battery_20Perc := TRUE;
+	ELSE
+		Communications.EtherCAT_Variables.WarningLog.Bits.Battery_20Perc := FALSE;
+	END_IF
+	
+	
+	/////////////////////Critical warnings
+	IF Communications.EtherCAT_Variables.WarningLog.Bits.ModbusComm_FLC_PCS = TRUE THEN
+		Communications.EtherCAT_Inputs.Command := 0;
+		Communications.EtherCAT_Variables.Status := 0;
+	END_IF
+	
+	IF Communications.EtherCAT_Variables.WarningLog.Bits.CommandTimeout = TRUE THEN
+		Communications.EtherCAT_Inputs.Command := 0;
+	END_IF
+	
+	IF Communications.EtherCAT_Variables.WarningLog.Bits.EtherCAT_Failure = TRUE THEN
+		Communications.EtherCAT_Inputs.Command := 0;
+		Communications.EtherCAT_Variables.Status := 0;
+	END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="State_Machine">
+      <LineId Id="5321" Count="4" />
+      <LineId Id="5334" Count="0" />
+      <LineId Id="5548" Count="0" />
+      <LineId Id="5326" Count="3" />
+      <LineId Id="5549" Count="0" />
+      <LineId Id="5330" Count="1" />
+      <LineId Id="5333" Count="0" />
+      <LineId Id="5319" Count="0" />
+      <LineId Id="5577" Count="0" />
+      <LineId Id="5320" Count="0" />
+      <LineId Id="5251" Count="0" />
+      <LineId Id="5263" Count="0" />
+      <LineId Id="5252" Count="2" />
+      <LineId Id="5264" Count="0" />
+      <LineId Id="5255" Count="0" />
+      <LineId Id="5249" Count="0" />
+      <LineId Id="5257" Count="0" />
+      <LineId Id="5250" Count="0" />
+      <LineId Id="5141" Count="0" />
+      <LineId Id="5145" Count="6" />
+      <LineId Id="5144" Count="0" />
+      <LineId Id="4834" Count="0" />
+      <LineId Id="5209" Count="0" />
+      <LineId Id="5265" Count="0" />
+      <LineId Id="5213" Count="0" />
+      <LineId Id="5218" Count="3" />
+      <LineId Id="5210" Count="1" />
+      <LineId Id="5266" Count="0" />
+      <LineId Id="5212" Count="0" />
+      <LineId Id="5208" Count="0" />
+      <LineId Id="4579" Count="0" />
+      <LineId Id="4771" Count="2" />
+      <LineId Id="4776" Count="0" />
+      <LineId Id="4796" Count="0" />
+      <LineId Id="5223" Count="1" />
+      <LineId Id="5267" Count="0" />
+      <LineId Id="5233" Count="13" />
+      <LineId Id="5230" Count="2" />
+      <LineId Id="5222" Count="0" />
+      <LineId Id="4789" Count="0" />
+      <LineId Id="1725" Count="0" />
+      <LineId Id="1517" Count="0" />
+      <LineId Id="1513" Count="0" />
+      <LineId Id="4030" Count="0" />
+      <LineId Id="4650" Count="0" />
+      <LineId Id="4699" Count="0" />
+      <LineId Id="4873" Count="0" />
+      <LineId Id="1548" Count="1" />
+      <LineId Id="4267" Count="0" />
+      <LineId Id="1551" Count="0" />
+      <LineId Id="4874" Count="0" />
+      <LineId Id="1550" Count="0" />
+      <LineId Id="1552" Count="0" />
+      <LineId Id="4556" Count="0" />
+      <LineId Id="1554" Count="0" />
+      <LineId Id="4875" Count="0" />
+      <LineId Id="1553" Count="0" />
+      <LineId Id="1556" Count="0" />
+      <LineId Id="4553" Count="0" />
+      <LineId Id="1558" Count="0" />
+      <LineId Id="4876" Count="0" />
+      <LineId Id="1544" Count="0" />
+      <LineId Id="1559" Count="0" />
+      <LineId Id="4697" Count="0" />
+      <LineId Id="4866" Count="2" />
+      <LineId Id="4870" Count="0" />
+      <LineId Id="4872" Count="0" />
+      <LineId Id="4869" Count="0" />
+      <LineId Id="1560" Count="1" />
+      <LineId Id="1543" Count="0" />
+      <LineId Id="4969" Count="0" />
+      <LineId Id="5247" Count="0" />
+      <LineId Id="5195" Count="0" />
+      <LineId Id="5197" Count="0" />
+      <LineId Id="5192" Count="0" />
+      <LineId Id="5198" Count="0" />
+      <LineId Id="5121" Count="0" />
+      <LineId Id="5091" Count="0" />
+      <LineId Id="5364" Count="0" />
+      <LineId Id="5366" Count="0" />
+      <LineId Id="5365" Count="0" />
+      <LineId Id="5383" Count="0" />
+      <LineId Id="5382" Count="0" />
+      <LineId Id="5443" Count="0" />
+      <LineId Id="5384" Count="0" />
+      <LineId Id="5442" Count="0" />
+      <LineId Id="5532" Count="1" />
+      <LineId Id="5494" Count="1" />
+      <LineId Id="5579" Count="0" />
+      <LineId Id="5445" Count="0" />
+      <LineId Id="5451" Count="0" />
+      <LineId Id="5446" Count="0" />
+      <LineId Id="5452" Count="0" />
+      <LineId Id="5447" Count="1" />
+      <LineId Id="5450" Count="0" />
+      <LineId Id="5449" Count="0" />
+      <LineId Id="5536" Count="0" />
+      <LineId Id="5538" Count="1" />
+      <LineId Id="5537" Count="0" />
+      <LineId Id="5540" Count="0" />
+      <LineId Id="5543" Count="2" />
+      <LineId Id="5542" Count="0" />
+      <LineId Id="5546" Count="0" />
+      <LineId Id="5496" Count="1" />
+      <LineId Id="5367" Count="1" />
+      <LineId Id="5575" Count="1" />
+      <LineId Id="5498" Count="1" />
+      <LineId Id="5398" Count="1" />
+      <LineId Id="5572" Count="1" />
+      <LineId Id="5500" Count="1" />
+      <LineId Id="5393" Count="1" />
+      <LineId Id="5570" Count="1" />
+      <LineId Id="5502" Count="1" />
+      <LineId Id="5418" Count="0" />
+      <LineId Id="5421" Count="0" />
+      <LineId Id="5568" Count="1" />
+      <LineId Id="5504" Count="1" />
+      <LineId Id="5422" Count="0" />
+      <LineId Id="5424" Count="0" />
+      <LineId Id="5566" Count="1" />
+      <LineId Id="5506" Count="1" />
+      <LineId Id="5425" Count="0" />
+      <LineId Id="5434" Count="0" />
+      <LineId Id="5564" Count="1" />
+      <LineId Id="5508" Count="1" />
+      <LineId Id="5435" Count="1" />
+      <LineId Id="5562" Count="1" />
+      <LineId Id="5510" Count="1" />
+      <LineId Id="5437" Count="1" />
+      <LineId Id="5560" Count="1" />
+      <LineId Id="5512" Count="1" />
+      <LineId Id="5439" Count="1" />
+      <LineId Id="5558" Count="1" />
+      <LineId Id="5514" Count="1" />
+      <LineId Id="5454" Count="1" />
+      <LineId Id="5554" Count="1" />
+      <LineId Id="5516" Count="1" />
+      <LineId Id="5456" Count="1" />
+      <LineId Id="5556" Count="1" />
+      <LineId Id="5415" Count="0" />
+      <LineId Id="5520" Count="2" />
+      <LineId Id="5525" Count="1" />
+      <LineId Id="5588" Count="0" />
+      <LineId Id="5527" Count="1" />
+      <LineId Id="5530" Count="1" />
+      <LineId Id="5529" Count="0" />
+      <LineId Id="5550" Count="2" />
+      <LineId Id="5589" Count="0" />
+      <LineId Id="5553" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

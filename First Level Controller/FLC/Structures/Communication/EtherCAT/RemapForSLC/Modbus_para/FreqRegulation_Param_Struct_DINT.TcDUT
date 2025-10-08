@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="FreqRegulation_Param_Struct_DINT" Id="{53a89767-286d-423d-99ea-21a814c5fec4}">
+    <Declaration><![CDATA[TYPE FreqRegulation_Param_Struct_DINT :
+STRUCT
+	//Frequency Regulation
+		DroopConstantP : DINT := 4;			//0
+		Max_delta_Energy : DINT := 1000000;		//1
+		PowerLimit_Freq : DINT := 1000000;		//2
+		FrequencyCutOff : DINT := 200;		//3
+		FreqDeadBand : DINT := 30;			//4
+		Reserved1 : DINT;					//5
+		Reserved2 : DINT;					//6	
+		Reserved3 : DINT;					//7
+		Reserved4 : DINT;					//8
+		Reserved5 : DINT;					//9
+		Reserved6 : DINT;					//10
+		Reserved7 : DINT;					//11
+		Reserved8 : DINT;					//12
+		Reserved9 : DINT;					//13
+		Reserved10 : DINT;					//14
+		Reserved11 : DINT;					//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

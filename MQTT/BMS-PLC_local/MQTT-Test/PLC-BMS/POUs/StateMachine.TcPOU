@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="StateMachine" Id="{cc880b57-a213-4818-8211-c51fbe5c1aaa}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM StateMachine
+VAR
+	eFLCState: StateMachineCommand;
+	params_fromHL : EtherCAT_Parameters_FrmCLC; //param from high /2nd level
+	sCurrentState: STRING;
+	sAlarm: STRING;
+	
+	tRamping :  TOF := (PT:=T#2S);
+	sRamping: STRING;
+	EtherCATHeartBeat : DINT;
+	CounterCommFailure : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Protection for EtherCAT
+//EtherCATHeartBeat := EtherCATHeartBeat+1;
+	IF GVL_Global.EthCommandsfrmCLC_IN.Heartbeat = EtherCATHeartBeat THEN
+		CounterCommFailure := CounterCommFailure + 1;
+			IF CounterCommFailure > 500 THEN
+				 GVL_Global.EthCommandsfrmCLC_IN.StatControlCMD:= 2;
+				GVL_Global.CommunicationFailureEtherCAT := TRUE;
+				//Communications.EtherCAT_Variables.WarningLog.Bits.EtherCAT_Failure := TRUE;
+				CounterCommFailure := 0;
+			END_IF
+	ELSE
+		GVL_Global.CommunicationFailureEtherCAT:= FALSE;
+		//Communications.EtherCAT_Variables.WarningLog.Bits.EtherCAT_Failure := FALSE;
+		CounterCommFailure := 0;
+	END_IF
+	EtherCATHeartBeat := GVL_Global.EthCommandsfrmCLC_IN.Heartbeat ;
+
+//FLC State machine goverened by state of Enerark BESS EMS modbus module	
+IF GVL_Global.ModRead.Workingstatus = 1 OR GVL_Global.ModWrite.System_state_control =2 THEN   // 1 = stop, 2 =  run, 3 = fault,   MB register work_status address 0x001
+eFLCState := StateMachineCommand.OFF;
+ELSIF GVL_Global.ModRead.Workingstatus = 2 OR GVL_Global.ModWrite.System_state_control = 6 THEN
+	IF GVL_Global.ModRead.Workingmode = 1 OR GVL_Global.ModWrite.System_mode_control = 1 THEN     // 1 = P/Q , 2 = off-grid, 3 = on-grid? 4 = peak to valley mode 5= backup mode
+		eFLCState := StateMachineCommand.OPERATIONAL;
+		ELSIF GVL_Global.ModRead.Workingmode = 2 OR GVL_Global.ModWrite.System_mode_control =2 THEN
+			eFLCState := StateMachineCommand.DISCONNECTED;
+			ELSIF GVL_Global.ModRead.Workingmode = 3 OR GVL_Global.ModWrite.System_mode_control = 3 THEN
+				eFLCState := StateMachineCommand.CONNECTED;
+				END_IF
+	ELSIF GVL_Global.ModRead.Workingstatus = 3 THEN
+		eFLCState := StateMachineCommand.FAULT;
+		END_IF	
+
+CASE eFLCState OF
+	
+	//Default satate after switching on controller.
+	StateMachineCommand.OFF:
+		GVL_Global.bPower_enable := FALSE;
+		//GVL_Global.ModWrite.Active_power_control := 0;
+		//GVL_Global.ModWrite.Reactive_power_control := 0;
+	
+		(*//commuincation check , INIT
+		IF GVL_Global.bCommunicationOK THEN
+			IF GVL_Global.bON AND NOT GVL_Global.bOFF THEN
+				eFLCState := StateMachineCommand.DISCONNECTED;
+			END_IF
+					
+		END_IF*)
+	
+	// BESS is ready but not connected to GRID
+	StateMachineCommand.DISCONNECTED:
+		GVL_Global.bPower_enable := FALSE;
+		//GVL_Global.ModWrite.Active_power_control := 0;
+		//GVL_Global.ModWrite.Reactive_power_control := 0;
+	
+		//check faults/alarms
+		(*IF GVL_Global.bFault_present THEN
+			eFLCState := StateMachineCommand.FAULT;
+	
+		ELSE
+			IF GVL_Global.bConnected THEN
+			eFLCState := StateMachineCommand.CONNECTED;
+			END_IF
+		END_IF*)
+	//BESS is connected to GRID but no Injection
+	StateMachineCommand.CONNECTED:
+		GVL_Global.bPower_enable := FALSE;
+		//GVL_Global.ModWrite.Active_power_control := 0;
+		//GVL_Global.ModWrite.Reactive_power_control := 0;
+	
+		(*IF GVL_Global.bFault_present THEN
+			eFLCState := StateMachineCommand.FAULT;
+	
+		ELSE
+			IF GVL_Global.bOPERATIONAL THEN
+				eFLCState := StateMachineCommand.OPERATIONAL;
+			END_IF
+			IF NOT GVL_Global.bConnected THEN
+				eFLCState := StateMachineCommand.DISCONNECTED;
+			END_IF
+		END_IF *)
+		
+	// BESS IN OPERATIONAL MODE , recieve I/0
+	StateMachineCommand.OPERATIONAL:
+	 //Control varaibles , references  here , 
+	 GVL_Global.bPower_enable := TRUE;
+		//GVL_Global.ModWrite.Active_power_control :=  DINT_TO_INT(GVL_Global.EthCommandsfrmCLC_IN.ActivePowerReference)*10; //-600 to 600 kW
+		
+		//GVL_Global.ModWrite.Reactive_power_control := DINT_TO_INT(GVL_Global.EthCommandsfrmCLC_IN.ReactivePowerReference)*10;
+		
+		(*IF GVL_Global.bFault_present THEN
+			eFLCState := StateMachineCommand.FAULT;
+	
+		END_IF
+		IF NOT GVL_Global.bOPERATIONAL THEN
+				eFLCState := StateMachineCommand.CONNECTED;
+			END_IF*)	
+	
+//FAULT STATE // 
+	StateMachineCommand.FAULT:
+	// RAMDOWN /GRID DSICONECTION //// 
+		GVL_Global.ModWrite.Active_power_control := 0;
+		GVL_Global.ModWrite.Reactive_power_control := 0;
+	
+	//Clear faults;
+		IF GVL_Global.ModRead.Workingstatus = 2   THEN // OR GVL_Global.ModRead.Workingstatus = 1
+			// power ramping down 
+			//Transit to disconneted or off
+			eFLCState := StateMachineCommand.DISCONNECTED;
+			GVL_Global.bFault_present := FALSE;
+			GVL_Global.bConnected :=FALSE;
+			GVL_Global.bOPERATIONAL :=FALSE;
+			//IF GVL_Higherlevel.bClearFault THEN
+			//GVL_Higherlevel.bFault_present := FALSE;
+		
+			//END_IF
+		
+		END_IF		
+
+END_CASE
+	
+	
+	sCurrentState := TO_STRING(eFLCState); // get state name 
+	
+
+
+(*IF GVL_Global.bAlarm_present THEN
+		
+	// RAMDOWN IF ALARM STAYS  
+		sAlarm := 'An alarm is present';
+		ELSIF GVL_Global.bClearAlarm THEN
+			sAlarm := '';	
+	END_IF
+	IF GVL_Global.bOFF THEN
+		tRamping(IN:=GVL_Global.bOFF) ;
+		sRamping := 'Ramping down process ';
+		IF tRamping.Q THEN
+			sRamping := 'Ramped Down';
+			eFLCState:= StateMachineCommand.OFF; 
+			sRamping := '';
+		END_IF
+		eFLCState:= StateMachineCommand.OFF; 
+		
+	END_IF*)
+	
+	
+		 ]]></ST>
+    </Implementation>
+    <LineIds Name="StateMachine">
+      <LineId Id="226" Count="15" />
+      <LineId Id="342" Count="0" />
+      <LineId Id="242" Count="0" />
+      <LineId Id="343" Count="0" />
+      <LineId Id="243" Count="0" />
+      <LineId Id="344" Count="0" />
+      <LineId Id="350" Count="2" />
+      <LineId Id="345" Count="0" />
+      <LineId Id="353" Count="2" />
+      <LineId Id="347" Count="0" />
+      <LineId Id="349" Count="0" />
+      <LineId Id="348" Count="0" />
+      <LineId Id="244" Count="4" />
+      <LineId Id="393" Count="0" />
+      <LineId Id="368" Count="1" />
+      <LineId Id="249" Count="10" />
+      <LineId Id="394" Count="0" />
+      <LineId Id="370" Count="1" />
+      <LineId Id="260" Count="11" />
+      <LineId Id="395" Count="0" />
+      <LineId Id="372" Count="1" />
+      <LineId Id="272" Count="15" />
+      <LineId Id="396" Count="0" />
+      <LineId Id="288" Count="0" />
+      <LineId Id="375" Count="0" />
+      <LineId Id="374" Count="0" />
+      <LineId Id="290" Count="11" />
+      <LineId Id="376" Count="1" />
+      <LineId Id="302" Count="20" />
+      <LineId Id="379" Count="1" />
+      <LineId Id="378" Count="0" />
+      <LineId Id="323" Count="18" />
+      <LineId Id="116" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

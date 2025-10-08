@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="DataLogic" Id="{085bc544-972e-46c8-8d94-cedf826394e0}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM DataLogic
+VAR	
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE GVL_Global.data2rcv.cmd[0] OF 
+	0: 
+		GVL_Global.ModWrite.System_state_control:=2;	// Stop command
+	1:
+		GVL_Global.ModWrite.System_state_control := 6; // RUN command 
+		//battry on, 
+		
+END_CASE
+
+CASE GVL_Global.data2rcv.cmd[1] OF
+	0: 
+		GVL_Global.ModWrite.System_mode_control := 2; // Disconnected 
+	1:
+		GVL_Global.ModWrite.System_mode_control := 3; //Connected	
+	2:
+		GVL_Global.ModWrite.System_mode_control := 1; // Operational	
+		
+END_CASE
+		]]></ST>
+    </Implementation>
+    <LineIds Name="DataLogic">
+      <LineId Id="5" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="18" Count="0" />
+      <LineId Id="21" Count="2" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="26" Count="1" />
+      <LineId Id="29" Count="6" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="CommonBlock_Param_Struct_EAP" Id="{7759027c-76d4-43e5-a990-17a8527318f1}">
+    <Declaration><![CDATA[TYPE CommonBlock_Param_Struct_EAP :
+STRUCT
+	//Common Block parameters
+		NominalPower : REAL := 1E6;			//0
+		NominalFreq : REAL := 400;			//1
+		NominalVolt : REAL := 50;			//2
+		ActivePowerLimit : REAL := 1E6;		//3
+		ReactivePowerLimit: REAL := 1E6;	//4
+		Delta_limits : REAL := 1;			//5
+		E_Limits : REAL := 200;				//6
+		Kp_ReactiveControl : REAL := 1E-4;	//7
+		Ki_ReactiveControl : REAL := 1E-4;	//8
+		VirtualReactance : REAL := 0.3;		//9
+		VirtualResistor : REAL := 0.1;		//10
+		Reserved1 : REAL;					//11
+		Reserved2 : REAL;					//12
+		Reserved3 : REAL;					//13
+		Reserved4 : REAL;					//14
+		Reserved5 : REAL;					//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <Task Name="TimerTask" Id="{db795b9c-7aee-4d6e-be08-36a81f2ecc35}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>1000</CycleTime>
+    <Priority>6</Priority>
+    <PouCall>
+      <Name>Timer</Name>
+    </PouCall>
+    <TaskFBGuid>{dd0a9ef3-9f55-4d0c-ac54-94f07d2cadf2}</TaskFBGuid>
+    <Fb_init>{6fdcaec7-8943-445f-8044-fd52f9eabd84}</Fb_init>
+    <Fb_exit>{b827e90b-bbd8-4c60-8b7a-74adad689ded}</Fb_exit>
+    <CycleUpdate>{d134b735-f8c7-4c1b-83c7-d72902e3b7d7}</CycleUpdate>
+    <PostCycleUpdate>{eed7f7f7-7728-453d-8696-e967d267cc88}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

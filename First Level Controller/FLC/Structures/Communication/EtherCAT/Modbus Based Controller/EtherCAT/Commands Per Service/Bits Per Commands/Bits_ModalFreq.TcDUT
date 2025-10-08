@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="Bits_ModalFreq" Id="{93b282a6-f420-4569-938a-200326becc0f}">
+    <Declaration><![CDATA[TYPE Bits_ModalFreq :
+STRUCT
+	//Modal Frequency Attenuation
+		Enable_ModalFreq : 				BIT;	//0
+		Delta_Power_Limit_ModalFreq : 	BIT;	//1
+		Reset_To_Default_ModalFreq : 	BIT;	//2
+		Reserved1 : 					BIT;	//3
+		Reserved2 : 					BIT;	//4
+		Reserved3 : 					BIT;	//5
+		Reserved4 : 					BIT;	//6
+		Reserved5 : 					BIT;	//7
+		Reserved6 : 					BIT;	//8
+		Reserved7 : 					BIT;	//9
+		Reserved8 : 					BIT;	//10
+		Reserved9 : 					BIT;	//11
+		Reserved10 : 					BIT;	//12
+		Reserved11 : 					BIT;	//13
+		Reserved12 : 					BIT;	//14
+		Reserved13 : 					BIT;	//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

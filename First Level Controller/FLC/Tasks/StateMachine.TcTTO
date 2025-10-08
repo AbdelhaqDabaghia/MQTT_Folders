@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <Task Name="StateMachine" Id="{897f6b50-da9b-43d2-b6b2-7bc88fc215ca}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>5000</CycleTime>
+    <Priority>8</Priority>
+    <PouCall>
+      <Name>State_Machine</Name>
+    </PouCall>
+    <TaskFBGuid>{e9384b95-ef8c-4c07-a650-d96dd2d65cca}</TaskFBGuid>
+    <Fb_init>{5f1b4ba0-95db-4341-97a1-6901a3823ba7}</Fb_init>
+    <Fb_exit>{1e2efffb-1bb6-492e-a39d-0da25a8ddbd4}</Fb_exit>
+    <CycleUpdate>{932b3aa6-b5f9-419b-bcf7-6387caa4d196}</CycleUpdate>
+    <PostCycleUpdate>{8e0d357b-7d08-464c-82c6-07a453df5ce7}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

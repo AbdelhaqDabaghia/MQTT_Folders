@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <DUT Name="AdditionalService_Struct" Id="{738fd2ab-0d04-44ce-9583-2a9c22e19046}">
+    <Declaration><![CDATA[TYPE AdditionalService_Struct :
+UNION
+		Value : INT;
+		Bits : Bits_CommonBlock;
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

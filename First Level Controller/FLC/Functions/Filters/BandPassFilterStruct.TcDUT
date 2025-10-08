@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="BandPassFilterStruct" Id="{92776ef2-d8ed-4dda-a587-ffa1810c050b}">
+    <Declaration><![CDATA[TYPE BandPassFilterStruct :
+STRUCT
+	G1_a0 : REAL;
+	G1_a1 : REAL;
+	G1_a2 : REAL;
+
+	G1_b0 : REAL;
+	
+	output : REAL;
+	error1 : REAL;
+	error2 : REAL;
+	output1 : REAL;
+	output2 : REAL;
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

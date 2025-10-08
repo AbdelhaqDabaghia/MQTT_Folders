@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="MB_StatMonitoring_VAR" Id="{efd8d2f5-c642-47dd-b822-9462304b28e1}">
+    <Declaration><![CDATA[TYPE MB_StatMonitoring_VAR :
+STRUCT
+	//variables to be monitored // write to CLC master output register
+	
+	// Status related 
+	CurrentOpmod : StateMachineCommand;
+	
+	// HEATBIT , 	
+	Heartbeat : DINT; // An inc. counter
+	
+	Alarms1 : DINT;  
+	Alarms2: DINT;  
+	
+	Alarms3 : DINT;
+	Alarms4  : DINT;  	
+
+	Warning1 :DINT;
+	Warning2: DINT;
+	
+	
+
+		
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

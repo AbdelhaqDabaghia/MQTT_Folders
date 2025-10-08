@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="BessOpmodeControl" Id="{1e849b4c-7853-4f18-a5f2-8765e24431ab}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+
+TYPE BessOpmodeControl :
+(
+	OPERATIONAL := 1, // P/Q Connected to grid and injecting current
+	DISCONNECTED := 2,   // OFF-grid Disoconneted from grid
+	CONNECTED := 3 // On-grid Connected to grid but no injection
+	
+)UINT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

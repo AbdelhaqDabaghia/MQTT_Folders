@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="BandPassFilterParameters" Id="{446c3f0e-3497-41dd-9cba-343f9487a1f6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION BandPassFilterParameters
+VAR_INPUT
+	Damping : REAL;
+	WCentral : REAL;
+	
+	BPF : POINTER TO BandPassFilterStruct;
+	
+	TS : REAL;
+END_VAR
+VAR
+	WBase_2 : REAL;
+	Q: REAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[WBase_2 := WCentral*WCentral;
+Q := 1 / (2 * Damping);
+
+//Denominator G1
+BPF^.G1_a0 := 1 / (TS*TS*WBASE_2*Q + 2 * WCentral*TS + 4 * Q);
+BPF^.G1_a1 := BPF^.G1_a0*(2 * WBase_2*TS*TS*Q - 8 * Q);
+BPF^.G1_a2 := BPF^.G1_a0*(TS*TS*WBase_2*Q - 2 * WCentral*TS + 4 * Q);
+//Numerator
+BPF^.G1_b0 := BPF^.G1_a0*(2 * WCentral*TS);
+]]></ST>
+    </Implementation>
+    <LineIds Name="BandPassFilterParameters">
+      <LineId Id="77" Count="7" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="14" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

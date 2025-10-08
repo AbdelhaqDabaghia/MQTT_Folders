@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="HPF_FilterInit" Id="{9d310c2f-1456-4ec7-acee-f0b5066f55d0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION HPF_FilterInit : REAL
+VAR_INPUT
+	CutFreq : REAL;
+	Filter : POINTER TO HighPassFilter;
+	TS : REAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[	Filter^.FrequencyCut := CutFreq;
+	Filter^.CutFreq := 1/1/(2*3.1415*Filter^.FrequencyCut);
+	
+	Filter^.Den := 1/(TS + 2*(Filter^.CutFreq));	
+	
+	
+	Filter^.a1 := (TS-2*Filter^.CutFreq)*Filter^.Den;
+	Filter^.b0 := (2*Filter^.CutFreq)*Filter^.Den;
+	Filter^.b1 := -(2*Filter^.CutFreq)*Filter^.Den;
+	]]></ST>
+    </Implementation>
+    <LineIds Name="HPF_FilterInit">
+      <LineId Id="23" Count="1" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="30" Count="3" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="34" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

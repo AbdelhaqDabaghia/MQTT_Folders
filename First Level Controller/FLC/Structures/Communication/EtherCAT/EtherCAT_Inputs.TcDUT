@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <DUT Name="EtherCAT_Inputs" Id="{53dee161-36bf-43ba-b0c8-ccdfaaa23ba5}">
+    <Declaration><![CDATA[{define JEMA}
+TYPE EtherCAT_Inputs :
+STRUCT
+	Command : StateMachineCommand;				//0
+	ActivePowerReference : REAL;				//1
+	ReactivePowerReference : REAL;				//2
+	Heartbeat : REAL;							//3
+	Reserved4 : REAL;							//4
+	Reserved5 : REAL;							//5
+	Reserved6 : REAL;							//6
+	Reserved7 : REAL;							//7
+	Reserved8 : REAL;							//8
+	Reserved9 : REAL;							//9	
+	Reserved10 : REAL;							//10
+	Reserved11 : REAL;							//11
+	Reserved12 : REAL;							//12
+	Reserved13 : REAL;							//13
+	Reserved14 : REAL;							//14
+	Reserved15 : REAL;							//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

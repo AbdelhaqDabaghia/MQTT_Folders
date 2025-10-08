@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <GVL Name="Communications" Id="{92066a6d-90c8-42ee-9f6a-e137f7dc8e94}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	//Inputs
+		//Modbus-Based Controller
+			EtherCAT_Commands AT %I*: Commands;
+			EhterCAT_Parameters	: Parameters;
+			EhterCAT_Parameters_DINT AT %I*: Parameters_DINT;
+		//EAP-Based Controller
+			EtherCAT_EAP_Commands AT %I* : Commands_EAP;
+			EtherCAT_EAP_Parameters  : Parameters_EAP;
+			EtherCAT_EAP_Parameters_DINT AT %I* : Parameters_EAP_DINT;
+		//EtherCAT Inputs	
+			EtherCAT_Inputs : EtherCAT_Inputs;
+			EtherCAT_Inputs_DINT AT %I*: EtherCAT_Inputs_DINT;	
+		//EtherCAT Status Variables
+			EtherCAT_Variables AT %Q* : EtherCAT_Stat_Variables;
+		//EtherCAT Monitoring Variables
+			EtherCAT_Monitor_Variables : EtherCAT_Monitor_Variables;
+			EtherCAT_Monitor_Variables_DINT AT %Q* : EtherCAT_Monitor_Variables_DINT;
+			
+		//Service Outputs
+			PowerOfService AT %Q* : PowerOfService_Struct;
+			
+		//EAP Recieve and Send Data
+			EAP_Read AT %I* : data_16Real;
+			EAP_Write AT %Q* : data_16Real;
+			
+		//Modbus Communication
+			ModWriteNRG 		: 	ModbusWrite_NRG;
+			ModReadNRG			: 	ModbusRead_NRG;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

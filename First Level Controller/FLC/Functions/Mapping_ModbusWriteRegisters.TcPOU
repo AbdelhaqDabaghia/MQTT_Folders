@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <POU Name="Mapping_ModbusWriteRegisters" Id="{4fcede58-d6bc-46b0-a7db-ae8676c0e79a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Mapping_ModbusWriteRegisters : bool
+VAR_INPUT
+	//Modbus_Structure : POINTER TO MOdbusWrite_NRG;
+	Modbus_Structure : POINTER TO ModbusWrite;
+	FromSLC : POINTER TO EtherCAT_Inputs;
+END_VAR
+VAR
+	wAutoManCtl: INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Commands
+	//State machine operation
+		Modbus_Structure^.CmdOpMode := REAL_TO_INT(FromSLC^.Command);
+	//Power Reference
+		//Modbus_Structure^.Pset := (FromSLC^.ActivePowerReference);
+		//Modbus_Structure^.Qset := (FromSLC^.ReactivePowerReference);
+
+//GlobalVar.ModWrite.SLC_Debugger := FromSLC^.Commands;]]></ST>
+    </Implementation>
+    <LineIds Name="Mapping_ModbusWriteRegisters">
+      <LineId Id="32" Count="1" />
+      <LineId Id="8" Count="0" />
+      <LineId Id="43" Count="2" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="16" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

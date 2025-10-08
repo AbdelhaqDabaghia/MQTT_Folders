@@ -1,0 +1,487 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <FileVersion>1.0.0.0</FileVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0ebd6341-80b2-4424-bd19-8c23ccb8bbd3}</ProjectGuid>
+    <SubObjectsSortedByName>True</SubObjectsSortedByName>
+    <Name>FLC</Name>
+    <ProgramVersion>3.1.4026.12</ProgramVersion>
+    <Application>{208572ad-ea06-4eb3-aa77-5c543f3c21f7}</Application>
+    <TypeSystem>{0812a9e2-8716-4932-9ad8-f2e66fcf2f26}</TypeSystem>
+    <Implicit_Task_Info>{e4ef7455-1bc7-495d-8a64-acb914284a68}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{9aac35bd-73a1-428d-bcb3-335912222de0}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{55850b66-0dbc-46a8-98f6-0930d5527923}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{85c8fbcd-ffb9-4d56-90ab-80a61426766c}</LibraryReferences>
+    <CompilerDefines>ABG</CompilerDefines>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Functions" />
+    <Folder Include="Functions\Communications" />
+    <Folder Include="Functions\EventRecoder" />
+    <Folder Include="Functions\Filters" />
+    <Folder Include="GlobalVar" />
+    <Folder Include="Structures\Communication\EtherCAT\EAP Based Controller" />
+    <Folder Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT" />
+    <Folder Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands Per Service" />
+    <Folder Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands Per Service\Bits Per Commands" />
+    <Folder Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Parameters Per Service" />
+    <Folder Include="Structures\Communication\EtherCAT\Modbus Based Controller" />
+    <Folder Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT" />
+    <Folder Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands Per Service" />
+    <Folder Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands Per Service\Bits Per Commands" />
+    <Folder Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Parameters Per Service" />
+    <Folder Include="Structures\Communication\EtherCAT" />
+    <Folder Include="Structures\Communication\EtherCAT\Warning" />
+    <Folder Include="Structures\Communication\EtherCAT\RemapForSLC" />
+    <Folder Include="Structures\Communication\EtherCAT\RemapForSLC\EAP_para" />
+    <Folder Include="Structures\Communication\EtherCAT\RemapForSLC\Modbus_para" />
+    <Folder Include="Structures\Communication\Modbus" />
+    <Folder Include="Structures\EventRecorder" />
+    <Folder Include="Structures\EventRecorder\HistorianDataType" />
+    <Folder Include="Structures\StateMachine" />
+    <Folder Include="Tasks" />
+    <Folder Include="Structures" />
+    <Folder Include="Structures\Communication" />
+    <Folder Include="Structures\Transformations" />
+    <Folder Include="Programs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderReference Include="Tc2_IoFunctions">
+      <DefaultResolution>Tc2_IoFunctions, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_IoFunctions</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_ModbusSrv">
+      <DefaultResolution>Tc2_ModbusSrv, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_ModbusSrv</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Standard">
+      <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Standard</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_System">
+      <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Utilities">
+      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Utilities</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc3_Module">
+      <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc3_Module</Namespace>
+    </PlaceholderReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Functions\Communications\EtherCAT_MappingEAP.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Communications\EtherCAT_MappingModbus.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Communications\Mapping_Monitoring_Variables.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Communications\Mapping_Monitoring_Variables_ABG.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Communications\Remap_EtherCAT_Variables.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\EventRecoder\HistorianFunctionBlock.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\EventRecoder\UnixTimestamp.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Filters\BandPassFilter.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Filters\BandPassFilterParameters.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Filters\BandPassFilterStruct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Filters\HighPassFilter.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Filters\HPF_FilterInit.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Filters\HPF_Function.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Filters\LowPassFilter.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Filters\LPF_FilterInit.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Filters\LPF_Function.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Mapping_ModbusReadRegisters.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\Mapping_ModbusWriteRegisters.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Functions\ModReadScaling.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GlobalVar\Communications.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GlobalVar\GlobalVar.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="GlobalVar\GVL.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="Programs\EAPControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Programs\Timer.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands Per Service\AdditionalService_Struct_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands Per Service\Bits Per Commands\Bits_AdditionalService_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands Per Service\Bits Per Commands\Bits_CommonBlock_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands Per Service\Bits Per Commands\Bits_FreqRegulation_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands Per Service\Bits Per Commands\Bits_InertiaEmulation_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands Per Service\Bits Per Commands\Bits_ModalFreq_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands Per Service\Bits Per Commands\Bits_VoltageRegulation_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands Per Service\CommonBlock_Struct_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands Per Service\FreqRegulation_Struct_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands Per Service\InertiaEmulation_Struct_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands Per Service\ModalFreq_Struct_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands Per Service\VoltageRegulation_Struct_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Commands_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Parameters Per Service\AdditionalService_Param_Struct_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Parameters Per Service\CommonBlock_Param_Struct_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Parameters Per Service\FreqRegulation_Param_Struct_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Parameters Per Service\InertiaEmulation_Param_Struct_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Parameters Per Service\ModalFreq_Param_Struct_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Parameters Per Service\VoltageRegulation_Param_Struct_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EAP Based Controller\EtherCAT\Parameters_EAP.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EtherCAT_Inputs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EtherCAT_Monitor_Variables.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\EtherCAT_Stat_Variables.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands Per Service\AdditionalService_Struct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands Per Service\Bits Per Commands\Bits_AdditionalService.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands Per Service\Bits Per Commands\Bits_CommonBlock.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands Per Service\Bits Per Commands\Bits_FreqRegulation.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands Per Service\Bits Per Commands\Bits_InertiaEmulation.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands Per Service\Bits Per Commands\Bits_ModalFreq.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands Per Service\Bits Per Commands\Bits_VoltageRegulation.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands Per Service\CommonBlock_Struct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands Per Service\FreqRegulation_Struct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands Per Service\InertiaEmulation_Struct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands Per Service\ModalFreq_Struct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands Per Service\VoltageRegulation_Struct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Commands.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Parameters Per Service\AdditionalService_Param_Struct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Parameters Per Service\CommonBlock_Param_Struct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Parameters Per Service\FreqRegulation_Param_Struct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Parameters Per Service\InertiaEmulation_Param_Struct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Parameters Per Service\ModalFreq_Param_Struct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Parameters Per Service\VoltageRegulation_Param_Struct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT\Parameters.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Modbus Based Controller\EtherCAT_INT_VALUES.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\PowerOfService_Struct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\EAP_para\AdditionalService_Param_Struct_EAP_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\EAP_para\CommonBlock_Param_Struct_EAP_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\EAP_para\FreqRegulation_Param_Struct_EAP_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\EAP_para\InertiaEmulation_Param_Struct_EAP_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\EAP_para\ModalFreq_Param_Struct_EAP_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\EAP_para\VoltageRegulation_Param_Struct_EAP_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\EtherCAT_Inputs_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\EtherCAT_Monitor_Variables_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\Modbus_para\AdditionalService_Param_Struct_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\Modbus_para\CommonBlock_Param_Struct_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\Modbus_para\FreqRegulation_Param_Struct_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\Modbus_para\InertiaEmulation_Param_Struct_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\Modbus_para\ModalFreq_Param_Struct_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\Modbus_para\VoltageRegulation_Param_Struct_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\Parameters_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\RemapForSLC\Parameters_EAP_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Warning\Warnings_FLC.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\EtherCAT\Warning\Warning_FLC_DINT.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\Modbus\ModbusHoldingRegs.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\Modbus\ModbusRead.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\Modbus\ModbusRead_NRG.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\Modbus\ModbusWrite.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Programs\ModbusControl_Comm.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Programs\State_Machine.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\Modbus\ModbusWrite_NRG.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Communication\Modbus\ScaledModRead.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\EventRecorder\EthercatDataPacket.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\EventRecorder\HistorianDataType\DateTimetype.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\StateMachine\eCurrentState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\StateMachine\eFEC_CurrState.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\StateMachine\StateMachineCommand.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Transformations\abcSignal.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Transformations\alphabetaSignal.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Structures\Transformations\dqsignal.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tasks\EAPControl_Task.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tasks\ModbusComm.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tasks\StateMachine.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tasks\TimerTask.TcTTO">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FLC.tmc">
+      <SubType>Content</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <LibraryReference Include="EAP_Controller,1.0,LUA">
+      <Namespace>EAP_Controller</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="Modbus_SPC,1.0,LUA">
+      <Namespace>Modbus_SPC</Namespace>
+    </LibraryReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ExternalTypes.tmc">
+      <SubType>Content</SubType>
+    </None>
+  </ItemGroup>
+  <ProjectExtensions>
+    <PlcProjectOptions>
+      <XmlArchive>
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
+      <v n="Name">"&lt;ProjectRoot&gt;"</v>
+      <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
+        <v>{8F99A816-E488-41E4-9FA3-846536012284}</v>
+        <o>
+          <v n="Name">"{8F99A816-E488-41E4-9FA3-846536012284}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{29BD8D0C-3586-4548-BB48-497B9A01693F}</v>
+        <o>
+          <v n="Name">"{29BD8D0C-3586-4548-BB48-497B9A01693F}"</v>
+          <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
+            <v>Rules</v>
+            <o>
+              <v n="Name">"Rules"</v>
+              <d n="SubKeys" t="Hashtable" />
+              <d n="Values" t="Hashtable" />
+            </o>
+          </d>
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{40450F57-0AA3-4216-96F3-5444ECB29763}</v>
+        <o>
+          <v n="Name">"{40450F57-0AA3-4216-96F3-5444ECB29763}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" ckt="String" cvt="String">
+            <v>ActiveVisuProfile</v>
+            <v>IR0whWr8bwfyBwAAHf+pawAAAABVAgAADnffSgAAAAABAAAAAAAAAAEaUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwACTHsAZgA5ADUAYgBiADQAMgA2AC0ANQA1ADIANAAtADQAYgA0ADUALQA5ADQAMAAwAC0AZgBiADAAZgAyAGUANwA3AGUANQAxAGIAfQADCE4AYQBtAGUABDJUAHcAaQBuAEMAQQBUACAAMwAuADEAIABCAHUAaQBsAGQAIAA0ADAAMgAyAC4AMQAwAAUWUAByAG8AZgBpAGwAZQBEAGEAdABhAAZMewAxADYAZQA1ADUAYgA2ADAALQA3ADAANAAzAC0ANABhADYAMwAtAGIANgA1AGIALQA2ADEANAA3ADEAMwA4ADcAOABkADQAMgB9AAcSTABpAGIAcgBhAHIAaQBlAHMACEx7ADMAYgBmAGQANQA0ADUAOQAtAGIAMAA3AGYALQA0AGQANgBlAC0AYQBlADEAYQAtAGEAOAAzADMANQA2AGEANQA1ADEANAAyAH0ACUx7ADkAYwA5ADUAOAA5ADYAOAAtADIAYwA4ADUALQA0ADEAYgBiAC0AOAA4ADcAMQAtADgAOQA1AGYAZgAxAGYAZQBkAGUAMQBhAH0ACg5WAGUAcgBzAGkAbwBuAAsGaQBuAHQADApVAHMAYQBnAGUADQpUAGkAdABsAGUADhpWAGkAcwB1AEUAbABlAG0ATQBlAHQAZQByAA8OQwBvAG0AcABhAG4AeQAQDFMAeQBzAHQAZQBtABESVgBpAHMAdQBFAGwAZQBtAHMAEjBWAGkAcwB1AEUAbABlAG0AcwBTAHAAZQBjAGkAYQBsAEMAbwBuAHQAcgBvAGwAcwATKFYAaQBzAHUARQBsAGUAbQBzAFcAaQBuAEMAbwBuAHQAcgBvAGwAcwAUJFYAaQBzAHUARQBsAGUAbQBUAGUAeAB0AEUAZABpAHQAbwByABUiVgBpAHMAdQBOAGEAdABpAHYAZQBDAG8AbgB0AHIAbwBsABYUdgBpAHMAdQBpAG4AcAB1AHQAcwAXDHMAeQBzAHQAZQBtABgYVgBpAHMAdQBFAGwAZQBtAEIAYQBzAGUAGSZEAGUAdgBQAGwAYQBjAGUAaABvAGwAZABlAHIAcwBVAHMAZQBkABoIYgBvAG8AbAAbIlAAbAB1AGcAaQBuAEMAbwBuAHMAdAByAGEAaQBuAHQAcwAcTHsANAAzAGQANQAyAGIAYwBlAC0AOQA0ADIAYwAtADQANABkADcALQA5AGUAOQA0AC0AMQBiAGYAZABmADMAMQAwAGUANgAzAGMAfQAdHEEAdABMAGUAYQBzAHQAVgBlAHIAcwBpAG8AbgAeFFAAbAB1AGcAaQBuAEcAdQBpAGQAHxZTAHkAcwB0AGUAbQAuAEcAdQBpAGQAIEhhAGYAYwBkADUANAA0ADYALQA0ADkAMQA0AC0ANABmAGUANwAtAGIAYgA3ADgALQA5AGIAZgBmAGUAYgA3ADAAZgBkADEANwAhFFUAcABkAGEAdABlAEkAbgBmAG8AIkx7AGIAMAAzADMANgA2AGEAOAAtAGIANQBjADAALQA0AGIAOQBhAC0AYQAwADAAZQAtAGUAYgA4ADYAMAAxADEAMQAwADQAYwAzAH0AIw5VAHAAZABhAHQAZQBzACRMewAxADgANgA4AGYAZgBjADkALQBlADQAZgBjAC0ANAA1ADMAMgAtAGEAYwAwADYALQAxAGUAMwA5AGIAYgA1ADUANwBiADYAOQB9ACVMewBhADUAYgBkADQAOABjADMALQAwAGQAMQA3AC0ANAAxAGIANQAtAGIAMQA2ADQALQA1AGYAYwA2AGEAZAAyAGIAOQA2AGIANwB9ACYWTwBiAGoAZQBjAHQAcwBUAHkAcABlACdUVQBwAGQAYQB0AGUATABhAG4AZwB1AGEAZwBlAE0AbwBkAGUAbABGAG8AcgBDAG8AbgB2AGUAcgB0AGkAYgBsAGUATABpAGIAcgBhAHIAaQBlAHMAKBBMAGkAYgBUAGkAdABsAGUAKRRMAGkAYgBDAG8AbQBwAGEAbgB5ACoeVQBwAGQAYQB0AGUAUAByAG8AdgBpAGQAZQByAHMAKzhTAHkAcwB0AGUAbQAuAEMAbwBsAGwAZQBjAHQAaQBvAG4AcwAuAEgAYQBzAGgAdABhAGIAbABlACwSdgBpAHMAdQBlAGwAZQBtAHMALUg2AGMAYgAxAGMAZABlADEALQBkADUAZABjAC0ANABhADMAYgAtADkAMAA1ADQALQAyADEAZgBhADcANQA2AGEAMwBmAGEANAAuKEkAbgB0AGUAcgBmAGEAYwBlAFYAZQByAHMAaQBvAG4ASQBuAGYAbwAvTHsAYwA2ADEAMQBlADQAMAAwAC0ANwBmAGIAOQAtADQAYwAzADUALQBiADkAYQBjAC0ANABlADMAMQA0AGIANQA5ADkANgA0ADMAfQAwGE0AYQBqAG8AcgBWAGUAcgBzAGkAbwBuADEYTQBpAG4AbwByAFYAZQByAHMAaQBvAG4AMgxMAGUAZwBhAGMAeQAzMEwAYQBuAGcAdQBhAGcAZQBNAG8AZABlAGwAVgBlAHIAcwBpAG8AbgBJAG4AZgBvADQwTABvAGEAZABMAGkAYgByAGEAcgBpAGUAcwBJAG4AdABvAFAAcgBvAGoAZQBjAHQANRpDAG8AbQBwAGEAdABpAGIAaQBsAGkAdAB5ANAAAhoD0AMBLQTQBQYaB9AHCBoBRQcJCNAACRoERQoLBAMAAAAFAAAACgAAAAAAAADQDAutAgAAANANAS0O0A8BLRDQAAkaBEUKCwQDAAAABQAAAAoAAAAoAAAA0AwLrQEAAADQDQEtEdAPAS0Q0AAJGgRFCgsEAwAAAAUAAAAKAAAAAAAAANAMC60CAAAA0A0BLRLQDwEtENAACRoERQoLBAMAAAAFAAAACgAAACgAAADQDAutAgAAANANAS0T0A8BLRDQAAkaBEUKCwQDAAAABQAAAAoAAAAKAAAA0AwLrQIAAADQDQEtFNAPAS0Q0AAJGgRFCgsEAwAAAAUAAAAKAAAAKAAAANAMC60CAAAA0A0BLRXQDwEtENAACRoERQoLBAMAAAAFAAAACgAAAAAAAADQDAutAgAAANANAS0W0A8BLRfQAAkaBEUKCwQDAAAABQAAAAoAAAAoAAAA0AwLrQQAAADQDQEtGNAPAS0Q0BkarQFFGxwB0AAcGgJFHQsEAwAAAAUAAAAKAAAAAAAAANAeHy0g0CEiGgJFIyQC0AAlGgVFCgsEAwAAAAMAAAAAAAAACgAAANAmC60AAAAA0AMBLSfQKAEtEdApAS0Q0AAlGgVFCgsEAwAAAAMAAAAAAAAACgAAANAmC60BAAAA0AMBLSfQKAEtEdApAS0QmiorAUUAAQLQAAEtLNAAAS0X0AAfLS3QLi8aA9AwC60BAAAA0DELrRMAAADQMhqtANAzLxoD0DALrQIAAADQMQutAwAAANAyGq0A0DQarQDQNRqtAA==</v>
+          </d>
+        </o>
+        <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
+        <o>
+          <v n="Name">"{192FAD59-8248-4824-A8DE-9177C94C195A}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{F66C7017-BDD8-4114-926C-81D6D687E35F}</v>
+        <o>
+          <v n="Name">"{F66C7017-BDD8-4114-926C-81D6D687E35F}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{246001F4-279D-43AC-B241-948EB31120E1}</v>
+        <o>
+          <v n="Name">"{246001F4-279D-43AC-B241-948EB31120E1}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" ckt="String" cvt="String">
+            <v>GlobalVisuImageFilePath</v>
+            <v>%APPLICATIONPATH%</v>
+          </d>
+        </o>
+      </d>
+      <d n="Values" t="Hashtable" />
+    </o>
+        </Data>
+        <TypeList>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
+    </PlcProjectOptions>
+  </ProjectExtensions>
+</Project>

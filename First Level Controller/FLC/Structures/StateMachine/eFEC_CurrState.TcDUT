@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="eFEC_CurrState" Id="{bbeac189-b41e-48d4-a330-5f4ec5948442}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+//{attribute 'strict'}
+TYPE eFEC_CurrState :
+(
+	FEC_OFF := 1,
+	FEC_PCS_START := 2,
+	FEC_PCS_STOP := 3,
+	FEC_STANDBY := 4,
+	FEC_MANUAL := 5,
+	FEC_AVG_PWR_CTR := 6,
+	FEC_PCS_LOCAL_CONTROL := 7,
+	FEC_RESERVED := 8,
+	FEC_PCS_RAMPDOWN := 9,
+	FEC_ALARM_STATE := 10,
+	FEC_STANDBY_NoSwitching := 11,
+	FEC_INST_PWR_CTR := 20
+) INT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

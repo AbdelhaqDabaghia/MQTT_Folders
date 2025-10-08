@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <Task Name="ReadFD083" Id="{449fa060-4f28-4690-85c4-839a76959612}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>10000</CycleTime>
+    <Priority>1</Priority>
+    <PouCall>
+      <Name>ModbusRead</Name>
+    </PouCall>
+    <TaskFBGuid>{8f7167a7-7a0c-46a4-a426-6bd695b0a3f8}</TaskFBGuid>
+    <Fb_init>{48c76d9d-9d88-4848-a12e-93dcf4fb1132}</Fb_init>
+    <Fb_exit>{b3e93bd0-8041-4348-9441-08ac9a1b08ec}</Fb_exit>
+    <CycleUpdate>{203e00d8-e631-4946-ab26-01c53297249f}</CycleUpdate>
+    <PostCycleUpdate>{c19b2329-069f-45c6-9db3-efd843394d45}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

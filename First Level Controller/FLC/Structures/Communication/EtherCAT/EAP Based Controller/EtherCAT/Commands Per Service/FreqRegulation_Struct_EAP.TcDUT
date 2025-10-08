@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="FreqRegulation_Struct_EAP" Id="{f4f6412d-68ef-4ad6-bb62-2fdf5757b21a}">
+    <Declaration><![CDATA[TYPE FreqRegulation_Struct_EAP :
+UNION
+	Value : INT;
+	Bits : Bits_FreqRegulation_EAP;
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

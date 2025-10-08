@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.10">
+  <DUT Name="EtherCAT_INT_VALUES" Id="{41236664-e579-44f0-9bc5-b99eca872c1c}">
+    <Declaration><![CDATA[TYPE EtherCAT_INT_VALUES :
+STRUCT
+	TotW : INT;								//0
+	TotVAr : INT;							//1
+	Var1 : INT;						//2
+	Var2 : INT;							//3
+	Var3 : INT;							//4
+	Var4 : INT;							//5
+	Var5 : INT;							//6
+	Var6 : INT;								//7
+	Var7 : INT;								//8
+	Var8 : INT;								//9
+	Var9 : INT;								//10
+	Var10 : INT;								//11
+	Var11 : INT;								//12
+	Var12 : INT;								//13
+	Var13 : INT;								//14
+	Var14 : INT;								//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

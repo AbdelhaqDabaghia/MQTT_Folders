@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="ModbusHoldingRegs" Id="{1ed293cc-9d16-498e-b2ca-2c7e8d860336}">
+    <Declaration><![CDATA[TYPE ModbusHoldingRegs :
+STRUCT
+		HoldRegsW	AT	%MB8192		:		FromSLC_1;		
+		HoldRegsR	AT	%MB8704		:		To_SecondLevelControl;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

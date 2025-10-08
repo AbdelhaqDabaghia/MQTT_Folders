@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <DUT Name="Parameters_EAP" Id="{6552a218-1980-4fcb-ba63-12754f6e0d47}">
+    <Declaration><![CDATA[TYPE Parameters_EAP :
+STRUCT
+	//Common Block
+		CommonBlock_Params_EAP : CommonBlock_Param_Struct_EAP;
+	//Inertia Emulation
+		InertiaEmulation_Params_EAP : InertiaEmulation_Param_Struct_EAP;
+	//Frequency Regulation
+		FrequencyRegulation_Params_EAP : FreqRegulation_Param_Struct_EAP;
+	//Modal Frequencies Attenunation
+		ModalFrequency_Params_EAP : ModalFreq_Param_Struct_EAP;
+	//Voltage Regulation
+		VoltageRegulation_Params_EAP : VoltageRegulation_Param_Struct_EAP;
+	//Additional Service
+		AdditonalSerivce : AdditionalService_Param_Struct_EAP;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

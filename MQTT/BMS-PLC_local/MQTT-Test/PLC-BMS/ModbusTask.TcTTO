@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <Task Name="ModbusTask" Id="{5073af67-c9dc-4d20-92e3-9995d819a96b}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>20000</CycleTime>
+    <Priority>8</Priority>
+    <PouCall>
+      <Name>ModbusControl</Name>
+    </PouCall>
+    <TaskFBGuid>{caea18c0-4d30-47e8-8375-5a3917e7cc9a}</TaskFBGuid>
+    <Fb_init>{85f6966b-3ffd-4eec-bb09-4bc17c787bd1}</Fb_init>
+    <Fb_exit>{2d467d5f-83af-4382-8b22-7bbeb2463c42}</Fb_exit>
+    <CycleUpdate>{dac4a069-e7fb-4cc0-9f33-9ecf70f0d09b}</CycleUpdate>
+    <PostCycleUpdate>{61540f50-58d8-47a0-976b-de1d421b4119}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="Warnings_FLC" Id="{264ec296-7962-4a4d-b044-65f24e51677e}">
+    <Declaration><![CDATA[TYPE Warnings_FLC :
+STRUCT
+	ModbusComm_FLC_PCS 				:		BIT; //0
+	OverVoltage						: 		BIT; //1
+	UnderVoltage					:		BIT; //2
+	OverCurrent						:		BIT; //3
+	OverFrequency					: 		BIT; //4
+	UnderFrequency					:		BIT; //5
+	CommandTimeout					:		BIT; //6
+	Inertia_Overrange				:		BIT; //7
+	Frequency_Overrange				:		BIT; //8
+	VoltReg_Overrange				:		BIT; //9
+	ModFreq_Overrange				:		BIT; //10
+	Battery_80Perc					:		BIT; //11
+	Battery_20Perc					:		BIT; //12
+	EtherCAT_Failure				: 		BIT; //13
+	Reserved2						: 		BIT; //14
+	Reserved3						: 		BIT; //15
+	Reserved4						: 		BIT; //16
+	Reserved5						: 		BIT; //17
+	Reserved6						: 		BIT; //18
+	Reserved7						: 		BIT; //19
+	Reserved8						: 		BIT; //20
+	Reserved9						: 		BIT; //21
+	Reserved10						: 		BIT; //22
+	Reserved11						: 		BIT; //23
+	Reserved12						: 		BIT; //24
+	Reserved13						: 		BIT; //25
+	Reserved14						: 		BIT; //26
+	Reserved15						: 		BIT; //27
+	Reserved16						: 		BIT; //28
+	Reserved17						: 		BIT; //29
+	Reserved18						: 		BIT; //30
+	Reserved19						: 		BIT; //31
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

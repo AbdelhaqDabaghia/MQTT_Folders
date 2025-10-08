@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="feederJSONStruct" Id="{740f6ebf-7c44-454f-9d54-dbb6700dc61c}">
+    <Declaration><![CDATA[TYPE feederJSONStruct :
+STRUCT
+	TIMESTAMP : STRING;
+	PV_GENERATION_kW 				: REAL;
+	TOTAL_APPARENT_LOAD_POWER_kVA	: REAL; 
+	VOLTAGE_MIN_pu					: REAL;
+	VOLTAGE_MAX_pu					: REAL;
+	LOADING_MAX						: REAL;
+	LOADING_MIN						: REAL;
+	VOLTAGE_DROP_MAX				: REAL;
+	VOLTAGE_DROP_MIN				: REAL;
+	GENERATION_ACTIVE_POWER_kW		: REAL;
+	INFEED_ACTIVE_POWER_kW			: REAL;
+	TOTAL_LOAD_P_kW					: REAL;
+	LOSSES_kW						: REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

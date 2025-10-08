@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="MQTTSubscribe" Id="{692d4a34-591d-4bec-8f2e-63ada5d7fb22}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MQTTSubscribe
+VAR
+    (* received payload for each subscribed topic *)
+	{attribute 'TcEncoding':='UTF-8'}
+    sPayloadRcv1 : STRING(255);
+	//{attribute 'TcEncoding':='UTF-8'}
+    sPayloadRcv2 : STRING(255);
+	
+    fbMessageQueue 	: FB_IotMqttMessageQueue;
+    fbMessage     	: FB_IotMqttMessage;
+	fbMqttClient    : FB_IotMqttClient;
+	
+    bSetParameter   : BOOL := TRUE;
+    bConnect        : BOOL := TRUE;
+	bSubscribed     : ARRAY[1..2] OF BOOL;
+	
+	i: INT;
+	noOfTopics: INT:= 2;
+	
+END_VAR
+VAR CONSTANT
+    (* subscriptions *)
+    sTopicSub1 : STRING(255) := 'Feeder/BESS/control/commands';
+    sTopicSub2 : STRING(255) := 'Feeder/BESS/control/params'; 
+	
+	sTopicSub : ARRAY [1..2] OF STRING:=[sTopicSub1, sTopicSub1];
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bSetParameter THEN
+	bSetParameter				:= FALSE;
+    fbMqttClient.sHostName 		:= 'a3rq4sh4gv4om5-ats.iot.eu-west-3.amazonaws.com'; 
+    fbMqttClient.nHostPort 		:= 8883;
+    fbMqttClient.sTopicPrefix 	:= '';
+    fbMqttClient.sClientId 		:= 'PLC1';
+  	fbMqttClient.stTLS.sCA 		:= 'C:\Users\tecnicoloyolatech\Desktop\certs\AmazonRootCA1.pem';
+  	fbMqttClient.stTLS.sCert 	:= 'C:\Users\tecnicoloyolatech\Desktop\certs\b729f5b134b28288523e0bb227f630967d68e270326ba912b4ddb8638ad6c3c6-certificate.pem.crt';
+  	fbMqttClient.stTLS.sKeyFile := 'C:\Users\tecnicoloyolatech\Desktop\certs\b729f5b134b28288523e0bb227f630967d68e270326ba912b4ddb8638ad6c3c6-private.pem.key';
+  	fbMqttClient.ActivateExponentialBackoff(T#1S, T#30S);
+	fbMqttClient.ipMessageQueue := fbMessageQueue;
+	//FOR i:= 1 TO noOfTopics DO
+	//	bSubscribed[i] := fbMqttClient.Subscribe(sTopic:=sTopicSub[i], eQoS:=TcIotMqttQos.AtMostOnceDelivery);
+	//END_FOR
+END_IF
+
+
+fbMqttClient.Execute(bConnect);
+fbMqttClient.bConnected;
+fbMqttClient.hrErrorCode;
+fbMqttClient.eConnectionState;
+IF fbMessageQueue.nQueuedMessages > 0 THEN
+
+    IF fbMessageQueue.Dequeue(fbMessage:=fbMessage) THEN
+        IF fbMessage.CompareTopic(sTopic:=sTopicSub1) THEN
+            fbMessage.GetPayload(pPayload:=ADR(sPayloadRcv1), nPayloadSize:=SIZEOF(sPayloadRcv1), bSetNullTermination:=FALSE);
+        ELSIF fbMessage.CompareTopic(sTopic:=sTopicSub2) THEN
+            fbMessage.GetPayload(pPayload:=ADR(sPayloadRcv2), nPayloadSize:=SIZEOF(sPayloadRcv2), bSetNullTermination:=FALSE);
+        END_IF
+    END_IF
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="MQTTSubscribe">
+      <LineId Id="376" Count="10" />
+      <LineId Id="342" Count="1" />
+      <LineId Id="341" Count="0" />
+      <LineId Id="318" Count="0" />
+      <LineId Id="321" Count="2" />
+      <LineId Id="388" Count="2" />
+      <LineId Id="324" Count="8" />
+      <LineId Id="241" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

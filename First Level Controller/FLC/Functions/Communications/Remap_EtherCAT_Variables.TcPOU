@@ -1,0 +1,333 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="Remap_EtherCAT_Variables" Id="{ff2b1435-9a18-4cea-95c2-37518d63a2a9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Remap_EtherCAT_Variables : BOOL
+VAR_INPUT
+	//Inputs
+	Modbus_para_DINT 	: POINTER TO Parameters_DINT;
+	EAP_para_DINT 		: POINTER TO Parameters_EAP_DINT;
+	EtherCAT_input_DINT	:	POINTER TO EtherCAT_Inputs_DINT;
+	EtherCAT_monitor_DINT	:	POINTER TO EtherCAT_Monitor_Variables_DINT;
+	
+	//Outputs
+	Modbus_paras 	: POINTER TO Parameters;
+	EAP_paras 		: POINTER TO Parameters_EAP;
+	EtherCAT_inputs	:	POINTER TO EtherCAT_Inputs;
+	EtherCAT_monitor_var	:	POINTER TO EtherCAT_Monitor_Variables;
+	
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Modbus Parameters
+// Aditonal services
+Modbus_paras^.AdditionalService_Params.Reserved1 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved1);
+Modbus_paras^.AdditionalService_Params.Reserved2 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved2);
+Modbus_paras^.AdditionalService_Params.Reserved3 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved3);
+Modbus_paras^.AdditionalService_Params.Reserved4 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved4);
+Modbus_paras^.AdditionalService_Params.Reserved5 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved5);
+Modbus_paras^.AdditionalService_Params.Reserved6 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved6);
+Modbus_paras^.AdditionalService_Params.Reserved7 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved7);
+Modbus_paras^.AdditionalService_Params.Reserved8 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved8);
+Modbus_paras^.AdditionalService_Params.Reserved9 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved9);
+Modbus_paras^.AdditionalService_Params.Reserved10 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved10);
+Modbus_paras^.AdditionalService_Params.Reserved11 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved11);
+Modbus_paras^.AdditionalService_Params.Reserved12 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved12);
+Modbus_paras^.AdditionalService_Params.Reserved13 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved13);
+Modbus_paras^.AdditionalService_Params.Reserved14 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved14);
+Modbus_paras^.AdditionalService_Params.Reserved15 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved15);
+Modbus_paras^.AdditionalService_Params.Reserved16 := DINT_TO_REAL(Modbus_para_DINT^.AdditionalService_Params.Reserved16);
+//CommonBlock_Params
+Modbus_paras^.CommonBlock_Params.ActivePowerLimit := DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.ActivePowerLimit);
+Modbus_paras^.CommonBlock_Params.NominalFreq := 0.01*DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.NominalFreq);
+Modbus_paras^.CommonBlock_Params.NominalPower := DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.NominalPower);
+Modbus_paras^.CommonBlock_Params.NominalVoltage := 0.01*DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.NominalVoltage);
+Modbus_paras^.CommonBlock_Params.ReactivePowerLimit := DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.ReactivePowerLimit);
+Modbus_paras^.CommonBlock_Params.Reserved1 := DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.Reserved1);
+Modbus_paras^.CommonBlock_Params.Reserved2 := DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.Reserved2);
+Modbus_paras^.CommonBlock_Params.Reserved3 := DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.Reserved3);
+Modbus_paras^.CommonBlock_Params.Reserved4 := DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.Reserved4);
+Modbus_paras^.CommonBlock_Params.Reserved5 := DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.Reserved5);
+Modbus_paras^.CommonBlock_Params.Reserved6 := DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.Reserved6);
+Modbus_paras^.CommonBlock_Params.Reserved7 := DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.Reserved7);
+Modbus_paras^.CommonBlock_Params.Reserved8 := DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.Reserved8);
+Modbus_paras^.CommonBlock_Params.Reserved9 := DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.Reserved9);
+Modbus_paras^.CommonBlock_Params.Reserved10 := DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.Reserved10);
+Modbus_paras^.CommonBlock_Params.Reserved11 := DINT_TO_REAL(Modbus_para_DINT^.CommonBlock_Params.Reserved11);
+//FrequencyRegulation_Params
+Modbus_paras^.FrequencyRegulation_Params.DroopConstantP := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.DroopConstantP)*0.1;
+Modbus_paras^.FrequencyRegulation_Params.FreqDeadBand := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.FreqDeadBand)*0.1;
+Modbus_paras^.FrequencyRegulation_Params.FrequencyCutOff := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.FrequencyCutOff)*0.01;
+Modbus_paras^.FrequencyRegulation_Params.Max_delta_Energy := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.Max_delta_Energy);
+Modbus_paras^.FrequencyRegulation_Params.PowerLimit_Freq := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.PowerLimit_Freq);
+Modbus_paras^.FrequencyRegulation_Params.Reserved1 := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.Reserved1);
+Modbus_paras^.FrequencyRegulation_Params.Reserved2 := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.Reserved2);
+Modbus_paras^.FrequencyRegulation_Params.Reserved3 := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.Reserved3);
+Modbus_paras^.FrequencyRegulation_Params.Reserved4 := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.Reserved4);
+Modbus_paras^.FrequencyRegulation_Params.Reserved5 := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.Reserved5);
+Modbus_paras^.FrequencyRegulation_Params.Reserved6 := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.Reserved6);
+Modbus_paras^.FrequencyRegulation_Params.Reserved7 := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.Reserved7);
+Modbus_paras^.FrequencyRegulation_Params.Reserved8 := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.Reserved8);
+Modbus_paras^.FrequencyRegulation_Params.Reserved9 := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.Reserved9);
+Modbus_paras^.FrequencyRegulation_Params.Reserved10 := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.Reserved10);
+Modbus_paras^.FrequencyRegulation_Params.Reserved11 := DINT_TO_REAL(Modbus_para_DINT^.FrequencyRegulation_Params.Reserved11);
+
+//InertiaEmulation_Params
+Modbus_paras^.InertiaEmulation_Params.HighPassFilterConst := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.HighPassFilterConst)*0.01;
+Modbus_paras^.InertiaEmulation_Params.Inertia_Constant := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.Inertia_Constant)*0.1;
+Modbus_paras^.InertiaEmulation_Params.Max_ROCOF := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.Max_ROCOF)*0.1;
+Modbus_paras^.InertiaEmulation_Params.PowerLimit_Inertia := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.PowerLimit_Inertia);
+Modbus_paras^.InertiaEmulation_Params.Reserved1 := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.Reserved1);
+Modbus_paras^.InertiaEmulation_Params.Reserved2 := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.Reserved2);
+Modbus_paras^.InertiaEmulation_Params.Reserved3 := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.Reserved3);
+Modbus_paras^.InertiaEmulation_Params.Reserved4 := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.Reserved4);
+Modbus_paras^.InertiaEmulation_Params.Reserved5 := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.Reserved5);
+Modbus_paras^.InertiaEmulation_Params.Reserved6 := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.Reserved6);
+Modbus_paras^.InertiaEmulation_Params.Reserved7 := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.Reserved7);
+Modbus_paras^.InertiaEmulation_Params.Reserved8 := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.Reserved8);
+Modbus_paras^.InertiaEmulation_Params.Reserved9 := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.Reserved9);
+Modbus_paras^.InertiaEmulation_Params.Reserved10 := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.Reserved10);
+Modbus_paras^.InertiaEmulation_Params.Reserved11 := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.Reserved11);
+Modbus_paras^.InertiaEmulation_Params.Reserved12 := DINT_TO_REAL(Modbus_para_DINT^.InertiaEmulation_Params.Reserved12);
+
+//InertiaEmulation_Params
+Modbus_paras^.ModalFrequency_Params.BandPassFilter_CenterFreq := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.BandPassFilter_CenterFreq)*0.1;
+Modbus_paras^.ModalFrequency_Params.ModalFreq_Gain := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.ModalFreq_Gain)*0.1;
+Modbus_paras^.ModalFrequency_Params.PowerLimit_ModalFreq := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.PowerLimit_ModalFreq);
+Modbus_paras^.ModalFrequency_Params.Reserved1 := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.Reserved1);
+Modbus_paras^.ModalFrequency_Params.Reserved2 := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.Reserved2);
+Modbus_paras^.ModalFrequency_Params.Reserved3 := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.Reserved3);
+Modbus_paras^.ModalFrequency_Params.Reserved4 := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.Reserved4);
+Modbus_paras^.ModalFrequency_Params.Reserved5 := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.Reserved5);
+Modbus_paras^.ModalFrequency_Params.Reserved6 := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.Reserved6);
+Modbus_paras^.ModalFrequency_Params.Reserved7 := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.Reserved7);
+Modbus_paras^.ModalFrequency_Params.Reserved8 := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.Reserved8);
+Modbus_paras^.ModalFrequency_Params.Reserved9 := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.Reserved9);
+Modbus_paras^.ModalFrequency_Params.Reserved10 := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.Reserved10);
+Modbus_paras^.ModalFrequency_Params.Reserved11 := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.Reserved11);
+Modbus_paras^.ModalFrequency_Params.Reserved12 := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.Reserved12);
+Modbus_paras^.ModalFrequency_Params.Reserved13 := DINT_TO_REAL(Modbus_para_DINT^.ModalFrequency_Params.Reserved13);
+
+//VoltageRegulation_Params
+Modbus_paras^.VoltageRegulation_Params.DroopConstantV := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.DroopConstantV)*0.1;
+Modbus_paras^.VoltageRegulation_Params.PowerLimit_Voltage := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.PowerLimit_Voltage);
+Modbus_paras^.VoltageRegulation_Params.VoltageCutOff := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.VoltageCutOff)*0.01;
+Modbus_paras^.VoltageRegulation_Params.VoltDeadBand := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.VoltDeadBand)*0.1;
+Modbus_paras^.VoltageRegulation_Params.Reserved1 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved1);
+Modbus_paras^.VoltageRegulation_Params.Reserved2 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved2);
+Modbus_paras^.VoltageRegulation_Params.Reserved3 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved3);
+Modbus_paras^.VoltageRegulation_Params.Reserved4 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved4);
+Modbus_paras^.VoltageRegulation_Params.Reserved5 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved5);
+Modbus_paras^.VoltageRegulation_Params.Reserved6 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved6);
+Modbus_paras^.VoltageRegulation_Params.Reserved7 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved7);
+Modbus_paras^.VoltageRegulation_Params.Reserved8 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved8);
+Modbus_paras^.VoltageRegulation_Params.Reserved9 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved9);
+Modbus_paras^.VoltageRegulation_Params.Reserved10 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved10);
+Modbus_paras^.VoltageRegulation_Params.Reserved11 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved11);
+Modbus_paras^.VoltageRegulation_Params.Reserved12 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved12);
+
+// EAP paras
+// Additional Services
+EAP_paras^.AdditonalSerivce.Reserved1 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved1);
+EAP_paras^.AdditonalSerivce.Reserved2 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved2);
+EAP_paras^.AdditonalSerivce.Reserved3 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved3);
+EAP_paras^.AdditonalSerivce.Reserved4 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved4);
+EAP_paras^.AdditonalSerivce.Reserved5 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved5);
+EAP_paras^.AdditonalSerivce.Reserved6 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved6);
+EAP_paras^.AdditonalSerivce.Reserved7 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved7);
+EAP_paras^.AdditonalSerivce.Reserved8 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved8);
+EAP_paras^.AdditonalSerivce.Reserved9 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved9);
+EAP_paras^.AdditonalSerivce.Reserved10 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved10);
+EAP_paras^.AdditonalSerivce.Reserved11 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved11);
+EAP_paras^.AdditonalSerivce.Reserved12 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved12);
+EAP_paras^.AdditonalSerivce.Reserved13 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved13);
+EAP_paras^.AdditonalSerivce.Reserved14 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved14);
+EAP_paras^.AdditonalSerivce.Reserved15 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved15);
+EAP_paras^.AdditonalSerivce.Reserved16 := DINT_TO_REAL(EAP_para_DINT^.AdditonalSerivce.Reserved16);
+//CommonBlock_Params
+EAP_paras^.CommonBlock_Params_EAP.ActivePowerLimit := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.ActivePowerLimit);
+EAP_paras^.CommonBlock_Params_EAP.Delta_limits := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.Delta_limits);
+EAP_paras^.CommonBlock_Params_EAP.E_Limits := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.E_Limits)*0.1;
+EAP_paras^.CommonBlock_Params_EAP.Ki_ReactiveControl := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.Ki_ReactiveControl)*0.0001;
+EAP_paras^.CommonBlock_Params_EAP.Kp_ReactiveControl := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.Kp_ReactiveControl)*0.0001;
+EAP_paras^.CommonBlock_Params_EAP.NominalFreq := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.NominalFreq);
+EAP_paras^.CommonBlock_Params_EAP.NominalPower := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.NominalPower);
+EAP_paras^.CommonBlock_Params_EAP.NominalVolt := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.NominalVolt);
+EAP_paras^.CommonBlock_Params_EAP.ReactivePowerLimit := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.ReactivePowerLimit);
+EAP_paras^.CommonBlock_Params_EAP.VirtualReactance := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.VirtualReactance)*0.001;
+EAP_paras^.CommonBlock_Params_EAP.VirtualResistor := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.VirtualResistor)*0.001;
+EAP_paras^.CommonBlock_Params_EAP.Reserved1 := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.Reserved1);
+EAP_paras^.CommonBlock_Params_EAP.Reserved2 := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.Reserved2);
+EAP_paras^.CommonBlock_Params_EAP.Reserved3 := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.Reserved3);
+EAP_paras^.CommonBlock_Params_EAP.Reserved4 := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.Reserved4);
+EAP_paras^.CommonBlock_Params_EAP.Reserved5 := DINT_TO_REAL(EAP_para_DINT^.CommonBlock_Params_EAP.Reserved5);
+//FrequencyRegulation_Params
+EAP_paras^.FrequencyRegulation_Params_EAP.DeadBand_Limits_P := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.DeadBand_Limits_P)*0.1;
+EAP_paras^.FrequencyRegulation_Params_EAP.DroopConstantP := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.DroopConstantP)*0.1;
+EAP_paras^.FrequencyRegulation_Params_EAP.LowPassFilter_CutOff_Freq := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.LowPassFilter_CutOff_Freq)*0.01;
+EAP_paras^.FrequencyRegulation_Params_EAP.Max_Delta_Energy := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.Max_Delta_Energy);
+EAP_paras^.FrequencyRegulation_Params_EAP.PowerLimit_Freq := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.PowerLimit_Freq);
+EAP_paras^.FrequencyRegulation_Params_EAP.Reserved1 := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.Reserved1);
+EAP_paras^.FrequencyRegulation_Params_EAP.Reserved2 := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.Reserved2);
+EAP_paras^.FrequencyRegulation_Params_EAP.Reserved3 := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.Reserved3);
+EAP_paras^.FrequencyRegulation_Params_EAP.Reserved4 := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.Reserved4);
+EAP_paras^.FrequencyRegulation_Params_EAP.Reserved5 := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.Reserved5);
+EAP_paras^.FrequencyRegulation_Params_EAP.Reserved6 := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.Reserved6);
+EAP_paras^.FrequencyRegulation_Params_EAP.Reserved7 := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.Reserved7);
+EAP_paras^.FrequencyRegulation_Params_EAP.Reserved8 := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.Reserved8);
+EAP_paras^.FrequencyRegulation_Params_EAP.Reserved9 := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.Reserved9);
+EAP_paras^.FrequencyRegulation_Params_EAP.Reserved10 := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.Reserved10);
+EAP_paras^.FrequencyRegulation_Params_EAP.Reserved11 := DINT_TO_REAL(EAP_para_DINT^.FrequencyRegulation_Params_EAP.Reserved11);
+//InertiaEmulation_Params
+EAP_paras^.InertiaEmulation_Params_EAP.Damping_Constant := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Damping_Constant)*0.1;
+EAP_paras^.InertiaEmulation_Params_EAP.HighPassFilterConst := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.HighPassFilterConst)*0.001;
+EAP_paras^.InertiaEmulation_Params_EAP.Inertia_Constant := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Inertia_Constant)*0.1;
+EAP_paras^.InertiaEmulation_Params_EAP.Max_ROCOF := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Max_ROCOF)*0.01;
+EAP_paras^.InertiaEmulation_Params_EAP.Reserved1 := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Reserved1);
+EAP_paras^.InertiaEmulation_Params_EAP.Reserved2 := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Reserved2);
+EAP_paras^.InertiaEmulation_Params_EAP.Reserved3 := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Reserved3);
+EAP_paras^.InertiaEmulation_Params_EAP.Reserved4 := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Reserved4);
+EAP_paras^.InertiaEmulation_Params_EAP.Reserved5 := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Reserved5);
+EAP_paras^.InertiaEmulation_Params_EAP.Reserved6 := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Reserved6);
+EAP_paras^.InertiaEmulation_Params_EAP.Reserved7 := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Reserved7);
+EAP_paras^.InertiaEmulation_Params_EAP.Reserved8 := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Reserved8);
+EAP_paras^.InertiaEmulation_Params_EAP.Reserved9 := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Reserved9);
+EAP_paras^.InertiaEmulation_Params_EAP.Reserved10 := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Reserved10);
+EAP_paras^.InertiaEmulation_Params_EAP.Reserved11 := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Reserved11);
+EAP_paras^.InertiaEmulation_Params_EAP.Reserved12 := DINT_TO_REAL(EAP_para_DINT^.InertiaEmulation_Params_EAP.Reserved12);
+//ModalFrequency_Params_EAP
+EAP_paras^.ModalFrequency_Params_EAP.BandPassFilter_CenterFreq := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.BandPassFilter_CenterFreq)*0.01;
+EAP_paras^.ModalFrequency_Params_EAP.Max_ROCOF_Modal := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.Max_ROCOF_Modal)*0.1;
+EAP_paras^.ModalFrequency_Params_EAP.ModalFreq_Gain := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.ModalFreq_Gain)*0.1;
+EAP_paras^.ModalFrequency_Params_EAP.ModalFreq_PowerLimit := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.ModalFreq_PowerLimit);
+EAP_paras^.ModalFrequency_Params_EAP.Reserved1 := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.Reserved1);
+EAP_paras^.ModalFrequency_Params_EAP.Reserved2 := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.Reserved2);
+EAP_paras^.ModalFrequency_Params_EAP.Reserved3 := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.Reserved3);
+EAP_paras^.ModalFrequency_Params_EAP.Reserved4 := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.Reserved4);
+EAP_paras^.ModalFrequency_Params_EAP.Reserved5 := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.Reserved5);
+EAP_paras^.ModalFrequency_Params_EAP.Reserved6 := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.Reserved6);
+EAP_paras^.ModalFrequency_Params_EAP.Reserved7 := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.Reserved7);
+EAP_paras^.ModalFrequency_Params_EAP.Reserved8 := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.Reserved8);
+EAP_paras^.ModalFrequency_Params_EAP.Reserved9 := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.Reserved9);
+EAP_paras^.ModalFrequency_Params_EAP.Reserved10 := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.Reserved10);
+EAP_paras^.ModalFrequency_Params_EAP.Reserved11 := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.Reserved11);
+EAP_paras^.ModalFrequency_Params_EAP.Reserved12 := DINT_TO_REAL(EAP_para_DINT^.ModalFrequency_Params_EAP.Reserved12);
+//VoltageRegulation_Params
+EAP_paras^.VoltageRegulation_Params_EAP.DeadBand_Limit_Q := DINT_TO_REAL(EAP_para_DINT^.VoltageRegulation_Params_EAP.DeadBand_Limit_Q)*0.1;
+EAP_paras^.VoltageRegulation_Params_EAP.DroopConstantQ := DINT_TO_REAL(EAP_para_DINT^.VoltageRegulation_Params_EAP.DroopConstantQ)*0.1;
+EAP_paras^.VoltageRegulation_Params_EAP.LowPassFilter_CutOff_Volt := DINT_TO_REAL(EAP_para_DINT^.VoltageRegulation_Params_EAP.LowPassFilter_CutOff_Volt)*0.01;
+EAP_paras^.VoltageRegulation_Params_EAP.PowerLimit_Volt := DINT_TO_REAL(EAP_para_DINT^.VoltageRegulation_Params_EAP.PowerLimit_Volt);
+EAP_paras^.VoltageRegulation_Params_EAP.Reserved1 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved1);
+EAP_paras^.VoltageRegulation_Params_EAP.Reserved2 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved2);
+EAP_paras^.VoltageRegulation_Params_EAP.Reserved3 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved3);
+EAP_paras^.VoltageRegulation_Params_EAP.Reserved4 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved4);
+EAP_paras^.VoltageRegulation_Params_EAP.Reserved5 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved5);
+EAP_paras^.VoltageRegulation_Params_EAP.Reserved6 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved6);
+EAP_paras^.VoltageRegulation_Params_EAP.Reserved7 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved7);
+EAP_paras^.VoltageRegulation_Params_EAP.Reserved8 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved8);
+EAP_paras^.VoltageRegulation_Params_EAP.Reserved9 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved9);
+EAP_paras^.VoltageRegulation_Params_EAP.Reserved10 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved10);
+EAP_paras^.VoltageRegulation_Params_EAP.Reserved11 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved11);
+EAP_paras^.VoltageRegulation_Params_EAP.Reserved12 := DINT_TO_REAL(Modbus_para_DINT^.VoltageRegulation_Params.Reserved12);
+
+// EtherCAT inputs
+EtherCAT_inputs^.ActivePowerReference := DINT_TO_REAL(EtherCAT_input_DINT^.ActivePowerReference);
+EtherCAT_inputs^.Command := (EtherCAT_input_DINT^.Command);
+EtherCAT_inputs^.Heartbeat := DINT_TO_REAL(EtherCAT_input_DINT^.Heartbeat);
+EtherCAT_inputs^.ReactivePowerReference := DINT_TO_REAL(EtherCAT_input_DINT^.ReactivePowerReference);
+EtherCAT_inputs^.Reserved4 := DINT_TO_REAL(EtherCAT_input_DINT^.Reserved4);
+EtherCAT_inputs^.Reserved5 := DINT_TO_REAL(EtherCAT_input_DINT^.Reserved4);
+EtherCAT_inputs^.Reserved6 := DINT_TO_REAL(EtherCAT_input_DINT^.Reserved4);
+EtherCAT_inputs^.Reserved7 := DINT_TO_REAL(EtherCAT_input_DINT^.Reserved4);
+EtherCAT_inputs^.Reserved8 := DINT_TO_REAL(EtherCAT_input_DINT^.Reserved4);
+EtherCAT_inputs^.Reserved9 := DINT_TO_REAL(EtherCAT_input_DINT^.Reserved4);
+EtherCAT_inputs^.Reserved10 := DINT_TO_REAL(EtherCAT_input_DINT^.Reserved4);
+EtherCAT_inputs^.Reserved11 := DINT_TO_REAL(EtherCAT_input_DINT^.Reserved4);
+EtherCAT_inputs^.Reserved12 := DINT_TO_REAL(EtherCAT_input_DINT^.Reserved4);
+EtherCAT_inputs^.Reserved13 := DINT_TO_REAL(EtherCAT_input_DINT^.Reserved4);
+EtherCAT_inputs^.Reserved14 := DINT_TO_REAL(EtherCAT_input_DINT^.Reserved4);
+EtherCAT_inputs^.Reserved15 := DINT_TO_REAL(EtherCAT_input_DINT^.Reserved4);
+
+// Monitoring information
+EtherCAT_monitor_DINT^.BatSoc := REAL_TO_DINT(EtherCAT_monitor_var^.BatSoc*100);
+EtherCAT_monitor_DINT^.BatSocLowLim := REAL_TO_DINT(EtherCAT_monitor_var^.BatSocLowLim*100);
+EtherCAT_monitor_DINT^.BatSocUpLim := REAL_TO_DINT(EtherCAT_monitor_var^.BatSocUpLim*100);
+EtherCAT_monitor_DINT^.GridFre := REAL_TO_DINT(EtherCAT_monitor_var^.GridFre*100);
+EtherCAT_monitor_DINT^.Irmsa := REAL_TO_DINT(EtherCAT_monitor_var^.Irmsa*100);
+EtherCAT_monitor_DINT^.Irmsb := REAL_TO_DINT(EtherCAT_monitor_var^.Irmsb*100);
+EtherCAT_monitor_DINT^.Irmsc := REAL_TO_DINT(EtherCAT_monitor_var^.Irmsc*100);
+EtherCAT_monitor_DINT^.MaxVArAval := REAL_TO_DINT(EtherCAT_monitor_var^.MaxVArAval*100);
+EtherCAT_monitor_DINT^.MaxWAval := REAL_TO_DINT(EtherCAT_monitor_var^.MaxWAval*100);
+EtherCAT_monitor_DINT^.MaxWCharVal := REAL_TO_DINT(EtherCAT_monitor_var^.MaxWCharVal*100);
+EtherCAT_monitor_DINT^.MinVArAval := REAL_TO_DINT(EtherCAT_monitor_var^.MinVArAval*100);
+EtherCAT_monitor_DINT^.TotVAr := REAL_TO_DINT(EtherCAT_monitor_var^.TotVAr);
+EtherCAT_monitor_DINT^.TotW := REAL_TO_DINT(EtherCAT_monitor_var^.TotW);
+EtherCAT_monitor_DINT^.Vrmsa := REAL_TO_DINT(EtherCAT_monitor_var^.Vrmsa*100);
+EtherCAT_monitor_DINT^.Vrmsb := REAL_TO_DINT(EtherCAT_monitor_var^.Vrmsb*100);
+EtherCAT_monitor_DINT^.Vrmsc := REAL_TO_DINT(EtherCAT_monitor_var^.Vrmsc*100);
+
+
+
+
+
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="Remap_EtherCAT_Variables">
+      <LineId Id="21" Count="0" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="22" Count="11" />
+      <LineId Id="35" Count="1" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="134" Count="0" />
+      <LineId Id="136" Count="14" />
+      <LineId Id="135" Count="0" />
+      <LineId Id="153" Count="15" />
+      <LineId Id="151" Count="0" />
+      <LineId Id="171" Count="16" />
+      <LineId Id="170" Count="0" />
+      <LineId Id="188" Count="16" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="206" Count="16" />
+      <LineId Id="205" Count="0" />
+      <LineId Id="38" Count="0" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="223" Count="0" />
+      <LineId Id="40" Count="0" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="64" Count="2" />
+      <LineId Id="68" Count="3" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="73" Count="3" />
+      <LineId Id="72" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="226" Count="14" />
+      <LineId Id="313" Count="0" />
+      <LineId Id="242" Count="17" />
+      <LineId Id="261" Count="8" />
+      <LineId Id="314" Count="0" />
+      <LineId Id="271" Count="6" />
+      <LineId Id="279" Count="16" />
+      <LineId Id="297" Count="15" />
+      <LineId Id="224" Count="0" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="97" Count="1" />
+      <LineId Id="59" Count="1" />
+      <LineId Id="99" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="100" Count="9" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="62" Count="0" />
+      <LineId Id="112" Count="0" />
+      <LineId Id="63" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="39" Count="0" />
+      <LineId Id="114" Count="18" />
+      <LineId Id="113" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

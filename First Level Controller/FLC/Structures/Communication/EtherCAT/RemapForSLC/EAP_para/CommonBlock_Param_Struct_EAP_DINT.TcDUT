@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="CommonBlock_Param_Struct_EAP_DINT" Id="{00aa60e4-9493-4047-b3e9-c39acb7db052}">
+    <Declaration><![CDATA[TYPE CommonBlock_Param_Struct_EAP_DINT :
+STRUCT
+	//Common Block parameters
+		NominalPower 		: DINT := 1000000;			//0
+		NominalFreq 		: DINT := 5000;			//1
+		NominalVolt 		: DINT := 400;			//2
+		ActivePowerLimit 	: DINT := 1000000;		//3
+		ReactivePowerLimit	: DINT := 100000;	//4
+		Delta_limits 		: DINT := 1;			//5
+		E_Limits 			: DINT := 200;				//6
+		Kp_ReactiveControl 	: DINT := 1000;	//1E-4;	//7
+		Ki_ReactiveControl 	: DINT := 1000;	//1E-4;	//8
+		VirtualReactance 	: DINT := 300;	//0.3		//9
+		VirtualResistor 	: DINT := 100;	//0.1;		//10
+		Reserved1 			: DINT;					//11
+		Reserved2 			: DINT;					//12
+		Reserved3 			: DINT;					//13
+		Reserved4 			: DINT;					//14
+		Reserved5 			: DINT;					//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

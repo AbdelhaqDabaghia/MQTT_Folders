@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="dqsignal" Id="{6bbdd68e-7b70-4982-b665-7e08fc0ab5ea}">
+    <Declaration><![CDATA[TYPE dqsignal :
+STRUCT
+	d	:	REAL;
+	q	:	REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

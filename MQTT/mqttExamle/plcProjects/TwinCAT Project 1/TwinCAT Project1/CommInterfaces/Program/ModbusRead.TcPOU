@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="ModbusRead" Id="{6357d3d9-0f37-453d-ba4d-53379d26e764}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM ModbusRead
+VAR
+	
+	datetimeVector : ARRAY [1 .. 6] OF INT;
+	signalsVector: ARRAY [1 .. 13] OF REAL;
+	scale : REAL := 1000.0;
+	
+	ipAddr    		: STRING(15) := '10.30.244.10'; // ModbusServer
+	ipAddrPort		: UINT := 12345;
+	
+	//Feeder FD_083
+	fbReadRegs	:	FB_MBReadRegs;
+	mbreadcounter	:	INT;
+
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF (NOT fbReadRegs.bBusy) THEN
+	fbReadRegs(bExecute:=TRUE,
+			   sIPAddr := ipAddr,
+			   nTCPPort := ipAddrPort,
+			   nQuantity := SIZEOF(metering.MeteringSignals)/2,
+		       nMBAddr := 0,
+			   cbLength := SIZEOF(metering.MeteringSignals),
+			   pDestAddr := ADR(metering.MeteringSignals),
+			   tTimeout := T#10S,
+			   nUnitID := 16#FF); 
+ELSE 
+	fbReadRegs(bExecute:=FALSE);
+END_IF
+	
+// Assign the vectorized timestamp in the datatimeVector ARRAY
+datetimeVector[1] := metering.MeteringSignals.YEAR;
+datetimeVector[2] := metering.MeteringSignals.MONTH;
+datetimeVector[3] := metering.MeteringSignals.DAY;
+datetimeVector[4] := metering.MeteringSignals.HOUR;
+datetimeVector[5] := metering.MeteringSignals.MINUTE;
+datetimeVector[6] := metering.MeteringSignals.SECOND;
+
+// Assign the incoming metering signas to meteringSignals ARRAY
+signalsVector[1] := metering.MeteringSignals.PV_GENERATION_kW/scale;
+signalsVector[2] := metering.MeteringSignals.TOTAL_APPARENT_LOAD_POWER_kVA/scale;
+signalsVector[3] := metering.MeteringSignals.LOAD_P_kW/scale;
+signalsVector[4] := metering.MeteringSignals.VOLTAGE_MIN_pu/scale;
+signalsVector[5] := metering.MeteringSignals.VOLTAGE_MAX_pu/scale;
+signalsVector[6] := metering.MeteringSignals.LOADING_MAX/scale;
+signalsVector[7] := metering.MeteringSignals.LOADING_MIN/scale;
+signalsVector[8] := metering.MeteringSignals.VOLTAGE_DROP_MAX/scale;
+signalsVector[9] := metering.MeteringSignals.VOLTAGE_DROP_MIN/scale;
+signalsVector[10] := metering.MeteringSignals.GENERATION_ACTIVE_POWER_kW/scale;
+signalsVector[11] := metering.MeteringSignals.INFEED_ACTIVE_POWER_kW/scale;
+signalsVector[12] := metering.MeteringSignals.TOTAL_LOAD_P_kW/scale;
+signalsVector[13] := metering.MeteringSignals.LOSSES_kW/scale;]]></ST>
+    </Implementation>
+    <LineIds Name="ModbusRead">
+      <LineId Id="20" Count="0" />
+      <LineId Id="12" Count="6" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="28" Count="1" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="43" Count="20" />
+      <LineId Id="42" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

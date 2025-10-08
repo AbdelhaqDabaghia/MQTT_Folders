@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="ModbusWrite_NRG" Id="{ef060e01-2fe5-4016-9b95-124fffa011c5}">
+    <Declaration><![CDATA[TYPE ModbusWrite_NRG :
+STRUCT
+	CmdOpMode	:INT;	// 432
+	Pset		:REAL;	// 430, kW, scale 1
+	Qset		:REAL;	// 431, kVar, scale 1
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

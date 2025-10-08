@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="feederMeteringStruct" Id="{690bb8a7-1cc9-4fda-be42-57dbce3137b7}">
+    <Declaration><![CDATA[{attribute 'pack_mode' := '1'} 
+TYPE feederMeteringStruct :
+STRUCT
+	YEAR                   			: INT; //0
+	MONTH 							: INT; //2
+	DAY 							: INT; //4
+	HOUR 							: INT; //6
+	MINUTE 							: INT; //8
+	SECOND 							: INT; //10
+	
+	PV_GENERATION_kW 				: INT; // SCALED by 1000
+	TOTAL_APPARENT_LOAD_POWER_kVA	: INT; // SCALED by 1000
+	LOAD_P_kW						: INT;
+	VOLTAGE_MIN_pu					: INT;
+	VOLTAGE_MAX_pu					: INT;
+	LOADING_MAX						: INT;
+	LOADING_MIN						: INT;
+	VOLTAGE_DROP_MAX				: INT;
+	VOLTAGE_DROP_MIN				: INT;
+	GENERATION_ACTIVE_POWER_kW		: INT;
+	INFEED_ACTIVE_POWER_kW			: INT;
+	TOTAL_LOAD_P_kW					: INT;
+	LOSSES_kW						: INT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

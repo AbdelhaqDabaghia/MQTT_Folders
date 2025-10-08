@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="AdditionalService_Param_Struct_EAP_DINT" Id="{6d6a72a5-2f25-4617-8144-e1ce1adef086}">
+    <Declaration><![CDATA[TYPE AdditionalService_Param_Struct_EAP_DINT :
+STRUCT
+	//Additional Service
+		Reserved1 : 	DINT;	//0
+		Reserved2 : 	DINT;	//1
+		Reserved3 : 	DINT;	//2
+		Reserved4 : 	DINT;	//3
+		Reserved5 : 	DINT;	//4
+		Reserved6 : 	DINT;	//5
+		Reserved7 : 	DINT;	//6
+		Reserved8 : 	DINT;	//7
+		Reserved9 : 	DINT;	//8
+		Reserved10 : 	DINT;	//9
+		Reserved11 : 	DINT;	//10
+		Reserved12 : 	DINT;	//11
+		Reserved13 : 	DINT;	//12
+		Reserved14 : 	DINT;	//13
+		Reserved15 : 	DINT;	//14
+		Reserved16 : 	DINT;	//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

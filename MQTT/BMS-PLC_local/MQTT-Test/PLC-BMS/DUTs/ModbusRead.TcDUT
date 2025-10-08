@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="ModbusRead" Id="{e6b69ea1-8ac4-412c-8276-3d77bfbd2dfd}">
+    <Declaration><![CDATA[TYPE ModbusRead : // EnerArk 
+STRUCT
+
+Workingstatus	:USINT; //0x0001
+
+Workingmode	:USINT;
+
+Controlmode	:USINT;
+
+Allowable_discharge_active_powerlimit	:USINT;
+
+Allowable_charging_active_powerlimit	:USINT;
+
+System_active_power	:USINT;
+
+Load_active_power	:INT;
+
+Grid_active_power	:INT;
+
+MPPT_total_power	:USINT;
+grid_input_active_powerHigh	:USINT;
+
+grid_input_active_powerLow	:USINT;
+
+grid_output_active_powerHigh	:USINT;
+
+grid_output_active_powerLow	:USINT;
+
+Load_output_active_powerHigh	:USINT;
+
+Load_output_active_powerLow :USINT;
+
+UC1_working_status	:USINT;
+
+UC2_working_status	:USINT;
+
+UC3_working_status	:USINT;
+
+UC4_working_status	:USINT;
+
+UC5_working_status	:USINT;
+
+UC6_working_status	:USINT;
+
+UC7_working_status	:USINT;
+
+UC8_working_status	:USINT;
+
+UC9_working_status	:USINT;
+
+UC10_working_status	:USINT;
+
+Reserved	:USINT;
+
+System_alarm0	:USINT;
+
+System_alarm1	:USINT;
+
+System_failure0	:USINT;
+
+System_failure1	:USINT; //0x001E
+
+
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

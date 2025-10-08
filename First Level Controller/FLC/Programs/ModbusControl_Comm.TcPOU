@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="ModbusControl_Comm" Id="{1ceab6a1-2c64-41bc-b807-9fc77f7128da}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM ModbusControl_Comm
+VAR
+
+//IP Adress
+	ipAddr    		: STRING(15) := '10.200.8.195';		// Beckhoff FEC
+	//ipAddr    		: STRING(15) := '10.200.8.217';		// Modicon PLC
+	//ipAddr    		: STRING(15) := '192.168.1.51';		// JEMA DSP
+	//ipAddr    		: STRING(15) := '169.254.227.11';	// NRG Board UPC
+ 	//ipAddr    		: STRING(15) := '10.200.8.196';		// NRG Board LUA
+	//ipAddr    		: STRING(15) := '172.20.236.8';			// ABG
+	
+//Sampling time determination
+	Tmod : INT;
+	Tp : INT;
+	Ts: REAL;
+//Debug variables for modbus communication
+ 	DebugVar1  		: INT;			// Just for debugging
+//Read and Write register for the modbus
+ 	fbWriteRegs 	: FB_MBWriteRegs;
+	fbReadRegs		: FB_MBReadRegs;
+ 	bWriteRegs		: BOOL;
+ 	bReadRegs		: BOOL;
+	pre_counter		:	DINT;
+	SwapRW			: 	BOOL;
+	mWritecounter:	DINT;
+	mbreadcounter : UDINT := 1;
+//Modbus-Based Controller system
+	SPCModbus1 : modbus_SPC;
+	ModbusSPC_Enable : BOOL;
+//Voltage Calculation
+	Vrmsmean: REAL;
+//HeartBeat FEC and failure handling
+	FECHeartBeat : DINT;
+	CounterCommFailure : DINT;
+	PreviousHeartBeat : UINT := 0;
+	CounterFaultHeartBeat : UDINT;
+	nQuantity: INT;
+	
+	
+// Event recorder
+	EventRecorder_in_modbus		:	EventRecorder_In_Modbus;
+	EventRecorderControlOut		:	EventRecorder_Controller_Output;
+	eventcnt	:	INT;
+	
+	Hugo :REAL;
+	Hugo1 : INT;
+	Hugo2 : INT;
+	Hugo3: INT;
+	Hugo4: INT;
+	Hugo5 : INT;
+	Hugo6 : INT;
+	Hugo7 : INT;
+	Hugo8 : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//To write and read variables
+//SwapRW := NOT SwapRW;
+SwapRW := pre_counter = GlobalVar.ModRead.HeartBeat;
+
+//Read Modbus Slave
+	IF SwapRW AND (NOT fbReadRegs.bBusy) (*AND (NOT fbWriteRegs.bBusy) *) THEN
+		mbreadcounter := 0;
+		DebugVar1:= DebugVar1 + 1;			// Debuging variable
+		
+		{IF defined (JEMA)}
+			Hugo1 := 1;
+			ipAddr  := '192.168.1.51';
+		{ELSE}
+			Hugo1 := 2;		
+			ipAddr  := '10.200.8.195';
+		{END_IF}
+		
+		fbReadRegs.sIPAddr := ipAddr;
+		
+		fbReadRegs.nQuantity :=  SIZEOF(GlobalVar.ModRead)/2;
+		
+		{IF defined (JEMA)}
+			Hugo2 := 1;
+			fbReadRegs.nMBAddr :=  16#191;(*JEMA*)
+			//fbReadRegs.nMBAddr :=(*16#0100;*)(*NRGLab*)
+			//fbReadRegs.nMBAddr := 16#8000;//ABENGOA Memory location read
+		{ELSE}
+			Hugo2 := 2;	
+			fbReadRegs.nMBAddr := 16#4100; //LUA-FEC 
+		{END_IF}
+			
+		fbReadRegs.cbLength := SIZEOF(GlobalVar.ModRead);
+		fbReadRegs.pDestAddr := ADR(GlobalVar.ModRead);
+		fbReadRegs.tTimeout := T#5S;
+		fbReadRegs(bExecute:=TRUE); 
+	ELSE 
+		fbReadRegs(bExecute:=FALSE);
+		IF fbReadRegs.bBusy THEN
+		mbreadcounter := mbreadcounter + 1;
+		END_IF
+	END_IF
+//End of Read Modbus Slave
+
+//Write Modbus Slave
+	IF (NOT SwapRW) AND (NOT fbWriteRegs.bBusy) (*AND (NOT fbWriteRegs.bBusy)*) THEN
+		//Scaling for Modbus Read
+		
+		{IF defined (JEMA)}
+			Hugo3 := 1;
+			ModreadScaling();
+		{ELSE}	
+			Hugo3 := 2;
+		{END_IF}
+		//Counter for synch
+			pre_counter := GlobalVar.ModRead.HeartBeat;
+		//RMS voltage calculation
+			Vrmsmean := (GlobalVar.ModRead.Vrmsa + GlobalVar.ModRead.Vrmsb + GlobalVar.ModRead.Vrmsc)/3.0;
+		//Heart Beat Failure
+			IF GlobalVar.ModRead.HeartBeat = PreviousHeartBeat THEN
+				CounterFaultHeartBeat := CounterFaultHeartBeat + 1;
+			ELSE
+				CounterFaultHeartBeat := 0;
+			END_IF
+			
+			IF CounterFaultHeartBeat >= 5 THEN
+				GlobalVar.HeartBeatFault := 1;
+			ELSE
+				GlobalVar.HeartBeatFault := 0;
+			END_IF	
+		//Sampling Time Calculation	
+			Tmod := GlobalVar.wMiliseconds - Tp;
+			IF Tmod<0 THEN Tmod:= (GlobalVar.wMiliseconds+1000)-Tp;
+			Ts := Tmod*0.001;
+			END_IF
+			
+		//IF GlobalVar.ModbusSPC_Enable THEN
+			EtherCAT_MappingModbus(ADR(SPCModbus1));
+		//END_IF
+		
+		//Enable Modbus-Based Controller
+			IF GlobalVar.ModbusSPC_Enable = TRUE THEN
+					SPCModbus1( 
+					Pmodref := Communications.EtherCAT_Inputs.ActivePowerReference, 
+					Qmodref := Communications.EtherCAT_Inputs.ReactivePowerReference,
+					GridFre := Communications.EtherCAT_Monitor_Variables.GridFre*0.1591549430918,//CHECK BEFORE CONNECTION.
+					Pmeasured := Communications.EtherCAT_Monitor_Variables.TotW,
+					Qmeasured := Communications.EtherCAT_Monitor_Variables.TotVAr,
+					Vmeasured := Communications.EtherCAT_Monitor_Variables.Vrmsa,
+					//Control Parameters
+					Ts := Ts,
+					RampUpValue := 10,
+					InertiaEmulationP=>Communications.PowerOfService.InertiaEmulationP_Service,
+					FrequencyRegulationP => Communications.PowerOfService.FrequencyRegulationP_Service,
+					ModalFreqAttP => Communications.PowerOfService.ModalFreqAttP_Service,		
+					VoltageRegulationQ => Communications.PowerOfService.VoltageRegulationQ_Service,
+					TestInertia := 1 //1 - Test mode ; 0- Normal Mode
+					);
+			//Output References from the controller
+			{IF defined (JEMA)}
+				Hugo4 := 1;
+				GlobalVar.ModWrite.Pset := REAL_TO_INT(SPCModbus1.OutputP*0.001); //JEMA
+				GlobalVar.ModWrite.Qset := REAL_TO_INT(SPCModbus1.OutputQ*0.001);//JEMA
+			{ELSE}	
+				Hugo4 := 2;
+				GlobalVar.ModWrite.OutWset := SPCModbus1.OutputP; //ABG
+				GlobalVar.ModWrite.OutVArSet := SPCModbus1.OutputQ;	//ABG
+			{END_IF}
+		
+		ELSE
+		//Reset functions
+			{IF defined (JEMA)}
+				Hugo5 := 1;
+				GlobalVar.ModWrite.Pset :=0; //JEMA
+				GlobalVar.ModWrite.Qset := 0;	//JEMA
+			{ELSE}	
+				Hugo5 := 2;
+				GlobalVar.ModWrite.OutWset := 0; //JEMA
+				GlobalVar.ModWrite.OutVArSet := 0;	//JEMA
+			{END_IF}
+			
+		END_IF
+	//Heart Beat send to DSP through Modbus
+		GlobalVar.ModWrite.HeartBeat := INT_TO_UINT(GlobalVar.wMiliseconds);
+		PreviousHeartBeat := GlobalVar.ModRead.HeartBeat;
+	//Miliseconds tick for determining the scan cycle
+		Tp := Globalvar.wMiliseconds;	
+	//Write Modbus Registers
+		mWritecounter := 0;
+		{IF defined (JEMA)}
+			Hugo6 := 1;
+			ipAddr  := '192.168.1.51';
+		{ELSE}	
+			Hugo6 := 2;
+			ipAddr  := '10.200.8.195';
+		{END_IF}
+		
+		fbWriteRegs.sIPAddr :=ipAddr;
+		fbWriteRegs.nQuantity := (*SIZEOF(Communications.ModWriteNRG)/2;*) SIZEOF(GlobalVar.ModWrite)/2; 
+		{IF defined (JEMA)}
+			Hugo7 := 1;
+			fbWriteRegs.nMBAddr :=  16#1AD;(*JEMA*)
+			//fbReadRegs.nMBAddr :=*16#0000;*)(*NRGLab*)
+			//fbReadRegs.nMBAddr := 16#8064;//ABENGOA Memory location read
+		{ELSE}	
+			Hugo7 := 2;
+			fbWriteRegs.nMBAddr := 16#4000; //LUA-FEC 
+		{END_IF}
+	
+		fbWriteRegs.cbLength := (*SIZEOF(Communications.ModWriteNRG);*) SIZEOF(GlobalVar.ModWrite);
+		fbWriteRegs.pSrcAddr := (*ADR(Communications.ModWriteNRG);*) ADR(GlobalVar.ModWrite);
+		fbWriteRegs.tTimeout := T#5S;
+		fbWriteRegs(bExecute:=TRUE);
+	ELSE 
+		fbWriteRegs(bExecute:=FALSE);
+		IF fbwriteregs.bBusy THEN
+		mWritecounter := mWritecounter + 1;
+		END_IF
+		
+	END_IF
+//End of Write Modbus Slave
+
+	IF GlobalVar.ModRead.HeartBeat = FECHeartBeat THEN
+		CounterCommFailure := CounterCommFailure + 1;
+			IF CounterCommFailure > 10 THEN
+				GlobalVar.CommunicationFailureModbus := TRUE;
+				CounterCommFailure := 0;
+			END_IF
+	ELSE
+		GlobalVar.CommunicationFailureModbus := FALSE;
+		CounterCommFailure := 0;
+	END_IF
+	
+	FECHeartBeat := GlobalVar.ModRead.HeartBeat;
+
+////////////////////////////////////////////Event recorder
+eventcnt := eventcnt + 1;
+IF eventcnt = 2 THEN
+	eventcnt := 0;
+
+	EventRecorder_in_modbus.BatSoc := Globalvar.ModRead.BatSoc;
+	{IF defined (JEMA)}
+		Hugo8 := 1;
+		EventRecorder_in_modbus.Vdc := GlobalVar.ModRead.CtrlPriority;
+	{ELSE}	
+		Hugo8 := 2;
+		EventRecorder_in_modbus.Vdc := Globalvar.ModRead.SM_ManualControl;
+	{END_IF}
+
+	EventRecorder_in_modbus.TotW := Globalvar.ModRead.TotW;
+	EventRecorder_in_modbus.TotVar := Globalvar.ModRead.TotVar;
+	EventRecorder_in_modbus.GridFre := Globalvar.ModRead.GridFre;
+	EventRecorder_in_modbus.Vrms := Globalvar.ModRead.Vrmsa;
+	EventRecorder_in_modbus.Irms := Globalvar.ModRead.Irmsa;
+	
+	gvl.fbHistorian.ListeningRecording_IN_Modbus(HistorianDataPacket := EventRecorder_in_modbus);
+	
+	IF  communications.EtherCAT_Inputs.Command < 4 THEN
+		EventRecorderControlOut.Pout_Inertia := Communications.PowerOfService.InertiaEmulationP_Service;
+		EventRecorderControlOut.Pout_FrequencyRegulation := Communications.PowerOfService.FrequencyRegulationP_Service;
+		EventRecorderControlOut.Pout_ModelFrequencyAttenuation := Communications.PowerOfService.ModalFreqAttP_Service;
+		EventRecorderControlOut.Qout_VoltageRegulation := Communications.PowerOfService.VoltageRegulationQ_Service;
+		EventRecorderControlOut.Pref := SPCModbus1.OutputP;
+		EventRecorderControlOut.Qref := SPCModbus1.OutputQ;	
+	
+		gvl.fbHistorian.ListeningRecording_ControlOut(HistorianDataPacket := EventRecorderControlOut);
+	END_IF
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="ModbusControl_Comm">
+      <LineId Id="1410" Count="0" />
+      <LineId Id="1409" Count="0" />
+      <LineId Id="2209" Count="0" />
+      <LineId Id="887" Count="0" />
+      <LineId Id="802" Count="1" />
+      <LineId Id="805" Count="0" />
+      <LineId Id="1358" Count="0" />
+      <LineId Id="2504" Count="0" />
+      <LineId Id="2506" Count="0" />
+      <LineId Id="2571" Count="0" />
+      <LineId Id="2507" Count="1" />
+      <LineId Id="2572" Count="0" />
+      <LineId Id="2509" Count="0" />
+      <LineId Id="2505" Count="0" />
+      <LineId Id="2510" Count="0" />
+      <LineId Id="808" Count="0" />
+      <LineId Id="2511" Count="0" />
+      <LineId Id="1416" Count="0" />
+      <LineId Id="2249" Count="0" />
+      <LineId Id="2513" Count="0" />
+      <LineId Id="2573" Count="0" />
+      <LineId Id="2514" Count="0" />
+      <LineId Id="2518" Count="1" />
+      <LineId Id="2515" Count="0" />
+      <LineId Id="2574" Count="0" />
+      <LineId Id="2516" Count="0" />
+      <LineId Id="2512" Count="0" />
+      <LineId Id="2250" Count="0" />
+      <LineId Id="812" Count="5" />
+      <LineId Id="902" Count="0" />
+      <LineId Id="819" Count="0" />
+      <LineId Id="904" Count="0" />
+      <LineId Id="821" Count="3" />
+      <LineId Id="1855" Count="0" />
+      <LineId Id="1455" Count="0" />
+      <LineId Id="2520" Count="0" />
+      <LineId Id="2522" Count="0" />
+      <LineId Id="2575" Count="0" />
+      <LineId Id="2525" Count="2" />
+      <LineId Id="2521" Count="0" />
+      <LineId Id="1181" Count="0" />
+      <LineId Id="889" Count="0" />
+      <LineId Id="1059" Count="1" />
+      <LineId Id="1062" Count="0" />
+      <LineId Id="1903" Count="1" />
+      <LineId Id="1915" Count="1" />
+      <LineId Id="1905" Count="3" />
+      <LineId Id="1912" Count="1" />
+      <LineId Id="1901" Count="1" />
+      <LineId Id="1688" Count="0" />
+      <LineId Id="1691" Count="2" />
+      <LineId Id="2039" Count="0" />
+      <LineId Id="1689" Count="0" />
+      <LineId Id="2004" Count="0" />
+      <LineId Id="2038" Count="0" />
+      <LineId Id="2040" Count="0" />
+      <LineId Id="1967" Count="0" />
+      <LineId Id="2166" Count="1" />
+      <LineId Id="1633" Count="1" />
+      <LineId Id="1706" Count="0" />
+      <LineId Id="1644" Count="1" />
+      <LineId Id="1707" Count="0" />
+      <LineId Id="1755" Count="0" />
+      <LineId Id="1703" Count="0" />
+      <LineId Id="2299" Count="0" />
+      <LineId Id="2293" Count="1" />
+      <LineId Id="2298" Count="0" />
+      <LineId Id="2295" Count="0" />
+      <LineId Id="2645" Count="0" />
+      <LineId Id="2296" Count="0" />
+      <LineId Id="2123" Count="0" />
+      <LineId Id="2529" Count="0" />
+      <LineId Id="2576" Count="0" />
+      <LineId Id="2530" Count="0" />
+      <LineId Id="2533" Count="0" />
+      <LineId Id="2531" Count="0" />
+      <LineId Id="2577" Count="0" />
+      <LineId Id="2532" Count="0" />
+      <LineId Id="2534" Count="0" />
+      <LineId Id="2528" Count="0" />
+      <LineId Id="2590" Count="0" />
+      <LineId Id="1102" Count="0" />
+      <LineId Id="2542" Count="0" />
+      <LineId Id="2536" Count="0" />
+      <LineId Id="2579" Count="0" />
+      <LineId Id="2537" Count="2" />
+      <LineId Id="2580" Count="0" />
+      <LineId Id="2540" Count="1" />
+      <LineId Id="2535" Count="0" />
+      <LineId Id="2543" Count="0" />
+      <LineId Id="998" Count="0" />
+      <LineId Id="992" Count="0" />
+      <LineId Id="1103" Count="0" />
+      <LineId Id="1914" Count="0" />
+      <LineId Id="1970" Count="0" />
+      <LineId Id="905" Count="0" />
+      <LineId Id="826" Count="1" />
+      <LineId Id="2552" Count="0" />
+      <LineId Id="2582" Count="0" />
+      <LineId Id="2553" Count="1" />
+      <LineId Id="2583" Count="0" />
+      <LineId Id="2555" Count="0" />
+      <LineId Id="2551" Count="0" />
+      <LineId Id="2556" Count="0" />
+      <LineId Id="829" Count="0" />
+      <LineId Id="1417" Count="0" />
+      <LineId Id="2559" Count="0" />
+      <LineId Id="2585" Count="0" />
+      <LineId Id="2560" Count="3" />
+      <LineId Id="2586" Count="0" />
+      <LineId Id="2564" Count="0" />
+      <LineId Id="2557" Count="0" />
+      <LineId Id="2251" Count="0" />
+      <LineId Id="832" Count="3" />
+      <LineId Id="837" Count="1" />
+      <LineId Id="898" Count="0" />
+      <LineId Id="839" Count="0" />
+      <LineId Id="899" Count="0" />
+      <LineId Id="840" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="2565" Count="0" />
+      <LineId Id="951" Count="0" />
+      <LineId Id="1579" Count="10" />
+      <LineId Id="950" Count="0" />
+      <LineId Id="2339" Count="0" />
+      <LineId Id="2451" Count="0" />
+      <LineId Id="2360" Count="0" />
+      <LineId Id="2452" Count="1" />
+      <LineId Id="2361" Count="0" />
+      <LineId Id="2545" Count="0" />
+      <LineId Id="2588" Count="0" />
+      <LineId Id="2546" Count="0" />
+      <LineId Id="2548" Count="0" />
+      <LineId Id="2589" Count="0" />
+      <LineId Id="2549" Count="0" />
+      <LineId Id="2544" Count="0" />
+      <LineId Id="2371" Count="2" />
+      <LineId Id="2376" Count="0" />
+      <LineId Id="2374" Count="1" />
+      <LineId Id="2364" Count="0" />
+      <LineId Id="2340" Count="0" />
+      <LineId Id="2378" Count="0" />
+      <LineId Id="2377" Count="0" />
+      <LineId Id="2446" Count="4" />
+      <LineId Id="2444" Count="1" />
+      <LineId Id="2379" Count="1" />
+      <LineId Id="2366" Count="0" />
+      <LineId Id="2365" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

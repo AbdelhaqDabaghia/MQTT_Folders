@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="abcSignal" Id="{3eabf449-9348-40c8-84bf-e566748d9637}">
+    <Declaration><![CDATA[TYPE abcSignal :
+STRUCT
+	a	:	REAL;
+	b	:	REAL;
+	c	:	REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

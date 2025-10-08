@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="InertiaEmulation_Param_Struct" Id="{4088455e-d762-436d-892b-62dc1283f5d3}">
+    <Declaration><![CDATA[TYPE InertiaEmulation_Param_Struct :
+STRUCT
+	//Inertia Emulation
+		Inertia_Constant : REAL := 5;		//0
+		HighPassFilterConst : REAL := 0.1;	//1
+		Max_ROCOF : REAL := 5;				//2
+		PowerLimit_Inertia : REAL := 1E6;	//3
+		Reserved1 : REAL;					//4
+		Reserved2 : REAL;					//5	
+		Reserved3 : REAL;					//6
+		Reserved4 : REAL;					//7
+		Reserved5 : REAL;					//8
+		Reserved6 : REAL;					//9
+		Reserved7 : REAL;					//10
+		Reserved8 : REAL;					//11
+		Reserved9 : REAL;					//12
+		Reserved10 : REAL;					//13
+		Reserved11 : REAL;					//14
+		Reserved12 : REAL;					//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

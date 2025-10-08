@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="Mapping_Monitoring_Variables_ABG" Id="{acb49f2e-cde5-4859-a7e0-79f191ed30c3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION Mapping_Monitoring_Variables_ABG
+VAR_INPUT
+	Input_var : ModbusRead;//ScaledModRead;
+	Output_var : POINTER TO EtherCAT_Monitor_Variables;
+	Output_var2 : POINTER TO EtherCAT_Stat_Variables;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[Output_var^.BatSoc := (Input_var.BatSoc );
+Output_var^.BatSocLowLim := (Input_var.BatSocLowLim);
+Output_var^.BatSocUpLim := (Input_var.BatSocUpLim );
+
+CASE Input_var.DerOpMode	OF
+	0:	
+		Output_var2^.Status := 0;
+	1:	
+		Output_var2^.Status := 0;
+	4:
+		Output_var2^.Status := 1;
+	11:
+		Output_var2^.Status := 1;
+	5:
+		Output_var2^.Status := 2;
+	6:
+		Output_var2^.Status := 3;
+	9:
+		Output_var2^.Status := 5;
+END_CASE
+
+//Output_var2^.Status := Input_var.DerOpMode;
+
+
+Output_var2^.HeartBeat := GlobalVar.wMiliseconds;
+
+Output_var2^.Alarms1 := UDINT_TO_DINT((Input_var.GrAlm));
+Output_var2^.Alarms2 := 0; //Input_var.GrAlm1;
+Output_var2^.Alarms3 := 0; //Input_var.GrAlm2;
+Output_var2^.Alarms4 := 0; //Input_var.GrAlm3;
+
+Output_var^.GridFre := (Input_var.GridFre);
+
+Output_var^.Irmsa := (Input_var.Irmsa);
+Output_var^.Irmsb := (Input_var.Irmsb);
+Output_var^.Irmsc := (Input_var.Irmsc);
+
+Output_var^.TotW := (Input_var.TotW);
+Output_var^.TotVAr := (Input_var.TotVAr);
+
+Output_var^.Vrmsa := (Input_var.Vrmsa);
+Output_var^.Vrmsb := (Input_var.Vrmsb);
+Output_var^.Vrmsc := (Input_var.Vrmsc);
+]]></ST>
+    </Implementation>
+    <LineIds Name="Mapping_Monitoring_Variables_ABG">
+      <LineId Id="7" Count="0" />
+      <LineId Id="11" Count="1" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="46" Count="0" />
+      <LineId Id="62" Count="1" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="51" Count="2" />
+      <LineId Id="60" Count="1" />
+      <LineId Id="54" Count="5" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="13" Count="0" />
+      <LineId Id="45" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="33" Count="0" />
+      <LineId Id="31" Count="1" />
+      <LineId Id="34" Count="1" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="14" Count="0" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="15" Count="2" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="18" Count="1" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="20" Count="1" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="22" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

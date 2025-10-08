@@ -1,0 +1,18 @@
+Id;Default
+339;%s
+673;bON
+118;Clear fault
+545;Connect
+57;Connect GRID
+685;Connected
+539;CURRENT STATE
+170;Enum
+988;OFF
+879;OP CONTROL
+562;Operational
+304;SATE Enum
+238;STATE ENUM
+416;TE
+232;Test Fault satate
+444;Test Fault state
+264;TSATE Enum

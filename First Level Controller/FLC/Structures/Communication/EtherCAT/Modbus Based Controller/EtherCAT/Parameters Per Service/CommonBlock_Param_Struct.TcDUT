@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="CommonBlock_Param_Struct" Id="{7ab4084b-2395-4eca-baf0-5f3539cc7c2c}">
+    <Declaration><![CDATA[TYPE CommonBlock_Param_Struct :
+STRUCT
+	//Common Block parameters
+		NominalPower : REAL := 1E6;			//0
+		NominalVoltage : REAL := 240;		//1
+		NominalFreq : REAL := 50;			//2
+		ActivePowerLimit : REAL := 1E6;		//3
+		ReactivePowerLimit: REAL := 1E6;	//4
+		Reserved1 : REAL;					//5
+		Reserved2 : REAL;					//6
+		Reserved3 : REAL;					//7
+		Reserved4 : REAL;					//8
+		Reserved5 : REAL;					//9
+		Reserved6 : REAL;					//10
+		Reserved7 : REAL;					//11
+		Reserved8 : REAL;					//12
+		Reserved9 : REAL;					//13
+		Reserved10 : REAL;					//14
+		Reserved11 : REAL;					//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

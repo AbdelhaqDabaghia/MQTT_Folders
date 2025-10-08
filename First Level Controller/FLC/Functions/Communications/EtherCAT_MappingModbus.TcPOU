@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="EtherCAT_MappingModbus" Id="{7c5c8915-b542-4fcc-8405-1da3b1124b96}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION EtherCAT_MappingModbus : bool
+VAR_INPUT
+	Modbus_Controller : POINTER TO modbus_SPC;
+	
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Commands
+	//Common Block - Commands
+		Modbus_Controller^.ActivePowerLimitation := Communications.EtherCAT_Commands.CommonBlock.Bits.ActivePowerLimitation;
+		Modbus_Controller^.ReactivePowerLimitation := Communications.EtherCAT_Commands.CommonBlock.Bits.ReactivePowerLimitation;
+		Modbus_Controller^.State_Of_Health := Communications.EtherCAT_Commands.CommonBlock.Bits.State_Of_Health;
+		Modbus_Controller^.Reset_To_Default_Common := Communications.EtherCAT_Commands.CommonBlock.Bits.Reset_To_Default_Common; //Check how to do this
+		
+	//Inertia Emulation - Commands
+		Modbus_Controller^.Enable_Inertia := Communications.EtherCAT_Commands.InertiaEmulation.Bits.Enable_Inertia;
+		Modbus_Controller^.Inertia_Reset_States := Communications.EtherCAT_Commands.InertiaEmulation.Bits.Inertia_Reset_States;
+		Modbus_Controller^.Limit_ROCOF := Communications.EtherCAT_Commands.InertiaEmulation.Bits.Limit_ROCOF;
+		Modbus_Controller^.Delta_Power_Limit_Inertia := Communications.EtherCAT_Commands.InertiaEmulation.Bits.Delta_Power_Limit_Inertia;
+		Modbus_Controller^.Reset_To_Default_Inertia := Communications.EtherCAT_Commands.InertiaEmulation.Bits.Reset_To_Default_Inertia; //Chechk how to do this
+	
+	//Frequency Regulation - Commands
+		Modbus_Controller^.Enable_DroopP := Communications.EtherCAT_Commands.FrequencyRegulation.Bits.Enable_DroopP;
+		Modbus_Controller^.Delta_Power_Limit_FreqRegulation := Communications.EtherCAT_Commands.FrequencyRegulation.Bits.Delta_Power_Limit_FreqRegulation;
+		Modbus_Controller^.DeadBandLimitationP := Communications.EtherCAT_Commands.FrequencyRegulation.Bits.DeadBandLimitationP;
+		Modbus_Controller^.Delta_Energy_Limit := Communications.EtherCAT_Commands.FrequencyRegulation.Bits.Delta_Energy_Limit;
+		Modbus_Controller^.Reset_Energy_State := Communications.EtherCAT_Commands.FrequencyRegulation.Bits.Reset_Energy_State;
+		Modbus_Controller^.Reset_To_Default_FreqRegulation := Communications.EtherCAT_Commands.FrequencyRegulation.Bits.Reset_To_Default_FreqRegulation; //Check How to do this.
+		
+	//Modal Frequency Attenuation - Commands
+		Modbus_Controller^.Enable_ModalFreq := Communications.EtherCAT_Commands.ModalFreq.Bits.Enable_ModalFreq;
+		Modbus_Controller^.Delta_Power_Limit_modalFreq := Communications.EtherCAT_Commands.ModalFreq.Bits.Delta_Power_Limit_ModalFreq;
+		Modbus_Controller^.DeadBandLimitationV := Communications.EtherCAT_Commands.VoltageRegulation.Bits.DeadBandLimitationV;
+		Modbus_Controller^.Reset_To_Default_ModalFreq := Communications.EtherCAT_Commands.ModalFreq.Bits.Reset_To_Default_ModalFreq;//Check How to do this.
+	
+	//Voltage Regulation - Commands
+		Modbus_Controller^.Enable_VoltageRef := Communications.EtherCAT_Commands.VoltageRegulation.Bits.Enable_VoltageRef;
+		Modbus_Controller^.Delta_Power_Limit_Voltage := Communications.EtherCAT_Commands.VoltageRegulation.Bits.Delta_Power_Limit_Voltage;
+		Modbus_Controller^.Reset_To_Default_VoltageReg := Communications.EtherCAT_Commands.VoltageRegulation.Bits.Reset_To_Default_VoltageReg;//Check How to do this.
+		
+//parameters
+	//Common Block - Parameters
+		Modbus_Controller^.NominalPower := Communications.EhterCAT_Parameters.CommonBlock_Params.NominalPower;
+		Modbus_Controller^.NominalFreq := Communications.EhterCAT_Parameters.CommonBlock_Params.NominalFreq;
+		Modbus_Controller^.NominalVoltage := Communications.EhterCAT_Parameters.CommonBlock_Params.NominalVoltage;
+		Modbus_Controller^.ActivePowerLimit := Communications.EhterCAT_Parameters.CommonBlock_Params.ActivePowerLimit;
+		Modbus_Controller^.ReactivePowerLimit := Communications.EhterCAT_Parameters.CommonBlock_Params.ReactivePowerLimit;
+		
+	//Inertia Emulation - Parameters
+		Modbus_Controller^.Inertia_Constant := Communications.EhterCAT_Parameters.InertiaEmulation_Params.Inertia_Constant;
+		Modbus_Controller^.HighPassFilterConst := Communications.EhterCAT_Parameters.InertiaEmulation_Params.HighPassFilterConst;
+		Modbus_Controller^.Max_ROCOF := Communications.EhterCAT_Parameters.InertiaEmulation_Params.Max_ROCOF;
+		Modbus_Controller^.PowerLimit_Inertia := Communications.EhterCAT_Parameters.InertiaEmulation_Params.PowerLimit_Inertia;
+		
+	//frequency Regulation - Parameters
+		Modbus_Controller^.DroopConstantP := Communications.EhterCAT_Parameters.FrequencyRegulation_Params.DroopConstantP;
+		Modbus_Controller^.Max_Delta_Energy := Communications.EhterCAT_Parameters.FrequencyRegulation_Params.Max_delta_Energy;
+		Modbus_Controller^.PowerLimit_Freq := Communications.EhterCAT_Parameters.FrequencyRegulation_Params.PowerLimit_Freq;
+		Modbus_Controller^.FrequencyCutOff := Communications.EhterCAT_Parameters.FrequencyRegulation_Params.FrequencyCutOff;
+		Modbus_Controller^.FreqDeadBand := Communications.EhterCAT_Parameters.FrequencyRegulation_Params.FreqDeadBand;
+		
+	//Modal Frequency Attenuation - Parameters
+		Modbus_Controller^.ModalFreq_Gain := Communications.EhterCAT_Parameters.ModalFrequency_Params.ModalFreq_Gain;
+		Modbus_Controller^.BandPassFilter_CenterFreq := Communications.EhterCAT_Parameters.ModalFrequency_Params.BandPassFilter_CenterFreq;
+		Modbus_Controller^.PowerLimit_ModalFreq := Communications.EhterCAT_Parameters.ModalFrequency_Params.PowerLimit_ModalFreq;
+		Modbus_Controller^.VoltageCutOff := Communications.EhterCAT_Parameters.VoltageRegulation_Params.VoltageCutOff;
+		Modbus_Controller^.VoltDeadBand := Communications.EhterCAT_Parameters.VoltageRegulation_Params.VoltDeadBand;
+		
+	//Voltage Regulation
+		Modbus_Controller^.DroopConstantV := Communications.EhterCAT_Parameters.VoltageRegulation_Params.DroopConstantV;
+		Modbus_Controller^.PowerLimit_Voltage := Communications.EhterCAT_Parameters.VoltageRegulation_Params.PowerLimit_Voltage;]]></ST>
+    </Implementation>
+    <LineIds Name="EtherCAT_MappingModbus">
+      <LineId Id="83" Count="1" />
+      <LineId Id="80" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="87" Count="11" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="99" Count="4" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="104" Count="0" />
+      <LineId Id="151" Count="0" />
+      <LineId Id="105" Count="13" />
+      <LineId Id="123" Count="11" />
+      <LineId Id="152" Count="1" />
+      <LineId Id="135" Count="4" />
+      <LineId Id="154" Count="1" />
+      <LineId Id="140" Count="2" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

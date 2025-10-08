@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <DUT Name="ModbusRead" Id="{41b4606e-673a-4d04-a73a-fc1ff1467427}">
+    <Declaration><![CDATA[TYPE ModbusRead :
+STRUCT
+{IF defined (JEMA)}
+	Vrmsa			:INT;	// 1, V, scale 1/10
+	Vrmsb			:INT;	// 2, V, scale 1/10
+	Vrmsc			:INT;	// 3, V, scale 1/10
+	Irmsa			:INT;	// 4, A, scale 1/10
+	Irmsb			:INT;	// 5, A, scale 1/10
+	Irmsc			:INT;	// 6, A, scale 1/10
+	TotW			:INT;	// 7, W, scale 10
+	TotVAr			:INT;	// 8, W, scale 10
+	GridFre			:INT;	// 9, Hz, scale 1/100
+	HeartBeat		:UINT;  // 10
+	GrAlm0			:UINT;	// 11, 1 flag 1 alarm
+	GrAlm1			:UINT;	// 12
+	GrAlm2			:UINT;	// 13
+	GrAlm3			:UINT;	// 14
+	GrAlm4			:UINT;	// 15
+	BatSoc			:INT;	// 16, %
+	BatSocUpLimit	:INT;	// 17, %
+	BatSocLowLimit	:INT;	// 18, %
+	fbOpMode		:UINT;  // 19
+	CurOpMode		:UINT;  // 20
+	fbP				:INT;	// 21, kW, 10
+	fbQ				:INT;	// 22, kVar, 10		
+	CtrlPriority 	:UINT; 	// 23, priority
+	(* For connection with PLC*)
+{ELSE}	
+	fCommCommand		:REAL;
+	BatSoc			 	:REAL;
+	BatSocUpLim			:REAL;
+	BatSocLowLim		:REAL;
+	MaxWAval 			:REAL;
+	MaxWCharval 		:REAL;
+	MaxVArAval 			:REAL;
+	MinVArAval			:REAL;
+	TotW				:REAL;		// W
+	TotVAr				:REAL;		// Var
+	GridFre				:REAL;
+	Vrmsa				:REAL;
+	Vrmsb				:REAL;
+	Vrmsc				:REAL;
+	Irmsa				:REAL;
+	Irmsb				:REAL;
+	Irmsc				:REAL;
+	//	Vsrfd				:REAL;
+	//	Vsrfq				:REAL;
+	HeartBeat			:UINT;
+	DerOpMode			:UINT;
+	GrAlm				:UDINT;
+	AutoManCtl			:UINT;
+	LocRemCtl			:UINT;
+	OpModTest			:UINT;
+	AutoManCtlFdbk		:UINT;
+	LocRemCtlFdbk		:UINT;
+	CtlSynVal			:UINT;
+	RawP				:REAL;
+	RawQ				:REAL;
+	SM_ManualControl	:INT;		// 0 - FLC enabled  
+{END_IF}	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <GVL Name="GVL_Global" Id="{187841bf-5d14-464e-8248-ca517dc1a2c8}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	bON : BOOL;
+	bOFF: BOOL;
+	bDisconnected: BOOL;
+	bConnected: BOOL;
+	bOPERATIONAL: BOOL;
+	bFault_present: BOOL;
+	bAlarm_present: BOOL;
+	bCommunicationOK: BOOL :=TRUE;
+	bClearFault: BOOL;
+	bClearAlarm: BOOL;
+	
+	ModRead : ModbusRead;
+	ModWrite : ModbusWrite;
+	bPower_enable : BOOL;
+	
+	//Data Excahnge 
+	//data2send AT %Q* : DATAEXCH;
+	data2rcv AT %I* : DATAEXCH;
+	
+	
+	
+	EthercatParametersIN AT %I* : EtherCAT_Parameters_FrmCLC;
+	EthCommandsfrmCLC_IN AT %I* : EtherCATCommandsFrmCLC; // command from clc on Ethercat
+	EthercatSTATMonitoringOut AT %Q* :ETherCAT_StatMonitor_VAR; //status var for clc on Ethercat
+	EthercatMoniotrBAT_OUT AT %Q* : EtherCAT_Monitor_BatVariables;
+	Ethercat_alarms_warningsOUT AT %Q* : Ethercat_AlarmsWarningToCLC;
+	
+	monitoringVAR : MB_StatMonitoring_VAR;  //send to CLC master modbus test
+	commandsfromCLC : MBCommandsFrmCLC; //modbus link to clc master
+	
+	udev AT %I*: UINT;
+	test AT %Q* : DINT;
+	data : ARRAY [0..4] OF WORD;
+	enstate : INT ;
+	CommunicationFailureEtherCAT : BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

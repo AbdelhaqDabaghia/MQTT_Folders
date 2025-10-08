@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="EtherCAT_Stat_Variables" Id="{fe4b58f3-8fe5-42c0-b968-d6cf1c4864d9}">
+    <Declaration><![CDATA[TYPE EtherCAT_Stat_Variables :
+STRUCT
+	Status : DINT;				//0
+	HeartBeat : DINT;			//1
+	Alarms1 : DINT;				//2
+	Alarms2 : DINT;				//3
+	Alarms3 : DINT;				//4
+	Alarms4 : DINT;				//5
+	WarningLog : Warning_FLC_DINT;	//6
+	Reserved2 : DINT;			//7
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

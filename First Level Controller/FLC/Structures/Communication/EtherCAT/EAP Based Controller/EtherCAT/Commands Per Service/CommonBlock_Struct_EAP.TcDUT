@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="CommonBlock_Struct_EAP" Id="{2951ff57-421d-4441-aaa0-d15dfa6e98df}">
+    <Declaration><![CDATA[TYPE CommonBlock_Struct_EAP :
+UNION
+	Value : INT;
+	Bits : Bits_CommonBlock_EAP;
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

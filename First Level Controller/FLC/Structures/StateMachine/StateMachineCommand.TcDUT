@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="StateMachineCommand" Id="{ae35598d-7b61-4c4b-90e7-ee42c69afb68}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+//{attribute 'strict'}
+TYPE StateMachineCommand :
+(
+	FEC_OFF := 0,
+	FEC_STANDBY := 1,
+	FEC_MANUAL := 2,
+	FEC_AVG_PWR_CTR := 3
+//	FEC_INST_PWR_CTR := 4
+) DINT;
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

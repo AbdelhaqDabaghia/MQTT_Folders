@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="FUN_LeftZeroPadding" Id="{fe0f8467-f021-48db-b457-53fe813ef60d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION FUN_LeftZeroPadding : STRING
+VAR_INPUT
+	input_string : INT;
+END_VAR
+VAR
+	temp : STRING(255);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[temp := INT_TO_STRING(input_string);
+
+IF LEN(temp) = 1 THEN
+	FUN_LeftZeroPadding:= CONCAT('0', temp);
+ELSIF LEN(temp) = 2 THEN
+	FUN_LeftZeroPadding:= temp;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="FUN_LeftZeroPadding">
+      <LineId Id="14" Count="1" />
+      <LineId Id="9" Count="3" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

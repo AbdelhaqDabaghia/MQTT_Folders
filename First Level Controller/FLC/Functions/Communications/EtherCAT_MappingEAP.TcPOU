@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <POU Name="EtherCAT_MappingEAP" Id="{67ef5562-68e3-41c8-a7e8-89bb3d22309a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION EtherCAT_MappingEAP
+VAR_INPUT
+	EAP_Controller : POINTER TO EAP_SPC;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Commands
+	//Common Block - Commands
+		EAP_Controller^.ActivePowerLimitation := Communications.EtherCAT_EAP_Commands.CommonBlock_EAP.Bits.ActivePowerLimitation;
+		EAP_Controller^.ReactivePowerLimitation := Communications.EtherCAT_EAP_Commands.CommonBlock_EAP.Bits.ReactivePowerLimitation;
+		EAP_Controller^.Delta_Limitation := Communications.EtherCAT_EAP_Commands.CommonBlock_EAP.Bits.Delta_Limitation;
+		EAP_Controller^.E_Limitation := Communications.EtherCAT_EAP_Commands.CommonBlock_EAP.Bits.E_Limitation;
+		EAP_Controller^.SOC_Limitation := Communications.EtherCAT_EAP_Commands.CommonBlock_EAP.Bits.SOC_Limitation;
+		EAP_Controller^.Reset_To_Default_Common := Communications.EtherCAT_EAP_Commands.CommonBlock_EAP.Bits.Reset_To_Default_Common;
+	//Inertia Emulation - Commands
+		EAP_Controller^.Enable_Inertia := Communications.EtherCAT_EAP_Commands.InertiaEmulation_EAP.Bits.Enable_Inertia;
+		EAP_Controller^.Reset_States_Inertia := Communications.EtherCAT_EAP_Commands.InertiaEmulation_EAP.Bits.Reset_States_Inertia;
+		EAP_Controller^. ROCOF_Limitation := Communications.EtherCAT_EAP_Commands.InertiaEmulation_EAP.Bits.ROCOF_Limitation;
+		EAP_Controller^.Reset_To_Default_Inertia := Communications.EtherCAT_EAP_Commands.InertiaEmulation_EAP.Bits.Reset_To_Default_Inertia;
+	//Frequency Regulation - Commands
+		EAP_Controller^.Enable_DroopP := Communications.EtherCAT_EAP_Commands.FrequencyRegulation_EAP.Bits.Enable_DroopP;
+		EAP_Controller^.Enable_DeadBandFreq := Communications.EtherCAT_EAP_Commands.FrequencyRegulation_EAP.Bits.Enable_DeadBandFreq;
+		EAP_Controller^.Delta_Power_Limitation_Freq := Communications.EtherCAT_EAP_Commands.FrequencyRegulation_EAP.Bits.Delta_Power_Limitation_freq;
+		EAP_Controller^.Delta_Energy_Limitation := Communications.EtherCAT_EAP_Commands.FrequencyRegulation_EAP.Bits.Delta_Energy_Limitation;
+		EAP_Controller^.Reset_To_Default_Freq := Communications.EtherCAT_EAP_Commands.FrequencyRegulation_EAP.Bits.Reset_To_Default_Freq;
+	//Modal Frequency Attenuation - Commands
+		EAP_Controller^.Enable_ModalFreq := Communications.EtherCAT_EAP_Commands.ModalFreq_EAP.Bits.Enable_ModalFreq;
+		EAP_Controller^.ModalFreq_PowerLimitation := Communications.EtherCAT_EAP_Commands.ModalFreq_EAP.Bits.ModalFreq_PowerLimitation;
+		EAP_Controller^.ROCOF_Limitation_ModalFreq := Communications.EtherCAT_EAP_Commands.ModalFreq_EAP.Bits.ROCOF_Limitation_ModalFreq;
+		EAP_Controller^.Reset_To_Default_ModalFreq := Communications.EtherCAT_EAP_Commands.ModalFreq_EAP.Bits.Reset_To_Default_ModalFreq;
+	//Voltage Regulation - Commands
+		EAP_Controller^.Enable_VoltageRegulation := Communications.EtherCAT_EAP_Commands.VoltageRegulation_EAP.Bits.Enable_VoltageRegulation;
+		EAP_Controller^.Enable_DeadBandV := Communications.EtherCAT_EAP_Commands.VoltageRegulation_EAP.Bits.Enable_deadBandV;
+		EAP_Controller^.Delta_Power_Limitation_VoltReg := Communications.EtherCAT_EAP_Commands.VoltageRegulation_EAP.Bits.Delta_Power_Limitation_VoltReg;
+		EAP_Controller^.Reset_To_Default_VoltReg := Communications.EtherCAT_EAP_Commands.VoltageRegulation_EAP.Bits.Reset_To_Default_VoltReg;
+//Parameters
+	//Common Block - Parameters
+		EAP_Controller^.NominalPower := Communications.EtherCAT_EAP_Parameters.CommonBlock_Params_EAP.NominalPower;
+		EAP_Controller^.NominalFreq := Communications.EtherCAT_EAP_Parameters.CommonBlock_Params_EAP.NominalFreq;
+		EAP_Controller^.NominalVolt := Communications.EtherCAT_EAP_Parameters.CommonBlock_Params_EAP.NominalVolt;
+		EAP_Controller^.ActivePowerLimit := Communications.EtherCAT_EAP_Parameters.CommonBlock_Params_EAP.ActivePowerLimit;
+		EAP_Controller^.ReactivePowerLimit := Communications.EtherCAT_EAP_Parameters.CommonBlock_Params_EAP.ReactivePowerLimit;
+		EAP_Controller^.Delta_Limits := Communications.EtherCAT_EAP_Parameters.CommonBlock_Params_EAP.Delta_limits;
+		EAP_Controller^.E_Limits := Communications.EtherCAT_EAP_Parameters.CommonBlock_Params_EAP.E_Limits;
+		EAP_Controller^.Kp_ReactiveControl := Communications.EtherCAT_EAP_Parameters.CommonBlock_Params_EAP.Kp_ReactiveControl;
+		EAP_Controller^.Ki_ReactiveControl := Communications.EtherCAT_EAP_Parameters.CommonBlock_Params_EAP.Ki_ReactiveControl;
+		EAP_Controller^.VirtualReactance := Communications.EtherCAT_EAP_Parameters.CommonBlock_Params_EAP.VirtualReactance;
+		EAP_Controller^.VirtualResistance := Communications.EtherCAT_EAP_Parameters.CommonBlock_Params_EAP.VirtualResistor;
+	//Inertia Emulation - Parameters
+		EAP_Controller^.Inertia_Constant := Communications.EtherCAT_EAP_Parameters.InertiaEmulation_Params_EAP.Inertia_Constant;
+		EAP_Controller^.Damping_Constant := Communications.EtherCAT_EAP_Parameters.InertiaEmulation_Params_EAP.Damping_Constant;
+		EAP_Controller^.HighPassFilterConst := Communications.EtherCAT_EAP_Parameters.InertiaEmulation_Params_EAP.HighPassFilterConst;
+		EAP_Controller^.Max_ROCOF := Communications.EtherCAT_EAP_Parameters.InertiaEmulation_Params_EAP.Max_ROCOF;
+	//Frequency Regulation - Parameters
+		EAP_Controller^.DroopConstantP := Communications.EtherCAT_EAP_Parameters.FrequencyRegulation_Params_EAP.DroopConstantP;
+		EAP_Controller^.Max_Delta_Energy := Communications.EtherCAT_EAP_Parameters.FrequencyRegulation_Params_EAP.Max_Delta_Energy;
+		EAP_Controller^.PowerLimit_Freq := Communications.EtherCAT_EAP_Parameters.FrequencyRegulation_Params_EAP.PowerLimit_Freq;
+		EAP_Controller^.LowPassFilter_CutOff_Freq := Communications.EtherCAT_EAP_Parameters.FrequencyRegulation_Params_EAP.LowPassFilter_CutOff_Freq;
+		EAP_Controller^.DeadBand_Limits_P := Communications.EtherCAT_EAP_Parameters.FrequencyRegulation_Params_EAP.DeadBand_Limits_P;
+	//Modal Frequency Attenunation -  Parameters
+		EAP_Controller^.ModalFreq_Gain := Communications.EtherCAT_EAP_Parameters.ModalFrequency_Params_EAP.ModalFreq_Gain;
+		EAP_Controller^.ModalFreq_PowerLimit := Communications.EtherCAT_EAP_Parameters.ModalFrequency_Params_EAP.ModalFreq_PowerLimit;
+		EAP_Controller^.Max_ROCOF_Modal := Communications.EtherCAT_EAP_Parameters.ModalFrequency_Params_EAP.Max_ROCOF_Modal;
+		EAP_Controller^.BandPassFilter_CenterFreq := Communications.EtherCAT_EAP_Parameters.ModalFrequency_Params_EAP.BandPassFilter_CenterFreq;]]></ST>
+    </Implementation>
+    <LineIds Name="EtherCAT_MappingEAP">
+      <LineId Id="9" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="10" Count="52" />
+      <LineId Id="65" Count="2" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

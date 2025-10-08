@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="InertiaEmulation_Param_Struct_DINT" Id="{65ece7c9-8956-431f-a49c-48ac757bea42}">
+    <Declaration><![CDATA[TYPE InertiaEmulation_Param_Struct_DINT :
+STRUCT
+	//Inertia Emulation
+		Inertia_Constant : DINT := 5;		//0
+		HighPassFilterConst : DINT := 100;	//1
+		Max_ROCOF : DINT := 5;				//2
+		PowerLimit_Inertia : DINT := 1000000;	//3
+		Reserved1 : DINT;					//4
+		Reserved2 : DINT;					//5	
+		Reserved3 : DINT;					//6
+		Reserved4 : DINT;					//7
+		Reserved5 : DINT;					//8
+		Reserved6 : DINT;					//9
+		Reserved7 : DINT;					//10
+		Reserved8 : DINT;					//11
+		Reserved9 : DINT;					//12
+		Reserved10 : DINT;					//13
+		Reserved11 : DINT;					//14
+		Reserved12 : DINT;					//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <GVL Name="GlobalVar" Id="{3ad830a9-6319-4aac-b1b1-12bf30371ddb}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	ModWrite 		: 	ModbusWrite;
+	ModRead 		: 	ModbusRead;
+	ScaledModRead	:	ScaledModRead;
+	Vabcrms			:	abcSignal;
+	Iabcrms			:	abcSignal;
+	Pmodmeas		:	REAL;
+	Qmodmeas		:	REAL;
+	Pmodref			:	REAL;
+	Qmodref			:	REAL;
+	fgmeas			:	REAL;
+	ModbusSPC_Enable: BOOL;
+	EAP_SPC_Enable : BOOL;
+	commandfromSLC	: (
+		
+			OFF := 0,
+			STANDBY := 1,
+			MANUAL := 2,
+			AVG_PWR_CTR := 3,
+			INST_PWR_CTR := 4);
+	PreffromSLC	:	REAL;
+	QreffromSLC	:	REAL;
+	CommunicationFailureEtherCAT : BOOL;
+	CommunicationFailureModbus : BOOL;
+	MB_HoldingRegs	:	ModbusHoldingRegs;
+	
+	wMiliseconds : INT;
+	HeartBeatFault : UINT;
+	
+	unixTime: UnixTimestamp;
+    timestampSeconds: DateTimeType;
+    timestampMilliseconds: UINT;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

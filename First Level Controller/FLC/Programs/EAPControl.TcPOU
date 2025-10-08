@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="EAPControl" Id="{e9ff433a-720e-46c4-a512-5b2a20b10431}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM EAPControl
+VAR
+		SLCHeartBeat : REAL;
+		CounterCommFailure : DINT;
+		PRUEBAINT AT %I* : data_16bool;
+		SPC_EAP : EAP_SPC;
+		
+		// Event recorder
+		f	: 	REAL;
+	t	:	REAL;
+	va	:	REAL;
+	vb	:	REAL;
+	vc	:	REAL;
+	EventRecorder_In_EAP	:	EventRecorder_In_EAP;
+	RecordingTriger : BOOL	:= FALSE;
+	
+	EventRecorderControlOut	:	EventRecorder_Controller_Output;
+	
+	ER_HPF_power : HighPassFilter;
+	Filtered_Power	:	REAL;
+	
+	ER_HPF_ReactivePower : HighPassFilter;
+	Filtered_ReactivePower	:	REAL;
+	
+	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[//Mapping EAP-Based Controller
+	//IF GlobalVar.EAP_SPC_Enable THEN
+		//EtherCAT_MappingEAP(ADR(SPC_EAP));
+	//END_IF
+	//IF GlobalVar.EAP_SPC_Enable = TRUE THEN
+		SPC_EAP(ReferenceActivePower := Communications.EtherCAT_Inputs.ActivePowerReference,
+				ReferenceReactivePower := Communications.EtherCAT_Inputs.ReactivePowerReference,
+				ActivePowerMeasure := Communications.EAP_Read.var4,
+				ReactivePowerMeasure := Communications.EAP_Read.var5,
+				Va_inst := Communications.EAP_Read.var1,
+				Vb_inst := Communications.EAP_Read.var2,
+				Vc_inst := Communications.EAP_Read.var3,
+				EnableControl := GlobalVar.EAP_SPC_Enable);
+				
+		Communications.EAP_Write.var1 := SPC_EAP.Global.SynchActivePower;
+		Communications.EAP_Write.var2 := SPC_EAP.Global.SynchActivePower;
+		Communications.EAP_Write.var3 := SPC_EAP.Global.SynchReactivePower;
+
+	// Event Recorder trigger
+		HPF_FilterInit(0.3, ADR(ER_HPF_Power), 800E-6);
+		Filtered_Power := HPF_Function(Communications.EtherCAT_Monitor_Variables.TotW, ADR(ER_HPF_Power));
+		
+		HPF_FilterInit(0.3, ADR(ER_HPF_ReactivePower), 800E-6);
+		Filtered_ReactivePower := HPF_Function(Communications.EtherCAT_Monitor_Variables.TotVAr, ADR(ER_HPF_ReactivePower));
+		
+		
+		IF ABS(Filtered_power) > 50E3 OR ABS(Filtered_ReactivePower) > 50E3 OR Communications.EtherCAT_Commands.AdditionalService.Bits.Reserved1 THEN
+			RecordingTriger := 1;
+		ELSE
+			RecordingTriger := 0;
+		END_IF
+		
+	// Event Recorder
+	gvl.fbHistorian.SetTtriger := RecordingTriger;
+	
+		f := 50;		// Hz
+		t := t + 800E-6;
+		
+		va := LREAL_TO_REAL(SIN(2*PI*f*t));
+		vb := LREAL_TO_REAL(SIN(2*PI*f*t - 2*PI/3));
+		vc := LREAL_TO_REAL(SIN(2*PI*f*t + 2*PI/3));
+		
+		EventRecorder_In_EAP.Va := va;
+		EventRecorder_In_EAP.Vb := vb;
+		EventRecorder_In_EAP.Vc := vc;
+		
+		gvl.fbHistorian.ListeningRecording_IN_EAP(HistorianDataPacket := EventRecorder_In_EAP);
+		
+		
+		
+		IF Communications.EtherCAT_Inputs.Command = 4 THEN
+			
+			EventRecorderControlOut.Pref := 0.5*va;
+			EventRecorderControlOut.Qref := 0.5*vc;
+//			gvl.fbHistorian.ListeningRecording_ControlOut(HistorianDataPacket := EventRecorderControlOut);
+		END_IF
+		
+		
+		
+]]></ST>
+    </Implementation>
+    <LineIds Name="EAPControl">
+      <LineId Id="36" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="46" Count="1" />
+      <LineId Id="63" Count="5" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="85" Count="2" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="183" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="189" Count="1" />
+      <LineId Id="227" Count="2" />
+      <LineId Id="236" Count="0" />
+      <LineId Id="192" Count="0" />
+      <LineId Id="184" Count="0" />
+      <LineId Id="194" Count="0" />
+      <LineId Id="196" Count="2" />
+      <LineId Id="182" Count="0" />
+      <LineId Id="97" Count="0" />
+      <LineId Id="161" Count="1" />
+      <LineId Id="116" Count="7" />
+      <LineId Id="137" Count="0" />
+      <LineId Id="124" Count="4" />
+      <LineId Id="138" Count="1" />
+      <LineId Id="158" Count="2" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="140" Count="0" />
+      <LineId Id="132" Count="2" />
+      <LineId Id="98" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

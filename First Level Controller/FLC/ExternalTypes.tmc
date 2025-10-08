@@ -1,0 +1,1586 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcModuleClass xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance2" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2009/05/TcModuleClass" GeneratedBy="TwinCAT XAE Plc">
+  <DataTypes>
+    <DataType>
+      <Name GUID="{2EF9AF4D-1D78-4E99-AF17-7FDA3C5D30D4}" PersistentType="true">data_16real</Name>
+      <BitSize>512</BitSize>
+      <SubItem>
+        <Name>var1</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var2</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var3</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var4</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var5</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var6</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>160</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var7</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>192</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var8</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>224</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var9</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>256</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var10</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>288</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var11</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>320</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var12</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>352</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var13</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>384</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var14</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>416</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var15</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>448</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var16</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>480</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{579DB6F2-418E-41E6-B79E-4B21AE66D24C}" PersistentType="true">Index_TimeStamp</Name>
+      <BitSize>96</BitSize>
+      <SubItem>
+        <Name>Index</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000006}">INT</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>_reserved1</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>16</BitOffs>
+        <Properties>
+          <Property>
+            <Name>plcAttribute_hide</Name>
+          </Property>
+        </Properties>
+      </SubItem>
+      <SubItem>
+        <Name>TimeStamp</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000004D}">DATE_AND_TIME</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Miliseconds</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>_reserved2</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000005}">UINT</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>80</BitOffs>
+        <Properties>
+          <Property>
+            <Name>plcAttribute_hide</Name>
+          </Property>
+        </Properties>
+      </SubItem>
+      <Hides>
+        <Hide GUID="{F2089DF6-20EC-4DE7-9829-DCFA944700F3}" />
+      </Hides>
+    </DataType>
+    <DataType>
+      <Name GUID="{3D92C355-4632-4BF3-9C32-126D90DEB8EB}" PersistentType="true">EventRecorder_In_Modbus</Name>
+      <BitSize>224</BitSize>
+      <SubItem>
+        <Name>BatSoc</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Vdc</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>TotW</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>TotVar</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>GridFre</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Vrms</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>160</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Irms</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>192</BitOffs>
+      </SubItem>
+      <Hides>
+        <Hide GUID="{008BB626-1ADB-4AAC-804F-DFF5B5306EB9}" />
+      </Hides>
+    </DataType>
+    <DataType>
+      <Name GUID="{3EEE5496-7843-443E-86B1-1658772C4A67}" PersistentType="true">EventRecorder_In_EAP</Name>
+      <BitSize>224</BitSize>
+      <SubItem>
+        <Name>Va</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Vb</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Vc</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Ia</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Ib</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Ic</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>160</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Vdc</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>192</BitOffs>
+      </SubItem>
+      <Hides>
+        <Hide GUID="{02CF8872-199D-4636-B301-27AA62390B38}" />
+      </Hides>
+    </DataType>
+    <DataType>
+      <Name GUID="{B6A69705-D0D7-4324-80B5-E217A53349C8}" PersistentType="true">EventRecorder_Controller_Output</Name>
+      <BitSize>192</BitSize>
+      <SubItem>
+        <Name>Pout_Inertia</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Pout_FrequencyRegulation</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Pout_ModelFrequencyAttenuation</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Qout_VoltageRegulation</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Pref</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Qref</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>160</BitOffs>
+      </SubItem>
+      <Hides>
+        <Hide GUID="{09F3DA48-88CE-4387-841F-21C89D77F315}" />
+      </Hides>
+    </DataType>
+    <DataType>
+      <Name GUID="{09A03CE4-F945-42E4-8C5D-C012BA81EAAA}" PersistentType="true">data_16bool</Name>
+      <BitSize>128</BitSize>
+      <SubItem>
+        <Name>Var1</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var2</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>8</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var3</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>16</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var4</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>24</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var5</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var6</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>40</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>VAR7</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>48</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var8</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>56</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var9</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var10</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>72</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var11</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>80</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var12</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>88</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var13</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var14</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>104</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var15</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>112</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var16</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000030}">BOOL</Type>
+        <BitSize>8</BitSize>
+        <BitOffs>120</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{228F3729-2013-4720-9D78-BDE354281C59}" PersistentType="true">array_16DINT</Name>
+      <BitSize>512</BitSize>
+      <SubItem>
+        <Name>var0</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var1</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var2</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var3</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var4</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var5</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>160</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var6</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>192</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var7</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>224</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var8</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>256</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var9</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>288</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var10</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>320</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var11</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>352</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var12</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>384</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var13</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>416</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var14</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>448</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var15</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>480</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{2E324FD3-89B4-443D-9D40-70E9CB7DF5FA}" PersistentType="true">EthercatDataPacket_2</Name>
+      <BitSize>768</BitSize>
+      <SubItem>
+        <Name>TransmitRequest</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000006}">INT</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Index_TimeStamp</Name>
+        <Type GUID="{579DB6F2-418E-41E6-B79E-4B21AE66D24C}">Index_TimeStamp</Type>
+        <BitSize>96</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>SingalIn_Modbus</Name>
+        <Type GUID="{3D92C355-4632-4BF3-9C32-126D90DEB8EB}">EventRecorder_In_Modbus</Type>
+        <BitSize>224</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>SignalIn_EAP</Name>
+        <Type GUID="{3EEE5496-7843-443E-86B1-1658772C4A67}">EventRecorder_In_EAP</Type>
+        <BitSize>224</BitSize>
+        <BitOffs>352</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ControllerOut</Name>
+        <Type GUID="{B6A69705-D0D7-4324-80B5-E217A53349C8}">EventRecorder_Controller_Output</Type>
+        <BitSize>192</BitSize>
+        <BitOffs>576</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{B6602C26-7442-4D48-B753-09C1EB063A05}" PersistentType="true">FromSLC_1</Name>
+      <BitSize>800</BitSize>
+      <SubItem>
+        <Name>Commands</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ActivePowerReference</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ReactivePowerReference</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Parameters_Inertia</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Parameters_Damping</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Parameters_Sn</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>160</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Parameters_Vn</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>192</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Parameters_wn</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>224</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>HeartBeat</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>256</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>SLC_Debugger</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>288</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve1</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>320</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve2</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>352</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve3</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>384</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve4</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>416</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve5</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>448</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve6</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>480</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve7</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>512</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve8</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>544</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve9</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>576</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve10</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>608</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve12</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>640</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve13</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>672</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve14</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>704</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve15</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>736</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve16</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>768</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{2014991D-3817-4C13-9846-D8151EF48E0A}" PersistentType="true">To_SecondLevelControl</Name>
+      <BitSize>1344</BitSize>
+      <SubItem>
+        <Name>Status</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ActivePowerMeasurement</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ReactivePowerMeasurement</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Feedback_Inertia</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Feedback_Damping</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Feedback_Vn</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>160</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Feedback_wn</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>192</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Feedback_Sn</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>224</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Feedback_ActiveReference</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>256</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Feedback_ReactiveReference</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>288</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>HeartBeat</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>320</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>BatSoc</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>352</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>BatSocUpLim</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>384</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>BatSocLowLim</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>416</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>MaxWAval</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>448</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>MaxWCharval</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>480</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>MaxVArAval</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>512</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>MinVArAval</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>544</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>TotW</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>576</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>TotVAr</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>608</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>GridFre</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>640</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Vrmsa</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>672</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Vrmsb</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>704</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Vrmsc</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>736</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Irmsa</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>768</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Irmsb</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>800</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Irmsc</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>832</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve1</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>864</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve2</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>896</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve3</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>928</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve4</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>960</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve5</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>992</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve6</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>1024</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve7</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>1056</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve8</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>1088</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve9</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>1120</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve10</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>1152</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve12</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>1184</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve13</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>1216</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve14</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>1248</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve15</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>1280</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve16</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>1312</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{7E6B89DD-774D-4006-A216-8BD1FEABAC1A}" PersistentType="true">data_1DINT_15Floats</Name>
+      <BitSize>512</BitSize>
+      <SubItem>
+        <Name>var1</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var2</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var3</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var4</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var5</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var6</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>160</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var7</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>192</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var8</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>224</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var9</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>256</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var10</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>288</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var11</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>320</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var12</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>352</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var13</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>384</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var14</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>416</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var15</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>448</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var16</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>480</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{999F4FEE-8E1A-4D1A-9D90-8870CB13418C}" PersistentType="true">Data_8DINT</Name>
+      <BitSize>256</BitSize>
+      <SubItem>
+        <Name>Var1</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var2</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var3</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var4</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var5</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var6</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>160</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var7</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>192</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var8</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>224</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{1D74CFEB-88D0-4F28-BA2B-CE38EE8DE0EA}" PersistentType="true">Data_16DINT</Name>
+      <BitSize>256</BitSize>
+      <SubItem>
+        <Name>Var1</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var2</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var3</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var4</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var5</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var6</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>160</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var7</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>192</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Var8</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>224</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{0A7F2CD6-6D5D-46A1-8A86-2886F0CC54F3}" PersistentType="true">FromSLC</Name>
+      <BitSize>416</BitSize>
+      <SubItem>
+        <Name>Command_1</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000006}">INT</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Command_2</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000006}">INT</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>16</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Pref</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Qref</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Resv1</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Resv2</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Resv3</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>160</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Resv4</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>192</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Resv5</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>224</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Resv6</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>256</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Resv7</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>288</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Resv8</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>320</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Resv9</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>352</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Resv10</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>384</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{47867D22-AAD5-49DA-A717-B5155C78A91A}" PersistentType="true">From_SecondLevelControl</Name>
+      <BitSize>768</BitSize>
+      <SubItem>
+        <Name>Commands</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ActivePowerReference</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ReactivePowerReference</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Parameters_Inertia</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Parameters_Damping</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Parameters_Sn</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>160</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Parameters_Vn</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>192</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Parameters_wn</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>224</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>HeartBeat</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>256</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve1</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>288</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve2</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000009}">DINT</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>320</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve3</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>352</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve4</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>384</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve5</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>416</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve6</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>448</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve7</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>480</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve8</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>512</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve9</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>544</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve10</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>576</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve12</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>608</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve13</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>640</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve14</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>672</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve15</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>704</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Reserve16</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>736</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{78FF1DDD-F176-4FA1-BB3C-5258F804363F}" PersistentType="true">data_1int_15real</Name>
+      <BitSize>512</BitSize>
+      <SubItem>
+        <Name>var1</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000006}">INT</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var2</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var3</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var4</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>96</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var5</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var6</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>160</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var7</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>192</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var8</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>224</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var9</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>256</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var10</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>288</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var11</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>320</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var12</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>352</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var13</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>384</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var14</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>416</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var15</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>448</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var16</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>480</BitOffs>
+      </SubItem>
+    </DataType>
+    <DataType>
+      <Name GUID="{4240ED09-DBAD-4F57-8B98-3985CA19F3BE}" PersistentType="true">HistorianSignal_In_Modbus</Name>
+      <BitSize>96</BitSize>
+      <SubItem>
+        <Name>var0</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var1</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var2</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <Hides>
+        <Hide GUID="{93A5D3F5-4FDF-4CFB-BD66-4526ACCFF530}" />
+      </Hides>
+    </DataType>
+    <DataType>
+      <Name GUID="{0CB89A44-CE49-4B61-ABC4-CEB67B3F92AA}" PersistentType="true">HistorianSignal_In_EAP</Name>
+      <BitSize>96</BitSize>
+      <SubItem>
+        <Name>var0</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var1</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var2</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <Hides>
+        <Hide GUID="{73532D48-9C02-4518-9E96-B9D3C1CCE8D3}" />
+      </Hides>
+    </DataType>
+    <DataType>
+      <Name GUID="{63124805-A67B-4D3A-B946-DAB94EDB4BC3}" PersistentType="true">HistorianControllerOut</Name>
+      <BitSize>96</BitSize>
+      <SubItem>
+        <Name>var0</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var1</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>var2</Name>
+        <Type GUID="{18071995-0000-0000-0000-00000000000D}">REAL</Type>
+        <BitSize>32</BitSize>
+        <BitOffs>64</BitOffs>
+      </SubItem>
+      <Hides>
+        <Hide GUID="{BE3FDEE8-D5B3-4827-9BB1-E8505A30082B}" />
+      </Hides>
+    </DataType>
+    <DataType>
+      <Name GUID="{12C142C6-A2B0-43B5-8ABC-94997FFFEF54}" PersistentType="true">EthercatDataPacket_1</Name>
+      <BitSize>416</BitSize>
+      <SubItem>
+        <Name>TransmitRequest</Name>
+        <Type GUID="{18071995-0000-0000-0000-000000000006}">INT</Type>
+        <BitSize>16</BitSize>
+        <BitOffs>0</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>Index_TimeStamp</Name>
+        <Type GUID="{579DB6F2-418E-41E6-B79E-4B21AE66D24C}">Index_TimeStamp</Type>
+        <BitSize>96</BitSize>
+        <BitOffs>32</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>SingalIn_Modbus</Name>
+        <Type GUID="{4240ED09-DBAD-4F57-8B98-3985CA19F3BE}">HistorianSignal_In_Modbus</Type>
+        <BitSize>96</BitSize>
+        <BitOffs>128</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>SignalIn_EAP</Name>
+        <Type GUID="{0CB89A44-CE49-4B61-ABC4-CEB67B3F92AA}">HistorianSignal_In_EAP</Type>
+        <BitSize>96</BitSize>
+        <BitOffs>224</BitOffs>
+      </SubItem>
+      <SubItem>
+        <Name>ControllerOut</Name>
+        <Type GUID="{63124805-A67B-4D3A-B946-DAB94EDB4BC3}">HistorianControllerOut</Type>
+        <BitSize>96</BitSize>
+        <BitOffs>320</BitOffs>
+      </SubItem>
+    </DataType>
+  </DataTypes>
+</TcModuleClass>

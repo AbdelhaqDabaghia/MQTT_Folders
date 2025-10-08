@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="Bits_VoltageRegulation" Id="{38e7f9e2-ecff-4b61-bcaa-f56393d43439}">
+    <Declaration><![CDATA[TYPE Bits_VoltageRegulation :
+STRUCT
+	//Voltage Regulation
+		Enable_VoltageRef : 			BIT;	//0
+		Delta_Power_Limit_Voltage : 	BIT;	//1
+		DeadBandLimitationV : 			BIT;	//2
+		Reset_To_Default_VoltageReg : 	BIT;	//3
+		Reserved1 : 					BIT;	//4
+		Reserved2 : 					BIT;	//5
+		Reserved3 : 					BIT;	//6
+		Reserved4 : 					BIT;	//7
+		Reserved5 : 					BIT;	//8
+		Reserved6 : 					BIT;	//9
+		Reserved7 : 					BIT;	//10
+		Reserved8 : 					BIT;	//11
+		Reserved9 : 					BIT;	//12
+		Reserved10 : 					BIT;	//13
+		Reserved11 : 					BIT;	//14
+		Reserved12 : 					BIT;	//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

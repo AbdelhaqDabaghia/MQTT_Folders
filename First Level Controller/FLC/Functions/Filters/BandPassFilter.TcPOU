@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="BandPassFilter" Id="{4133bbff-f006-4144-835a-edde2dcf8487}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION BandPassFilter : REAL
+VAR_INPUT
+	Error : REAL;
+	
+	BPF : POINTER TO BandPassFilterStruct;
+	
+	Enable : BOOL;
+	
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[BandPassFilter := BPF^.G1_b0*(Error - BPF^.error2) - BPF^.output1*BPF^.G1_a1 - BPF^.output2*BPF^.G1_a2;
+
+IF Enable = TRUE THEN
+	BPF^.error1 := Error;
+	BPF^.error2 := BPF^.error1;
+	BPF^.output1 := BandPassFilter;
+	BPF^.output2 := BPF^.output1;
+ELSE
+	BPF^.error1 := 0;
+	BPF^.error2 := 0;
+	BPF^.output1 := 0;
+	BPF^.output2 := 0;
+	BandPassFilter := 0;
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="BandPassFilter">
+      <LineId Id="7" Count="0" />
+      <LineId Id="16" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="58" Count="1" />
+      <LineId Id="25" Count="1" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="60" Count="1" />
+      <LineId Id="32" Count="0" />
+      <LineId Id="28" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="14" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

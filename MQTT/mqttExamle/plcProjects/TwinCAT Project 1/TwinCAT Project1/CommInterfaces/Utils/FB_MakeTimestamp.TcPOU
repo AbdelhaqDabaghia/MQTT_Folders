@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <POU Name="FB_MakeTimestamp" Id="{9e4e65dd-707e-4de1-a562-14d98d97dda3}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_MakeTimestamp
+VAR_INPUT
+	year:INT;
+	month:INT;
+	day:INT;
+	hour:INT;
+	minute:INT;
+	second:INT;
+END_VAR
+VAR_OUTPUT
+	timestamp: DT;
+END_VAR
+VAR
+	temp: STRING(255);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Start with year i.e. XXXX-
+temp:= CONCAT(INT_TO_STRING(year), '-');
+
+// Append the month (in case of a single digit pad with zero) i.e. XXXX-XX-	
+temp:= CONCAT(CONCAT(temp, FUN_LeftZeroPadding(month)), '-');
+
+// Append the day (in case of a single digit pad with zero) i.e. XXXX-XX-XX 	
+temp:= CONCAT(CONCAT(temp, FUN_LeftZeroPadding(day)), '-');
+
+// Append the hour (in case of a single digit pad with zero) i.e. XXXX-XX-XX XX:
+temp:= CONCAT(CONCAT(temp, FUN_LeftZeroPadding(hour)), ':');
+
+// Append the minutes (in case of a single digit pad with zero) i.e. XXXX-XX-XX XX:XX:
+temp:= CONCAT(CONCAT(temp, FUN_LeftZeroPadding(minute)), ':');
+
+// Append the seconds  (in case of a single digit pad with zero) i.e. XXXX-XX-XX XX:XX:XX
+temp:= CONCAT(temp, FUN_LeftZeroPadding(second));
+
+timestamp:= STRING_TO_DT(CONCAT('DT#', temp));
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_MakeTimestamp">
+      <LineId Id="48" Count="0" />
+      <LineId Id="9" Count="0" />
+      <LineId Id="72" Count="1" />
+      <LineId Id="47" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="64" Count="0" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="22" Count="0" />
+      <LineId Id="77" Count="0" />
+      <LineId Id="55" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="24" Count="1" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="17" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

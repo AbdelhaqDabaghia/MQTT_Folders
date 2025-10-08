@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <DUT Name="AdditionalService_Param_Struct_EAP" Id="{e6b9654d-064a-429c-94e0-7499f6c36868}">
+    <Declaration><![CDATA[TYPE AdditionalService_Param_Struct_EAP :
+STRUCT
+	//Additional Service
+		Reserved1 : 	REAL;	//0
+		Reserved2 : 	REAL;	//1
+		Reserved3 : 	REAL;	//2
+		Reserved4 : 	REAL;	//3
+		Reserved5 : 	REAL;	//4
+		Reserved6 : 	REAL;	//5
+		Reserved7 : 	REAL;	//6
+		Reserved8 : 	REAL;	//7
+		Reserved9 : 	REAL;	//8
+		Reserved10 : 	REAL;	//9
+		Reserved11 : 	REAL;	//10
+		Reserved12 : 	REAL;	//11
+		Reserved13 : 	REAL;	//12
+		Reserved14 : 	REAL;	//13
+		Reserved15 : 	REAL;	//14
+		Reserved16 : 	REAL;	//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

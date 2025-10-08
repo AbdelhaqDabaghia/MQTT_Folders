@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <DUT Name="ScaledModRead" Id="{a9b0765b-fa87-44a8-8855-840f042d343d}">
+    <Declaration><![CDATA[TYPE ScaledModRead :
+STRUCT
+	Vrmsa			:REAL;	// 1, V, scale 1/10
+	Vrmsb			:REAL;	// 2, V, scale 1/10
+	Vrmsc			:REAL;	// 3, V, scale 1/10
+	Irmsa			:REAL;	// 4, A, scale 1/10
+	Irmsb			:REAL;	// 5, A, scale 1/10
+	Irmsc			:REAL;	// 6, A, scale 1/10
+	TotW			:REAL;	// 7, W, scale 10
+	TotVAr			:REAL;	// 8, W, scale 10
+	GridFre			:REAL;	// 9, Hz, scale 1/100
+	HeartBeat		:UINT;  // 10
+	GrAlm0			:UINT;	// 11, 1 flag 1 alarm
+	
+	GrAlm1			:UINT;	// 12
+	GrAlm2			:UINT;	// 13
+	GrAlm3			:UINT;	// 14
+	GrAlm4			:UINT;	// 15
+	BatSoc			:INT;	// 16, %
+	BatSocUpLimit	:INT;	// 17, %
+	BatSocLowLimit	:INT;	// 18, %
+	fbOpMode		:UINT;  // 19
+	CurOpMode		:UINT;  // 20
+	fbP				:INT;	// 21, kW, 10
+	fbQ				:INT;	// 22, kVar, 10		
+	CtrlPriority 	:UINT; 	// 23, priority
+	
+
+//	Vd				:REAL;	// 22
+//	Vq				:REAL;	// 23
+
+//	Vdc				:REAL;   // 0, V, scale 1/10
+//	Idc				:REAL;   // 0, V, scale 1/10		
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

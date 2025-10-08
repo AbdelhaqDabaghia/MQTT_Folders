@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <DUT Name="HighPassFilter" Id="{ff445e2c-1293-47b7-9406-310ec928a5b0}">
+    <Declaration><![CDATA[TYPE HighPassFilter :
+STRUCT
+	FrequencyCut: REAL;
+	Den: REAL;
+	CutFreq: REAL;
+	a1: REAL;
+	b0: REAL;
+	b1: REAL;
+	ErrorFilt: REAL;
+	OutputFilt: REAL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

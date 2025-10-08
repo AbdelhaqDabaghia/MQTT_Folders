@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.12">
+  <DUT Name="Parameters_EAP_DINT" Id="{10f58660-b0e9-400c-8f3e-6d7f3185c904}">
+    <Declaration><![CDATA[TYPE Parameters_EAP_DINT :
+STRUCT
+	//Common Block
+		CommonBlock_Params_EAP : CommonBlock_Param_Struct_EAP_DINT;
+	//Inertia Emulation
+		InertiaEmulation_Params_EAP : InertiaEmulation_Param_Struct_EAP_DINT;
+	//Frequency Regulation
+		FrequencyRegulation_Params_EAP : FreqRegulation_Param_Struct_EAP_DINT;
+	//Modal Frequencies Attenunation
+		ModalFrequency_Params_EAP : ModalFreq_Param_Struct_EAP_DINT;
+	//Voltage Regulation
+		VoltageRegulation_Params_EAP : VoltageRegulation_Param_Struct_EAP_DINT;
+	//Additional Service
+		AdditonalSerivce : AdditionalService_Param_Struct_EAP_DINT;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

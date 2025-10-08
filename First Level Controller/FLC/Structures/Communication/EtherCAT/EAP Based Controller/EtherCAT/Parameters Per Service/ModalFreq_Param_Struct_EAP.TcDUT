@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="ModalFreq_Param_Struct_EAP" Id="{6bd1327c-252d-4486-adcf-fe79ebe8b040}">
+    <Declaration><![CDATA[TYPE ModalFreq_Param_Struct_EAP :
+STRUCT
+	//Modal Frequency Attenuation
+		ModalFreq_Gain : REAL := 1000;				//0
+		ModalFreq_PowerLimit : REAL := 1E6;		//1
+		Max_ROCOF_Modal : REAL := 6;				//2
+		BandPassFilter_CenterFreq : REAL := 5;	//3
+		Reserved1 : REAL;					//4
+		Reserved2 : REAL;					//5	
+		Reserved3 : REAL;					//6
+		Reserved4 : REAL;					//7
+		Reserved5 : REAL;					//8
+		Reserved6 : REAL;					//9
+		Reserved7 : REAL;					//10
+		Reserved8 : REAL;					//11
+		Reserved9 : REAL;					//12
+		Reserved10 : REAL;					//13
+		Reserved11 : REAL;					//14
+		Reserved12 : REAL;					//15
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

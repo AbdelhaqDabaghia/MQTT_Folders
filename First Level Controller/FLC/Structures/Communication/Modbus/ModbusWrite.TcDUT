@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <DUT Name="ModbusWrite" Id="{7ecbd13c-e5b2-4e9f-b0af-a0f4888cfa3c}">
+    <Declaration><![CDATA[TYPE ModbusWrite :
+STRUCT
+	{IF defined (JEMA)}
+		Pset		:INT;	// 430, kW, scale 1
+		Qset		:INT;	// 431, kVar, scale 1
+		CmdOpMode	:INT;	// 432
+		CurOpMode	:INT;	// 433
+		HeartBeat	:UINT;	// 434
+		R0			:INT;	// 435
+		R1			:INT;	// 436
+		R2			:INT;	// 437
+		R3			:INT;	// 438
+		(* For connection with PLC*)
+	{ELSE}	
+		wDerOpMode			:UINT;
+		wAutoManCtl		 	:UINT;
+		wLocRemCtl			:UINT;
+		wOpModTest 			:UINT;
+		CtlSynValfb			:UINT;
+		HeartBeat			:UINT;
+		OutWSet				:REAL;
+		OutVArSet			:REAL;
+		SLC_Debugger		:UINT;
+		Reserved2			:REAL;
+		Reserved3			:REAL;
+		Reserved4			:REAL;
+		(* For connection with DSP*)
+	{END_IF}
+
+
+
+	
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.2">
+  <POU Name="ModReadScaling" Id="{e8993d36-f0ad-435a-8fb3-2d53ee6f9b07}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION ModReadScaling : int
+VAR_INPUT
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[GlobalVar.ScaledModRead.GridFre := INT_TO_REAL(GlobalVar.ModRead.GridFre)*0.01;
+
+GlobalVar.ScaledModRead.Irmsa := INT_TO_REAL(GlobalVar.ModRead.Irmsa)*0.1;
+GlobalVar.ScaledModRead.Irmsb := INT_TO_REAL(GlobalVar.ModRead.Irmsb)*0.1;
+GlobalVar.ScaledModRead.Irmsc := INT_TO_REAL(GlobalVar.ModRead.Irmsc)*0.1;
+
+GlobalVar.ScaledModRead.Vrmsa := INT_TO_REAL(GlobalVar.ModRead.Vrmsa)*0.1;
+GlobalVar.ScaledModRead.Vrmsb := INT_TO_REAL(GlobalVar.ModRead.Vrmsb)*0.1;
+GlobalVar.ScaledModRead.Vrmsc := INT_TO_REAL(GlobalVar.ModRead.Vrmsc)*0.1;
+//GlobalVar.ScaledModRead.Vdc := INT_TO_REAL(GlobalVar.ModRead.Vdc)*0.1;
+//GlobalVar.ScaledModRead.Idc := INT_TO_REAL(GlobalVar.ModRead.Idc)*0.1;
+
+GlobalVar.ScaledModRead.TotW := INT_TO_REAL(GlobalVar.ModRead.TotW)*100.0;
+GlobalVar.ScaledModRead.TotVar := INT_TO_REAL(GlobalVar.ModRead.TotVar)*100.0;
+
+//GlobalVar.ScaledModRead.Vd := INT_TO_REAL(GlobalVar.ModRead.Vd)*0.1;
+//GlobalVar.ScaledModRead.Vq := INT_TO_REAL(GlobalVar.ModRead.Vq)*0.1;
+
+//GlobalVar.ScaledModRead.fbOpMode := GlobalVar.ModRead.fbOpMode;
+//GlobalVar.ScaledModRead.OpMode := GlobalVar.ModRead.OpMode;
+
+GlobalVar.ScaledModRead.GrAlm0 := GlobalVar.ModRead.GrAlm0;
+GlobalVar.ScaledModRead.GrAlm1 := GlobalVar.ModRead.GrAlm1;
+GlobalVar.ScaledModRead.GrAlm2 := GlobalVar.ModRead.GrAlm2;
+GlobalVar.ScaledModRead.GrAlm3 := GlobalVar.ModRead.GrAlm3;
+GlobalVar.ScaledModRead.GrAlm4 := GlobalVar.ModRead.GrAlm4;
+]]></ST>
+    </Implementation>
+    <LineIds Name="ModReadScaling">
+      <LineId Id="7" Count="0" />
+      <LineId Id="56" Count="0" />
+      <LineId Id="49" Count="2" />
+      <LineId Id="53" Count="2" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="77" Count="1" />
+      <LineId Id="57" Count="0" />
+      <LineId Id="48" Count="0" />
+      <LineId Id="58" Count="0" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="76" Count="0" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="67" Count="0" />
+      <LineId Id="71" Count="3" />
+      <LineId Id="66" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

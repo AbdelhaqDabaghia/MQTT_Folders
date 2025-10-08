@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <Task Name="MQTTSub" Id="{fd2548dd-c868-4ddf-b438-db331d84217d}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>10000</CycleTime>
+    <Priority>2</Priority>
+    <PouCall>
+      <Name>MQTTSubscribe</Name>
+    </PouCall>
+    <TaskFBGuid>{7b23ac48-4568-4b27-b582-9cbc48d371c2}</TaskFBGuid>
+    <Fb_init>{ee23ae1a-3471-473f-bc74-319c476b531c}</Fb_init>
+    <Fb_exit>{283196c3-4e5e-46fd-9fb1-cbb2615059c8}</Fb_exit>
+    <CycleUpdate>{939c51fe-7f6a-442f-bbbf-03adf1fffedd}</CycleUpdate>
+    <PostCycleUpdate>{e86983f0-0547-4268-921f-8203fca3a3be}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

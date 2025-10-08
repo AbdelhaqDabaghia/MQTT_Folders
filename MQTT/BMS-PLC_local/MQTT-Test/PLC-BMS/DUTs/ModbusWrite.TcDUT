@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="ModbusWrite" Id="{8cf32787-5624-4551-a939-6bfac497cdd2}">
+    <Declaration><![CDATA[
+TYPE ModbusWrite :
+STRUCT
+		
+System_mode_control	: BessOpmodeControl; ///USINT; //0x003c
+
+System_state_control	: BessStateControl; //USINT;
+
+Control_mode	:USINT;
+
+Active_power_control	: INT := 0;  //init
+
+Reactive_power_control	: INT := 0; //init
+
+SOC_H	:USINT;
+SOC_L	:USINT;
+
+Backu_charging_power	:USINT;
+
+Initial_operating_mode	:USINT;
+
+Initial_control_mode	:USINT;
+
+Slave_address	:USINT;
+
+Rated_power	:USINT;
+
+Clear_fault	:USINT; // 0x0048
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

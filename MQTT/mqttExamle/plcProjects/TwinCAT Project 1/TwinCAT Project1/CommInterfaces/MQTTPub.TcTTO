@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
+  <Task Name="MQTTPub" Id="{415d6f7b-16ab-464a-92a3-65fd53c07f1d}">
+    <!--CycleTime in micro seconds.-->
+    <CycleTime>1000</CycleTime>
+    <Priority>3</Priority>
+    <TaskFBGuid>{d9ca5bab-c043-47bc-aeaa-6523c53ddf8a}</TaskFBGuid>
+    <Fb_init>{a739fa4c-a5e8-4a43-9a5e-89027973be1d}</Fb_init>
+    <Fb_exit>{14953257-0850-438b-aa7e-1280a2211858}</Fb_exit>
+    <CycleUpdate>{0acf1d2f-77d6-461f-9985-320fa32e5811}</CycleUpdate>
+    <PostCycleUpdate>{3605456d-437d-45c0-ad0f-1129ab0f584c}</PostCycleUpdate>
+  </Task>
+</TcPlcObject>

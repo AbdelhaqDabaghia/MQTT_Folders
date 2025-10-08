@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4022.18">
+  <DUT Name="ModalFreq_Struct_EAP" Id="{b381616c-8f41-4146-9964-60f37c72543d}">
+    <Declaration><![CDATA[TYPE ModalFreq_Struct_EAP :
+UNION
+		Value : INT;
+		Bits : Bits_ModalFreq_EAP;
+END_UNION
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

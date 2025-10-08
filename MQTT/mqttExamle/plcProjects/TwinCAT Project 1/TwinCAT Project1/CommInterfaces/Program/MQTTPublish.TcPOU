@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1">
+  <POU Name="MQTTPublish" Id="{e3881628-da8b-46d4-86aa-cfdf76c98d20}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MQTTPublish
+VAR
+	fbMqttClient: FB_IotMqttClient; // MQTT client.
+	fbJsonDataType : FB_JsonReadWriteDataType;
+	fbJson : FB_JsonSaxWriter;
+	
+	TopicToPublish : STRING(255) := 'Feeder/083';
+	sJsonDoc : STRING(255); //String to send in JSON format
+	
+	fbSendMessageIntervalTimer : TON := (PT:=T#5S);
+	fbMakeTimestamp : FB_MakeTimestamp;
+	
+	scale : REAL := 1000.0;
+	bSetParameter   : BOOL := TRUE;
+	bConnect        : BOOL := TRUE;	
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bSetParameter THEN
+	bSetParameter				:= FALSE;
+    fbMqttClient.sHostName 		:= 'a3rq4sh4gv4om5-ats.iot.eu-west-3.amazonaws.com'; 
+    fbMqttClient.nHostPort 		:= 8883;
+    fbMqttClient.sTopicPrefix 	:= '';
+    fbMqttClient.sClientId 		:= 'PLC1';
+  	fbMqttClient.stTLS.sCA 		:= 'C:\Users\tecnicoloyolatech\Desktop\certs\AmazonRootCA1.pem';
+  	fbMqttClient.stTLS.sCert 	:= 'C:\Users\tecnicoloyolatech\Desktop\certs\4bcd27ad01e301288efa95a347e67a3ace65b850d1b0ed954ddefa5992b51b8b-certificate.pem.crt';
+  	fbMqttClient.stTLS.sKeyFile := 'C:\Users\tecnicoloyolatech\Desktop\certs\4bcd27ad01e301288efa95a347e67a3ace65b850d1b0ed954ddefa5992b51b8b-private.pem.key';
+  	fbMqttClient.ActivateExponentialBackoff(T#1S, T#30S);
+END_IF
+
+// Keep the connection alive by invoking the Execute on every execution cycle.
+fbMqttClient.Execute(bConnect);
+
+// -------------------- Publish ---------------------------------
+
+// If the connection with the MQTT broker is establish
+IF fbMqttClient.bConnected THEN
+    fbSendMessageIntervalTimer(IN:=TRUE);
+    IF fbSendMessageIntervalTimer.Q THEN
+        fbSendMessageIntervalTimer(IN:=FALSE);
+		
+		// Convert signals into a timestamp
+		fbMakeTimestamp.year := metering.MeteringSignals.YEAR;
+		fbMakeTimestamp.month := metering.MeteringSignals.MONTH;
+		fbMakeTimestamp.day:= metering.MeteringSignals.DAY;
+		fbMakeTimestamp.hour:= metering.MeteringSignals.HOUR;
+		fbMakeTimestamp.minute:= metering.MeteringSignals.MINUTE;
+		fbMakeTimestamp.second:= metering.MeteringSignals.SECOND;
+		
+		fbMakeTimestamp();
+		
+		// Make the JSON message
+		fbJson.StartObject();
+		fbJson.AddKey('Timestamp');
+		fbJson.AddDateTime(fbMakeTimestamp.timestamp);
+		//fbJson.AddKey('Values');
+		//fbJson.StartObject();
+		fbJson.AddKey('PV Generation (kW)');
+		fbJson.AddReal(metering.MeteringSignals.PV_GENERATION_kW/scale);
+		fbJson.AddKey('Total Load Power (kVA)');
+		fbJson.AddReal(metering.MeteringSignals.TOTAL_APPARENT_LOAD_POWER_kVA/scale);
+		fbJson.AddKey('Minimum Terminal Voltage (pu)');
+		fbJson.AddReal(metering.MeteringSignals.VOLTAGE_MIN_pu/scale);
+		fbJson.AddKey('Maximum Terminal Voltage (pu)');
+		fbJson.AddReal(metering.MeteringSignals.VOLTAGE_MAX_pu/scale);
+		//fbJson.EndObject();
+		fbJson.EndObject();
+		sJsonDoc := fbJson.GetDocument();
+		fbJson.ResetDocument();
+		
+     	// Publish message 
+        fbMqttClient.Publish(sTopic:= TopicToPublish,
+            pPayload:= ADR(sJsonDoc),
+            nPayloadSize:= LEN2(ADR(sJsonDoc)),
+            eQoS:= TcIotMqttQos.AtMostOnceDelivery,
+            bRetain:= FALSE,
+            bQueue:= FALSE);
+    END_IF
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="MQTTPublish">
+      <LineId Id="77" Count="0" />
+      <LineId Id="110" Count="0" />
+      <LineId Id="78" Count="3" />
+      <LineId Id="113" Count="2" />
+      <LineId Id="111" Count="0" />
+      <LineId Id="23" Count="0" />
+      <LineId Id="84" Count="0" />
+      <LineId Id="83" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="87" Count="0" />
+      <LineId Id="86" Count="0" />
+      <LineId Id="85" Count="0" />
+      <LineId Id="24" Count="44" />
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
